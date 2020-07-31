@@ -84,17 +84,41 @@
                                     <constraint firstAttribute="height" constant="67" id="qC8-um-wde"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MtO-Xg-7bO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MtO-Xg-7bO">
                                 <rect key="frame" x="0.0" y="119" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Vaw-5D-fbg">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="84" id="Vaw-5D-fbg" customClass="ListCell" customModule="imonitor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vaw-5D-fbg" id="D1d-VE-MLR">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYd-Fd-Q9P">
+                                                    <rect key="frame" x="22" y="49" width="66" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CourseTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F48-lc-6UI">
+                                                    <rect key="frame" x="22" y="16" width="86.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="F48-lc-6UI" firstAttribute="leading" secondItem="D1d-VE-MLR" secondAttribute="leading" constant="22" id="1TM-o7-8zv"/>
+                                                <constraint firstItem="yYd-Fd-Q9P" firstAttribute="top" secondItem="F48-lc-6UI" secondAttribute="bottom" constant="12" id="42O-K1-hnA"/>
+                                                <constraint firstItem="yYd-Fd-Q9P" firstAttribute="leading" secondItem="D1d-VE-MLR" secondAttribute="leading" constant="22" id="bZV-WS-ewI"/>
+                                                <constraint firstItem="F48-lc-6UI" firstAttribute="top" secondItem="D1d-VE-MLR" secondAttribute="topMargin" constant="5" id="pqk-Za-tjk"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="courseTitleLabel" destination="F48-lc-6UI" id="5HQ-Ti-1Pa"/>
+                                            <outlet property="professorLabel" destination="yYd-Fd-Q9P" id="q8Q-VP-in6"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -138,7 +162,7 @@
     </scenes>
     <resources>
         <image name="logo" width="243.33332824707031" height="142"/>
-        <image name="logo2" width="1198" height="498"/>
+        <image name="logo2" width="399.33334350585938" height="166"/>
         <image name="power" catalog="system" width="128" height="124"/>
     </resources>
 </document>

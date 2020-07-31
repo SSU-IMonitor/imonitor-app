@@ -11,7 +11,8 @@ import UIKit
 class MainViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
-    let data = ["apples" , "oranges", "grapes"]
+    let courseList = ["데이터베이스 응용 [102000305]" , "운영체제 [30502031]", "시스템프로그래밍 [205039171]"]
+    let professorList = ["이상호", "양승민", "최재영"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +74,7 @@ extension MainViewController: UITableViewDelegate{
 
 extension MainViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-           return 0
+        return 20.0
        }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -81,12 +82,22 @@ extension MainViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return courseList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = data[indexPath.row]
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//        return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
+            return UITableViewCell()
+        }
+        cell.courseTitleLabel.text = courseList[indexPath.row]
+        cell.professorLabel.text = professorList[indexPath.row]
         return cell
     }
+}
+
+class ListCell: UITableViewCell{
+    @IBOutlet weak var courseTitleLabel: UILabel!
+    @IBOutlet weak var professorLabel: UILabel!
 }
