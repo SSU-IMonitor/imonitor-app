@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
 		96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572A24D3005C002C7114 /* AppDelegate.swift */; };
 		96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572C24D3005C002C7114 /* SceneDelegate.swift */; };
 		96AE573224D3005C002C7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE573024D3005C002C7114 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		96AE572724D3005C002C7114 /* imonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AE572A24D3005C002C7114 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96AE572C24D3005C002C7114 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				96FA970824D3F7B700F49D24 /* MainViewController.swift */,
 				96AE575A24D300B2002C7114 /* LoginViewController.swift */,
 				96AE573024D3005C002C7114 /* Main.storyboard */,
+				9686686F24DA92F8004BB017 /* DetailViewController.swift */,
 				96AE573324D3005E002C7114 /* Assets.xcassets */,
 				96AE573524D3005E002C7114 /* LaunchScreen.storyboard */,
 				96AE573824D3005E002C7114 /* Info.plist */,
@@ -268,6 +271,7 @@
 				96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */,
 				96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */,
 				96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */,
+				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,
 				96FA970924D3F7B700F49D24 /* MainViewController.swift in Sources */,
 			);

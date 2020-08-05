@@ -31,8 +31,15 @@ class MainViewController: UIViewController {
     
     let viewModel = CourseViewModel()
     
-//    let courseList = ["데이터베이스 응용 [102000305]" , "운영체제 [30502031]", "시스템프로그래밍 [205039171]"]
-//    let professorList = ["이상호", "양승민", "최재영"]
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail"{
+            let vc = segue.destination as? DetailViewController
+            if let index = sender as? Int{
+                let courseInfo = viewModel.courseInfo(at: index)
+                vc?.viewModel.update(model: courseInfo)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,22 +65,18 @@ class MainViewController: UIViewController {
         imgStudent.image = image
         imgStudent.layer.cornerRadius = 20.0
         imgStudent.layer.masksToBounds = true
-        //imgStudent.layer.position =  CGPoint(x:self.view.bounds.width/10, y: self.view.bounds.height/10)
         
         header.addSubview(imgStudent)
 
         nameLabel.text = "허예은"
         nameLabel.textColor = UIColor.white
-        //nameLabel.textAlignment = .center
         header.addSubview(nameLabel)
             
         collegeNameLabel.text = "IT대학"
-        //deptNameLabel.textAlignment = .center
         collegeNameLabel.textColor = UIColor.white
         header.addSubview(collegeNameLabel)
             
         deptNameLabel.text = "소프트웨어학부"
-        //deptNameLabel.textAlignment = .center
         deptNameLabel.textColor = UIColor.white
         header.addSubview(deptNameLabel)
         
@@ -86,9 +89,10 @@ class MainViewController: UIViewController {
 
 }
 
+
 extension MainViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-          tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
       }
 }
 
@@ -102,22 +106,16 @@ extension MainViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return courseList.count
         return viewModel.numofCourseInfo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        return cell
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
             return UITableViewCell()
         }
         
         let courseInfo = viewModel.courseInfo(at: indexPath.row)
         cell.update(info: courseInfo)
-        
-//        cell.courseTitleLabel.text = courseList[indexPath.row]
-//        cell.professorLabel.text = professorList[indexPath.row]
         return cell
     }
 }
@@ -144,9 +142,9 @@ struct CourseInfo{
 
 class CourseViewModel{
     let courseInfoList:[CourseInfo] = [
-        CourseInfo(course:"데이터베이스 응용 [102000305]", professor: "이상호"),
-        CourseInfo(course:"운영체제 [30502031]", professor: "양승민"),
-        CourseInfo(course:"시스템 프로그래밍 [205039171]", professor: "최재영")
+        CourseInfo(course:"데이터베이스응용", professor: "이상호"),
+        CourseInfo(course:"운영체제", professor: "양승민"),
+        CourseInfo(course:"시스템프로그래밍", professor: "최재영")
     ]
     
     var numofCourseInfo: Int{

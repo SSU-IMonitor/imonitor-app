@@ -153,14 +153,73 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="MtO-Xg-7bO" id="Vqy-hH-SUQ"/>
+                        <segue destination="iRE-LZ-j5V" kind="show" identifier="showDetail" id="ajw-JW-bLq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BVU-Gk-bB5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="834.78260869565224" y="135.9375"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="gtJ-vs-9Gn">
+            <objects>
+                <viewController id="iRE-LZ-j5V" customClass="DetailViewController" customModule="imonitor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ICD-YQ-HgI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CourseTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ME2-In-TtL">
+                                <rect key="frame" x="50" y="89" width="314" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgF-eN-M2v">
+                                <rect key="frame" x="50" y="127" width="314" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ses-fu-Uwj">
+                                <rect key="frame" x="348" y="31" width="58" height="50"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="clear" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30" scale="large" weight="light"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="iRE-LZ-j5V" eventType="touchUpInside" id="nZm-Iu-2IY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qEl-ye-OGu" firstAttribute="trailing" secondItem="ME2-In-TtL" secondAttribute="trailing" constant="50" id="013-qt-bhb"/>
+                            <constraint firstItem="XgF-eN-M2v" firstAttribute="leading" secondItem="qEl-ye-OGu" secondAttribute="leading" constant="50" id="08p-2t-PLR"/>
+                            <constraint firstItem="ME2-In-TtL" firstAttribute="leading" secondItem="qEl-ye-OGu" secondAttribute="leading" constant="50" id="2iT-X5-gEQ"/>
+                            <constraint firstItem="qEl-ye-OGu" firstAttribute="trailing" secondItem="XgF-eN-M2v" secondAttribute="trailing" constant="50" id="48T-1I-m8J"/>
+                            <constraint firstItem="Ses-fu-Uwj" firstAttribute="top" secondItem="qEl-ye-OGu" secondAttribute="top" constant="31" id="L0Z-VY-a3r"/>
+                            <constraint firstItem="ME2-In-TtL" firstAttribute="top" secondItem="Ses-fu-Uwj" secondAttribute="bottom" constant="8" symbolic="YES" id="O8B-rG-ziA"/>
+                            <constraint firstItem="qEl-ye-OGu" firstAttribute="trailing" secondItem="Ses-fu-Uwj" secondAttribute="trailing" constant="8" id="Qzp-9o-lq5"/>
+                            <constraint firstItem="ME2-In-TtL" firstAttribute="top" secondItem="ICD-YQ-HgI" secondAttribute="top" constant="89" id="Y9c-Fu-Kch"/>
+                            <constraint firstItem="XgF-eN-M2v" firstAttribute="top" secondItem="ME2-In-TtL" secondAttribute="bottom" constant="8" symbolic="YES" id="ff5-eZ-MWz"/>
+                            <constraint firstItem="Ses-fu-Uwj" firstAttribute="leading" secondItem="qEl-ye-OGu" secondAttribute="leading" constant="348" id="j9I-uX-5zL"/>
+                            <constraint firstItem="XgF-eN-M2v" firstAttribute="centerX" secondItem="ME2-In-TtL" secondAttribute="centerX" id="qJ3-Mc-z7x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qEl-ye-OGu"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9u0-LX-Eo2"/>
+                    <connections>
+                        <outlet property="courseTitleLabel" destination="ME2-In-TtL" id="WFp-Pt-YlX"/>
+                        <outlet property="professorLabel" destination="XgF-eN-M2v" id="tq0-Ix-s3c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ez9-MU-5hF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1528.985507246377" y="135.9375"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="clear" catalog="system" width="128" height="114"/>
         <image name="logo" width="243.33332824707031" height="142"/>
         <image name="logo2" width="399.33334350585938" height="166"/>
         <image name="power" catalog="system" width="128" height="124"/>
