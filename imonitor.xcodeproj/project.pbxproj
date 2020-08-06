@@ -17,6 +17,9 @@
 		96AE574D24D3005E002C7114 /* imonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE574C24D3005E002C7114 /* imonitorUITests.swift */; };
 		96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE575A24D300B2002C7114 /* LoginViewController.swift */; };
 		96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */; };
+		96C9ADAA24DBE45F00856E3D /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C9ADA924DBE45F00856E3D /* DetailTableViewController.swift */; };
+		96C9ADB224DBEA0A00856E3D /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C9ADB124DBEA0A00856E3D /* ExamViewController.swift */; };
+		96C9ADB424DBEE9200856E3D /* SeeSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96C9ADB324DBEE9200856E3D /* SeeSo.framework */; };
 		96FA970924D3F7B700F49D24 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA970824D3F7B700F49D24 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,9 @@
 		96AE574E24D3005E002C7114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96AE575A24D300B2002C7114 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
+		96C9ADA924DBE45F00856E3D /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		96C9ADB124DBEA0A00856E3D /* ExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
+		96C9ADB324DBEE9200856E3D /* SeeSo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SeeSo.framework; path = ../../../../Downloads/SeeSo.framework; sourceTree = "<group>"; };
 		96FA970824D3F7B700F49D24 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C9ADB424DBEE9200856E3D /* SeeSo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,11 +112,14 @@
 		96AE572924D3005C002C7114 /* imonitor */ = {
 			isa = PBXGroup;
 			children = (
+				96C9ADB324DBEE9200856E3D /* SeeSo.framework */,
 				96AE572A24D3005C002C7114 /* AppDelegate.swift */,
+				96C9ADB124DBEA0A00856E3D /* ExamViewController.swift */,
 				96AE572C24D3005C002C7114 /* SceneDelegate.swift */,
 				96FA970824D3F7B700F49D24 /* MainViewController.swift */,
 				96AE575A24D300B2002C7114 /* LoginViewController.swift */,
 				96AE573024D3005C002C7114 /* Main.storyboard */,
+				96C9ADA924DBE45F00856E3D /* DetailTableViewController.swift */,
 				9686686F24DA92F8004BB017 /* DetailViewController.swift */,
 				96AE573324D3005E002C7114 /* Assets.xcassets */,
 				96AE573524D3005E002C7114 /* LaunchScreen.storyboard */,
@@ -268,10 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C9ADAA24DBE45F00856E3D /* DetailTableViewController.swift in Sources */,
 				96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */,
 				96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */,
 				96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */,
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
+				96C9ADB224DBEA0A00856E3D /* ExamViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,
 				96FA970924D3F7B700F49D24 /* MainViewController.swift in Sources */,
 			);
