@@ -12,7 +12,10 @@ import AVFoundation
 
 class ExamViewController: UIViewController {
     var tracker: GazeTracker? = nil
-
+    var count: Int = 0
+ 
+    @IBOutlet var countLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if AVCaptureDevice .authorizationStatus(for: .video) == .authorized{
@@ -55,11 +58,18 @@ extension ExamViewController: StatusDelegate{
 extension ExamViewController: GazeDelegate{
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
-        if x < 0.0 || y < 0.0 {
-            
+        if x < 100.0 || y < 100.0 || x > 800.0 || y > 800.0 {
+            startCount()
         }
     }
     func onFilteredGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         
+    }
+    
+    public func startCount(){
+        DispatchQueue.main.async {
+            self.countLabel.text = "\(self.count)번"
+            self.count = self.count + 1
+        }
     }
 }
