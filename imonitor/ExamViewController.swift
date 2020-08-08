@@ -55,6 +55,9 @@ extension ExamViewController: StatusDelegate{
 extension ExamViewController: GazeDelegate{
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
+        if x < 0.0 || y < 0.0 {
+            
+        }
     }
     func onFilteredGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         
