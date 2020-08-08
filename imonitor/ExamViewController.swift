@@ -13,11 +13,14 @@ import AVFoundation
 class ExamViewController: UIViewController {
     var tracker: GazeTracker? = nil
     var count: Int = 0
+    var isWarning: Bool = false
  
     @IBOutlet var countLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 카메라 권한 체크
         if AVCaptureDevice .authorizationStatus(for: .video) == .authorized{
             GazeTracker.initGazeTracker(license: "dev_zjr3b5ffioy6jiynqtv99txxoi5dswqo6nukescw", delegate: self)
         } else {
@@ -28,10 +31,10 @@ class ExamViewController: UIViewController {
                 }
             })
         }
-        
     }
 }
 
+// tracker 초기화
 extension ExamViewController: InitializationDelegate{
     func onInitialized(tracker: GazeTracker?, error: InitializationError) {
         if(tracker != nil){
@@ -46,6 +49,7 @@ extension ExamViewController: InitializationDelegate{
     }
 }
 
+// tracker 시작 & 종료 console 띄우기
 extension ExamViewController: StatusDelegate{
     func onStarted() {
         print("tracker starts tracking")
@@ -55,10 +59,12 @@ extension ExamViewController: StatusDelegate{
     }
 }
 
+
 extension ExamViewController: GazeDelegate{
+    // 시선 인식
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
-        if x < 100.0 || y < 100.0 || x > 800.0 || y > 800.0 {
+        if x < 100.0 || y < 100.0 || x > 750.0 || y > 750.0 {
             startCount()
         }
     }
@@ -66,10 +72,26 @@ extension ExamViewController: GazeDelegate{
         
     }
     
-    public func startCount(){
+    // 시선 이탈 횟수 카운트
+    func startCount(){
         DispatchQueue.main.async {
             self.countLabel.text = "\(self.count)번"
             self.count = self.count + 1
+        }
+        if self.count == 10 {
+            alert()
+        }
+    }
+    
+    // 이탈 횟수 초과시 경고창
+    func alert(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "경고", message: "경고 횟수 초과 시험 권한 박탈", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default){
+                (action) in exit(0)
+            }
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
