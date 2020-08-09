@@ -133,18 +133,26 @@ class ListCell: UITableViewCell{
 struct CourseInfo{
     let course: String
     let professor: String
+    let courseCode: String
+    let startTime: String
+    let endTime: String
+    let notice: String
     
-    init(course: String, professor: String){
+    init(course: String, professor: String, courseCode: String, startTime: String, endTime: String, notice: String){
         self.course = course
         self.professor = professor
+        self.courseCode = courseCode
+        self.startTime = startTime
+        self.endTime = endTime
+        self.notice = notice
     }
 }
 
 class CourseViewModel{
     let courseInfoList:[CourseInfo] = [
-        CourseInfo(course:"데이터베이스응용", professor: "이상호"),
-        CourseInfo(course:"운영체제", professor: "양승민"),
-        CourseInfo(course:"시스템프로그래밍", professor: "최재영")
+        CourseInfo(course:"데이터베이스응용", professor: "이상호", courseCode: "2050301", startTime:"2020.08.07 15:00", endTime: "2020.08.07 16:00", notice: "공지사항 1"),
+        CourseInfo(course:"운영체제", professor: "양승민", courseCode: "3020594", startTime:"2020.08.09 15:00", endTime: "2020.08.09 16:00", notice: "공지사항 2"),
+        CourseInfo(course:"시스템프로그래밍", professor: "최재영", courseCode: "342456", startTime:"2020.08.11 15:00:00", endTime: "2020.08.11 16:00:00", notice: "공지사항 3")
     ]
     
     var numofCourseInfo: Int{

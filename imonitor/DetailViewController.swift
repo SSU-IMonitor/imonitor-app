@@ -27,6 +27,7 @@ class DetailViewController: UIViewController {
 
     @IBOutlet var courseTitleLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
+    @IBOutlet var noticeLabel: UITextView!
     
     let viewModel = DetailViewModel();
     
@@ -51,6 +52,7 @@ class DetailViewController: UIViewController {
         if let courseInfo = viewModel.courseInfo{
             courseTitleLabel.text = courseInfo.course
             professorLabel.text = courseInfo.professor
+            noticeLabel.text = courseInfo.notice
         }
     }
 }
