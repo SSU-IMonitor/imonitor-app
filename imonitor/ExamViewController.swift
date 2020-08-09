@@ -64,7 +64,7 @@ extension ExamViewController: GazeDelegate{
     // 시선 인식
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
-        if x < 100.0 || y < 100.0 || x > 750.0 || y > 750.0 {
+        if x < 100.0 || y < 100.0 || x > 800.0 || y > 800.0 {
             startCount()
         }
     }
@@ -75,7 +75,7 @@ extension ExamViewController: GazeDelegate{
     // 시선 이탈 횟수 카운트
     func startCount(){
         DispatchQueue.main.async {
-            self.countLabel.text = "\(self.count)번"
+            self.countLabel.text = "시선 이탈 횟수: \(self.count)번"
             self.count = self.count + 1
         }
         if self.count == 10 {
