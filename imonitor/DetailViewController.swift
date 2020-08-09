@@ -42,12 +42,20 @@ class DetailViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+<<<<<<< HEAD
     @IBAction func startExamPressed(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "exam") as! ExamViewController
                vc.modalPresentationStyle = .fullScreen
                present(vc, animated: true)
     }
     
+=======
+    @IBAction func startPressed(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "exam") as! ExamViewController
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+>>>>>>> examview
     func updateUI(){
         if let courseInfo = viewModel.courseInfo{
             courseTitleLabel.text = courseInfo.course
