@@ -15,10 +15,14 @@ class ExamViewController: UIViewController {
     var count: Int = 0
     var isWarning: Bool = false
  
+    
     @IBOutlet var countLabel: UILabel!
+    @IBOutlet var answerTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        answerTextField.addDoneButtonOnKeyboard()
         
         // 카메라 권한 체크
         if AVCaptureDevice .authorizationStatus(for: .video) == .authorized{
@@ -31,6 +35,12 @@ class ExamViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    @IBAction func submitButtonPressed(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "submit") as! SubmitTableViewController
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
