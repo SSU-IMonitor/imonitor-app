@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
+		96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568924E17531002F52BF /* DetailContentsViewController.swift */; };
 		96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572A24D3005C002C7114 /* AppDelegate.swift */; };
 		96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572C24D3005C002C7114 /* SceneDelegate.swift */; };
 		96AE573224D3005C002C7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE573024D3005C002C7114 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		96A2568924E17531002F52BF /* DetailContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentsViewController.swift; sourceTree = "<group>"; };
 		96AE572724D3005C002C7114 /* imonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AE572A24D3005C002C7114 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96AE572C24D3005C002C7114 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				96FA970824D3F7B700F49D24 /* MainViewController.swift */,
 				96AE575A24D300B2002C7114 /* LoginViewController.swift */,
 				96AE573024D3005C002C7114 /* Main.storyboard */,
+				96A2568924E17531002F52BF /* DetailContentsViewController.swift */,
 				96B334CC24E041BD00227852 /* DetailTableViewController.swift */,
 				9686686F24DA92F8004BB017 /* DetailViewController.swift */,
 				96CF6FB524DD3A2800833233 /* ExamViewController.swift */,
@@ -293,6 +296,7 @@
 				96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */,
 				96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */,
 				96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */,
+				96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */,
 				96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */,
 				96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */,
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,

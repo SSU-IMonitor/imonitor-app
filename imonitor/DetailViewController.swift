@@ -28,6 +28,11 @@ class DetailViewController: UIViewController {
     @IBOutlet var courseTitleLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
     @IBOutlet var noticeLabel: UITextView!
+
+    @IBOutlet var courseIDLabel: UILabel!
+    @IBOutlet var courseTitle2Label: UILabel!
+    @IBOutlet var startTimeLabel: UILabel!
+    @IBOutlet var endTimeLabel: UILabel!
     
     let viewModel = DetailViewModel();
     
@@ -48,11 +53,16 @@ class DetailViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
+    
     func updateUI(){
         if let courseInfo = viewModel.courseInfo{
             courseTitleLabel.text = courseInfo.course
             professorLabel.text = courseInfo.professor
             noticeLabel.text = courseInfo.notice
+            courseIDLabel.text = courseInfo.courseCode
+            courseTitle2Label.text = courseInfo.course
+            startTimeLabel.text = courseInfo.startTime
+            endTimeLabel.text = courseInfo.endTime
         }
     }
 }

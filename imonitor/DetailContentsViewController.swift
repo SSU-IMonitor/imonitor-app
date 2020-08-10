@@ -1,16 +1,16 @@
 //
-//  DetailTableViewController.swift
+//  DetailContentsViewController.swift
 //  imonitor
 //
-//  Created by 허예은 on 2020/08/09.
+//  Created by 허예은 on 2020/08/10.
 //  Copyright © 2020 허예은. All rights reserved.
 //
 
 import UIKit
 
-class DetailTableViewController: UITableViewController {
-    let viewModel = DetailTableViewModel()
-
+class DetailContentsViewController: UIViewController {
+    let viewModel = DetailContentViewModel()
+    
     @IBOutlet var courseIDLabel: UILabel!
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var startTimeLabel: UILabel!
@@ -30,20 +30,13 @@ class DetailTableViewController: UITableViewController {
             endTimeLabel.text = courseInfo.endTime
         }
     }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+}
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
+class DetailContentViewModel{
+    var courseInfo: CourseInfo?
     
-    class DetailTableViewModel{
-        var courseInfo: CourseInfo?
-        
-        func update(model: CourseInfo?){
-            courseInfo = model
-        }
+    func update(model: CourseInfo?){
+        courseInfo = model
     }
 }
+
