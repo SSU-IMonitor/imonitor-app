@@ -49,9 +49,20 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func startPressed(_ sender: Any) {
+        let course = courseTitleLabel.text
+        let professor = professorLabel.text
+        let endTime = endTimeLabel.text
+        
         let vc = storyboard?.instantiateViewController(identifier: "exam") as! ExamViewController
+        
+        vc.courseName = course!
+        vc.professorName = professor!
+        vc.end = endTime!
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+        
+        
+        
     }
     
     func updateUI(){

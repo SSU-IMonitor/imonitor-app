@@ -11,17 +11,24 @@ import SeeSo
 import AVFoundation
 
 class ExamViewController: UIViewController {
+    let viewModel = DetailViewModel()
     var tracker: GazeTracker? = nil
     var count: Int = 0
     var isWarning: Bool = false
- 
+    
+    var courseName = ""
+    var professorName = ""
+    var end = ""
+    
+    @IBOutlet var courseNameLabel: UILabel!
+    @IBOutlet var professorLabel: UILabel!
     
     @IBOutlet var countLabel: UILabel!
     @IBOutlet var answerTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateUI()
         answerTextField.addDoneButtonOnKeyboard()
         
         // 카메라 권한 체크
@@ -35,6 +42,11 @@ class ExamViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    func updateUI(){
+        courseNameLabel.text = courseName
+        professorLabel.text = professorName
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
