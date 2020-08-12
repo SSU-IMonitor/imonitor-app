@@ -86,7 +86,10 @@ class MainViewController: UIViewController {
     @IBAction func logoutButtonPressed(){
         dismiss(animated: true, completion: nil)
     }
-
+    
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "search", sender: nil)
+    }
 }
 
 

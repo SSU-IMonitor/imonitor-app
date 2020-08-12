@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9623B65224E2DD4700446B53 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623B65124E2DD4700446B53 /* SearchTableViewController.swift */; };
 		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
 		96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568924E17531002F52BF /* DetailContentsViewController.swift */; };
 		96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568B24E17CE6002F52BF /* DoneButton.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9623B65124E2DD4700446B53 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		96A2568924E17531002F52BF /* DetailContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentsViewController.swift; sourceTree = "<group>"; };
 		96A2568B24E17CE6002F52BF /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				96FA970824D3F7B700F49D24 /* MainViewController.swift */,
 				96AE575A24D300B2002C7114 /* LoginViewController.swift */,
 				96AE573024D3005C002C7114 /* Main.storyboard */,
+				9623B65124E2DD4700446B53 /* SearchTableViewController.swift */,
 				96A2568B24E17CE6002F52BF /* DoneButton.swift */,
 				96A2568924E17531002F52BF /* DetailContentsViewController.swift */,
 				96B334CC24E041BD00227852 /* DetailTableViewController.swift */,
@@ -306,6 +309,7 @@
 				96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */,
 				96A2569024E17EE5002F52BF /* SubmitTableViewController.swift in Sources */,
 				96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */,
+				9623B65224E2DD4700446B53 /* SearchTableViewController.swift in Sources */,
 				96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */,
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,

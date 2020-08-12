@@ -117,3 +117,33 @@ extension ExamViewController: GazeDelegate{
         }
     }
 }
+
+struct QnAInfo{
+    let id: Int
+    let question: String
+    let answer: String
+    
+    
+    init(id: Int, question:String, answer: String){
+        self.id = id
+        self.question = question
+        self.answer = answer
+    }
+}
+
+class qnaViewModel{    
+    let qnaInfoList: [QnAInfo] = [
+        QnAInfo(id:1, question:"1+1 은?", answer: "2"),
+        QnAInfo(id:2, question:"2+2는? ", answer: "4")
+    ]
+    
+    var numofCourseInfo: Int{
+        return qnaInfoList.count
+    }
+    
+    func qnaInfo(at index: Int) -> QnAInfo{
+        return qnaInfoList[index]
+    }
+}
+
+
