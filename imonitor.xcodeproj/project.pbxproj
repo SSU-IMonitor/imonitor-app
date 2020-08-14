@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9665CC9824E6BCF600938E49 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9665CC9724E6BCF600938E49 /* SearchViewController.swift */; };
 		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
+		9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */; };
+		96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568924E17531002F52BF /* DetailContentsViewController.swift */; };
+		96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568B24E17CE6002F52BF /* DoneButton.swift */; };
+		96A2569024E17EE5002F52BF /* SubmitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568F24E17EE5002F52BF /* SubmitTableViewController.swift */; };
 		96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572A24D3005C002C7114 /* AppDelegate.swift */; };
 		96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572C24D3005C002C7114 /* SceneDelegate.swift */; };
 		96AE573224D3005C002C7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE573024D3005C002C7114 /* Main.storyboard */; };
@@ -16,6 +21,10 @@
 		96AE574D24D3005E002C7114 /* imonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE574C24D3005E002C7114 /* imonitorUITests.swift */; };
 		96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE575A24D300B2002C7114 /* LoginViewController.swift */; };
 		96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */; };
+		96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B334CC24E041BD00227852 /* DetailTableViewController.swift */; };
+		96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF6FB524DD3A2800833233 /* ExamViewController.swift */; };
+		96F9852A24DD76A100229FE4 /* SeeSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F9852824DD769B00229FE4 /* SeeSo.framework */; };
+		96F9852B24DD76A100229FE4 /* SeeSo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96F9852824DD769B00229FE4 /* SeeSo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96FA970924D3F7B700F49D24 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA970824D3F7B700F49D24 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,8 +45,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		96CF6FBE24DD3DB500833233 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				96F9852B24DD76A100229FE4 /* SeeSo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9665CC9724E6BCF600938E49 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		96A2568924E17531002F52BF /* DetailContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentsViewController.swift; sourceTree = "<group>"; };
+		96A2568B24E17CE6002F52BF /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
+		96A2568F24E17EE5002F52BF /* SubmitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitTableViewController.swift; sourceTree = "<group>"; };
 		96AE572724D3005C002C7114 /* imonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AE572A24D3005C002C7114 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96AE572C24D3005C002C7114 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +80,9 @@
 		96AE574E24D3005E002C7114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96AE575A24D300B2002C7114 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
+		96B334CC24E041BD00227852 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		96CF6FB524DD3A2800833233 /* ExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
+		96F9852824DD769B00229FE4 /* SeeSo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SeeSo.framework; sourceTree = "<group>"; };
 		96FA970824D3F7B700F49D24 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F9852A24DD76A100229FE4 /* SeeSo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,12 +135,20 @@
 		96AE572924D3005C002C7114 /* imonitor */ = {
 			isa = PBXGroup;
 			children = (
+				96F9852824DD769B00229FE4 /* SeeSo.framework */,
 				96AE572A24D3005C002C7114 /* AppDelegate.swift */,
 				96AE572C24D3005C002C7114 /* SceneDelegate.swift */,
+				96A2568F24E17EE5002F52BF /* SubmitTableViewController.swift */,
 				96FA970824D3F7B700F49D24 /* MainViewController.swift */,
 				96AE575A24D300B2002C7114 /* LoginViewController.swift */,
 				96AE573024D3005C002C7114 /* Main.storyboard */,
+				9665CC9724E6BCF600938E49 /* SearchViewController.swift */,
+				9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */,
+				96A2568B24E17CE6002F52BF /* DoneButton.swift */,
+				96A2568924E17531002F52BF /* DetailContentsViewController.swift */,
+				96B334CC24E041BD00227852 /* DetailTableViewController.swift */,
 				9686686F24DA92F8004BB017 /* DetailViewController.swift */,
+				96CF6FB524DD3A2800833233 /* ExamViewController.swift */,
 				96AE573324D3005E002C7114 /* Assets.xcassets */,
 				96AE573824D3005E002C7114 /* Info.plist */,
 				96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */,
@@ -144,6 +184,7 @@
 				96AE572324D3005C002C7114 /* Sources */,
 				96AE572424D3005C002C7114 /* Frameworks */,
 				96AE572524D3005C002C7114 /* Resources */,
+				96CF6FBE24DD3DB500833233 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -267,8 +308,15 @@
 				96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */,
 				96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */,
 				96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */,
+				96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */,
+				96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */,
+				96A2569024E17EE5002F52BF /* SubmitTableViewController.swift in Sources */,
+				96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */,
+				96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */,
+				9665CC9824E6BCF600938E49 /* SearchViewController.swift in Sources */,
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,
+				9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */,
 				96FA970924D3F7B700F49D24 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +484,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3CY8UX9N2S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/imonitor",
+				);
 				INFOPLIST_FILE = imonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,6 +506,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3CY8UX9N2S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/imonitor",
+				);
 				INFOPLIST_FILE = imonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

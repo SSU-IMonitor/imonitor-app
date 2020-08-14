@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 /* MVVM
 
@@ -30,16 +31,6 @@ class MainViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     let viewModel = CourseViewModel()
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail"{
-            let vc = segue.destination as? DetailViewController
-            if let index = sender as? Int{
-                let courseInfo = viewModel.courseInfo(at: index)
-                vc?.viewModel.update(model: courseInfo)
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,10 +74,23 @@ class MainViewController: UIViewController {
         tableView.tableHeaderView = header
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if segue.identifier == "showDetail"{
+               let vc = segue.destination as? DetailViewController
+               if let index = sender as? Int{
+                   let courseInfo = viewModel.courseInfo(at: index)
+                   vc?.viewModel.update(model: courseInfo)
+               }
+           }
+       }
+       
     @IBAction func logoutButtonPressed(){
         dismiss(animated: true, completion: nil)
     }
-
+    
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "search", sender: nil)
+    }
 }
 
 
@@ -133,18 +137,26 @@ class ListCell: UITableViewCell{
 struct CourseInfo{
     let course: String
     let professor: String
+    let courseCode: String
+    let startTime: String
+    let endTime: String
+    let notice: String
     
-    init(course: String, professor: String){
+    init(course: String, professor: String, courseCode: String, startTime: String, endTime: String, notice: String){
         self.course = course
         self.professor = professor
+        self.courseCode = courseCode
+        self.startTime = startTime
+        self.endTime = endTime
+        self.notice = notice
     }
 }
 
 class CourseViewModel{
     let courseInfoList:[CourseInfo] = [
-        CourseInfo(course:"데이터베이스응용", professor: "이상호"),
-        CourseInfo(course:"운영체제", professor: "양승민"),
-        CourseInfo(course:"시스템프로그래밍", professor: "최재영")
+        CourseInfo(course:"데이터베이스응용", professor: "이상호", courseCode: "2050301", startTime:"2020.08.07 15:00:00", endTime: "2020.08.07 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다."),
+        CourseInfo(course:"운영체제", professor: "양승민", courseCode: "3020594", startTime:"2020.08.09 15:00:00", endTime: "2020.08.09 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다."),
+        CourseInfo(course:"시스템프로그래밍", professor: "최재영", courseCode: "342456", startTime:"2020.08.11 15:00:00", endTime: "2020.08.11 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다.")
     ]
     
     var numofCourseInfo: Int{
@@ -154,4 +166,10 @@ class CourseViewModel{
     func courseInfo(at index: Int) -> CourseInfo{
         return courseInfoList[index]
     }
+}
+
+struct UserInfo{
+    let id: String
+    let name: String
+    let major: String
 }
