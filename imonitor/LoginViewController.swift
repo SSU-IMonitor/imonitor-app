@@ -24,10 +24,6 @@ class LoginViewController: UIViewController {
         let vc = storyboard?.instantiateViewController(identifier: "main") as! MainViewController
         vc.modalPresentationStyle = .fullScreen
         
-        
-        
-        present(vc, animated: true)
-        
         let parameters = ["id": idTextField.text, "password": passwordTextField.text]
 
         guard let url = URL(string: "https://stoplight.io/p/mocks/13917/150793/v1/auth/sign-in") else { return }
@@ -49,9 +45,16 @@ class LoginViewController: UIViewController {
 
             if let data = data {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                    let users = json
-                    print(users)
+//                    codable 사용하지 않았을 경우
+//                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+//                    print(json)
+//
+//                    let userInfo = (json["userInfo"] ?? "")
+//                    print(userInfo)
+                    
+//                    codable 사용한 경우
+                    let user = try JSONDecoder().decode(LoginInfo.self, from: data)
+                    print(user.userInfo.major)
                     
                 } catch {
                     print(error)
@@ -59,8 +62,10 @@ class LoginViewController: UIViewController {
             }
         }.resume()
         
-        
+        present(vc, animated: true)
     }
+    
+    
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "signUp") as! SignUpViewController
@@ -68,4 +73,21 @@ class LoginViewController: UIViewController {
                present(vc, animated: true)
     }
     
+}
+
+struct LoginInfo: Codable{
+    let accessToken: String
+    let refreshToken: String
+    let tokenType: String
+    let userInfo: UserInfo
+}
+
+struct UserInfo: Codable{
+    let id: String
+    let major: String
+    let name: String
+    
+    func getString(){
+        print("id: \(id), major: \(major), name: \(name)")
+    }
 }

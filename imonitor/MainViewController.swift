@@ -27,25 +27,25 @@ import Foundation
  
  */
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController{
+   
     @IBOutlet var tableView: UITableView!
     
     let viewModel = CourseViewModel()
+
+  
+    let nameLabel = UILabel(frame: CGRect(x: 230, y: -30, width:150, height:150))
+    let collegeNameLabel = UILabel(frame: CGRect(x: 230, y: 0, width:150, height:150))
+    let deptNameLabel = UILabel(frame: CGRect(x: 230, y: 30, width:150, height:150))
+    let image = UIImage(named: "person.jpg")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 150))
         
-            
-        let nameLabel = UILabel(frame: CGRect(x: 230, y: -30, width:150, height:150))
-        let collegeNameLabel = UILabel(frame: CGRect(x: 230, y: 0, width:150, height:150))
-        let deptNameLabel = UILabel(frame: CGRect(x: 230, y: 30, width:150, height:150))
-        let image = UIImage(named: "person.jpg")
-        
         var imgStudent: UIImageView!
         
-            
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
         imgStudent.layer.masksToBounds = true
         
         header.addSubview(imgStudent)
-
+        
         nameLabel.text = "허예은"
         nameLabel.textColor = UIColor.white
         header.addSubview(nameLabel)
@@ -166,10 +166,4 @@ class CourseViewModel{
     func courseInfo(at index: Int) -> CourseInfo{
         return courseInfoList[index]
     }
-}
-
-struct UserInfo{
-    let id: String
-    let name: String
-    let major: String
 }
