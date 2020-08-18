@@ -31,6 +31,8 @@ class SignUpViewController: UIViewController {
         passwordVerifiedTextField.addDoneButtonOnKeyboard()
     }
     
+    
+    
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "login") as! LoginViewController
         vc.modalPresentationStyle = .fullScreen

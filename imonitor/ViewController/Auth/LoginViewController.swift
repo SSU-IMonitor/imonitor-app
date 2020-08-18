@@ -26,6 +26,19 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func loginButtonPressed(){
+
+        let vc = storyboard?.instantiateViewController(identifier: "main") as! MainViewController
+        
+        vc.modalPresentationStyle = .fullScreen
+        userInfoParsing()
+        vc.idText = self.idText
+        vc.nameText = self.nameText
+        vc.majorText = self.majorText
+        
+        present(vc, animated: true)
+    }
+    
     func userInfoParsing(){
         let parameters = ["id": idTextField.text, "password": passwordTextField.text]
 
@@ -43,51 +56,37 @@ class LoginViewController: UIViewController {
         let session = URLSession.shared
         session.dataTask(with: request){
             (data, response, error) in
-            
+                
             if let data = data {
                 do {
-        //                    codable 사용하지 않았을 경우
-        //                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-        //                    print(json)
-        //
-        //                    let userInfo = (json["userInfo"] ?? "")
-        //                    print(userInfo)
-        //          codable 사용한 경우
+            //                    codable 사용하지 않았을 경우
+            //                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+            //                    print(json)
+            //
+            //                    let userInfo = (json["userInfo"] ?? "")
+            //                    print(userInfo)
+            //          codable 사용한 경우
                     let myResponse = response as! HTTPURLResponse
-                         print("Status Code:", myResponse.statusCode)
-                    
+                        print("Status Code:", myResponse.statusCode)
+                        
                     if myResponse.statusCode != 200 {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
                         print(error.message)
+                    } else {
+                        let user = try JSONDecoder().decode(LoginInfo.self, from: data)
+                            
+                        print(user.userInfo.id)
+                        self.idText = user.userInfo.id
+                        self.nameText = user.userInfo.name
+                        self.majorText = user.userInfo.major
                     }
-                    
-                    let user = try JSONDecoder().decode(LoginInfo.self, from: data)
-                    
-                    print(user.userInfo.id)
-                    self.idText = user.userInfo.id
-                    self.nameText = user.userInfo.name
-                    self.majorText = user.userInfo.major
-//                    self.inserData(name: user.userInfo.name, id: user.userInfo.id, major: user.userInfo.major)
-
+    //                    self.inserData(name: user.userInfo.name, id: user.userInfo.id, major: user.userInfo.major)
                 } catch {
                     //let error = try JSONDecoder.decode(ErrorInfo.self, from: data)
                     print("error: ", error)
                 }
             }
         }.resume()
-    }
-    
-    @IBAction func loginButtonPressed(){
-
-        let vc = storyboard?.instantiateViewController(identifier: "main") as! MainViewController
-        
-        vc.modalPresentationStyle = .fullScreen
-        userInfoParsing()
-        vc.idText = self.idText
-        vc.nameText = self.nameText
-        vc.majorText = self.majorText
-        
-        present(vc, animated: true)
     }
     
     
@@ -97,41 +96,6 @@ class LoginViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
-    
-}
-
-struct LoginInfo: Codable{
-    let accessToken: String
-    let refreshToken: String
-    let tokenType: String
-    let userInfo: UserInfo
-    
-//    init(accessToken: String, refreshToken: String, tokenType: String, userInfo: UserInfo){
-//        self.accessToken = accessToken
-//        self.refreshToken = refreshToken
-//        self.tokenType = tokenType
-//        self.userInfo = userInfo
-//    }
-}
-
-struct UserInfo: Codable{
-    let id: String
-    let major: String
-    let name: String
-    
-    func getString(){
-        print("id: \(id), major: \(major), name: \(name)")
-    }
-//    
-//    init(id: String, major: String, name: String){
-//        self.id = id
-//        self.major = major
-//        self.name = name
-//    }
-}
-
-struct ErrorInfo: Codable{
-    let message: String
 }
 
 //class CourseViewModel{
