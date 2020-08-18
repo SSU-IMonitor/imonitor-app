@@ -31,16 +31,20 @@ class MainViewController: UIViewController{
    
     @IBOutlet var tableView: UITableView!
     
+    var idText: String = ""
+    var majorText: String = ""
+    var nameText: String = ""
+    
     let viewModel = CourseViewModel()
-
-  
+    
     let nameLabel = UILabel(frame: CGRect(x: 230, y: -30, width:150, height:150))
     let collegeNameLabel = UILabel(frame: CGRect(x: 230, y: 0, width:150, height:150))
     let deptNameLabel = UILabel(frame: CGRect(x: 230, y: 30, width:150, height:150))
-    let image = UIImage(named: "person.jpg")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let image = UIImage(named: "person.jpg")
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 150))
         
@@ -51,7 +55,6 @@ class MainViewController: UIViewController{
         
         header.backgroundColor =  UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1)
         
-        
         imgStudent = UIImageView(frame: CGRect(x: 75, y: 35, width:75, height: 75))
         imgStudent.image = image
         imgStudent.layer.cornerRadius = 20.0
@@ -59,15 +62,18 @@ class MainViewController: UIViewController{
         
         header.addSubview(imgStudent)
         
-        nameLabel.text = "허예은"
+        //nameLabel.text = "허예은"
+        nameLabel.text = nameText
         nameLabel.textColor = UIColor.white
         header.addSubview(nameLabel)
             
-        collegeNameLabel.text = "IT대학"
+        //collegeNameLabel.text = "IT대학"
+        collegeNameLabel.text = idText
         collegeNameLabel.textColor = UIColor.white
         header.addSubview(collegeNameLabel)
             
-        deptNameLabel.text = "소프트웨어학부"
+        //deptNameLabel.text = "소프트웨어학부"
+        deptNameLabel.text = majorText
         deptNameLabel.textColor = UIColor.white
         header.addSubview(deptNameLabel)
         
@@ -165,5 +171,13 @@ class CourseViewModel{
     
     func courseInfo(at index: Int) -> CourseInfo{
         return courseInfoList[index]
+    }
+}
+
+class UserInfoViewModel{
+    var courseInfo: CourseInfo?
+    
+    func update(model: CourseInfo?){
+        courseInfo = model
     }
 }
