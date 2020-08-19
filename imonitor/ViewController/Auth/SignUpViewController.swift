@@ -31,12 +31,45 @@ class SignUpViewController: UIViewController {
         passwordVerifiedTextField.addDoneButtonOnKeyboard()
     }
     
-    
-    
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "login") as! LoginViewController
         vc.modalPresentationStyle = .fullScreen
+        SignUpParsing()
         present(vc, animated: true)
     }
     
+    func SignUpParsing(){
+        let parameters = ["id": idTextField.text, "name": nameTextField.text, "password": passwordTextField.text, "major": majorTextField.text]
+        
+        guard let url = URL(string: "http://api.puroong.me/v1/auth/sign-up") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody;
+        
+        let session = URLSession.shared
+        session.dataTask(with: request){
+            (data, response, error) in
+            
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                    print("Status Code: ", myResponse.statusCode)
+                    
+                    if myResponse.statusCode != 200 {
+                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+                        print(error.message)
+                    } else {
+                        let log = try JSONDecoder().decode(LoginInfo.self, from: data)
+                        print(log.userInfo.id)
+                    }
+                } catch{
+                    print("error: ", error)
+                }
+            }
+        }.resume()
+    }
 }

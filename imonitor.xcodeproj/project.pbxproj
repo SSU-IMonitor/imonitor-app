@@ -16,6 +16,9 @@
 		96AA35C124EBCDD7001A79FF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 96AA35C024EBCDD7001A79FF /* Alamofire */; };
 		96AA35CF24EBCFFF001A79FF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA35CE24EBCFFF001A79FF /* LoginModel.swift */; };
 		96AA35D124EBD048001A79FF /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA35D024EBD048001A79FF /* ErrorModel.swift */; };
+		96AA35D324EBD131001A79FF /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA35D224EBD131001A79FF /* SignUpModel.swift */; };
+		96AA35D524EBD1B4001A79FF /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA35D424EBD1B4001A79FF /* APIManager.swift */; };
+		96AA35D924EBD48E001A79FF /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA35D824EBD48E001A79FF /* Constant.swift */; };
 		96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572A24D3005C002C7114 /* AppDelegate.swift */; };
 		96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE572C24D3005C002C7114 /* SceneDelegate.swift */; };
 		96AE573224D3005C002C7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96AE573024D3005C002C7114 /* Main.storyboard */; };
@@ -71,6 +74,9 @@
 		96A2568F24E17EE5002F52BF /* SubmitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitTableViewController.swift; sourceTree = "<group>"; };
 		96AA35CE24EBCFFF001A79FF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		96AA35D024EBD048001A79FF /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		96AA35D224EBD131001A79FF /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		96AA35D424EBD1B4001A79FF /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		96AA35D824EBD48E001A79FF /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		96AE572724D3005C002C7114 /* imonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AE572A24D3005C002C7114 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96AE572C24D3005C002C7114 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 		96AA35C324EBCE2D001A79FF /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
+				96AA35D424EBD1B4001A79FF /* APIManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -179,9 +186,18 @@
 			isa = PBXGroup;
 			children = (
 				96AA35CE24EBCFFF001A79FF /* LoginModel.swift */,
+				96AA35D224EBD131001A79FF /* SignUpModel.swift */,
 				96AA35D024EBD048001A79FF /* ErrorModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		96AA35D724EBD481001A79FF /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				96AA35D824EBD48E001A79FF /* Constant.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 		96AE571E24D3005C002C7114 = {
@@ -207,6 +223,7 @@
 		96AE572924D3005C002C7114 /* imonitor */ = {
 			isa = PBXGroup;
 			children = (
+				96AA35D724EBD481001A79FF /* Constant */,
 				96AA35CD24EBCFBD001A79FF /* Model */,
 				96AA35C524EBCE6D001A79FF /* templates */,
 				96AA35C424EBCE47001A79FF /* ViewController */,
@@ -378,6 +395,7 @@
 				96AA35D124EBD048001A79FF /* ErrorModel.swift in Sources */,
 				96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */,
 				96AA35CF24EBCFFF001A79FF /* LoginModel.swift in Sources */,
+				96AA35D324EBD131001A79FF /* SignUpModel.swift in Sources */,
 				96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */,
 				96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */,
 				96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */,
@@ -385,7 +403,9 @@
 				96A2569024E17EE5002F52BF /* SubmitTableViewController.swift in Sources */,
 				96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */,
 				96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */,
+				96AA35D924EBD48E001A79FF /* Constant.swift in Sources */,
 				9665CC9824E6BCF600938E49 /* SearchViewController.swift in Sources */,
+				96AA35D524EBD1B4001A79FF /* APIManager.swift in Sources */,
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,
 				9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */,
