@@ -59,12 +59,17 @@ class SignUpViewController: UIViewController {
                     let myResponse = response as! HTTPURLResponse
                     print("Status Code: ", myResponse.statusCode)
                     
-                    if myResponse.statusCode != 200 {
+                    if myResponse.statusCode == 200{
+                        let log = try JSONDecoder().decode(LoginInfo.self, from: data)
+                        print("id:", log.userInfo.id, "\tname: ", log.userInfo.name)
+                        print("회원가입 정상 완료")
+                        
+                    } else if myResponse.statusCode == 500{
+                        print("회원 중복")
+                        
+                    } else {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
                         print(error.message)
-                    } else {
-                        let log = try JSONDecoder().decode(LoginInfo.self, from: data)
-                        print(log.userInfo.id)
                     }
                 } catch{
                     print("error: ", error)
