@@ -10,6 +10,10 @@ import UIKit
 import SeeSo
 import AVFoundation
 
+let bounds: CGRect = UIScreen.main.bounds
+let width = bounds.width
+let height = bounds.height
+
 class ExamViewController: UIViewController {
     let viewModel = DetailViewModel()
     var tracker: GazeTracker? = nil
@@ -84,9 +88,10 @@ extension ExamViewController: StatusDelegate{
 
 extension ExamViewController: GazeDelegate{
     // 시선 인식
+    
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
-        if x < 100.0 || y < 100.0 || x > 800.0 || y > 800.0 {
+        if x < 100.0 || y < 100.0 || x > Float(width) || y > Float(height) - 100.0 || x == Float(Double.nan) || y == Float(Double.nan)  {
             startCount()
         }
     }
