@@ -9,19 +9,42 @@
 import UIKit
 import Alamofire
 
-class SearchViewController: UIViewController, UISearchBarDelegate {
+var count: Int = 0
+
+
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
     
     var accessTokenString: String = ""
-    
+    var courses = [ExamInfo]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        SearchAPI()
-
-
+        SearchAPI {
+            self.tableView.reloadData()
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return courses.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = courses[indexPath.row].title
+        cell.detailTextLabel?.text = courses[indexPath.row].courseCode
+        return cell
+    }
+//
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       return 80.0
+   }
+//
     private func dismissKeyboard(){
         searchBar.resignFirstResponder()
     }
@@ -43,7 +66,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         print("--> 검색어: \(searchBar.text)")
     }
     
-    func SearchAPI(){
+    func SearchAPI(completed: @escaping () -> ()){
         let url = URL(string: "http://api.puroong.me/v1/exams")
         
         guard let requestURL = url else { fatalError() }
@@ -67,7 +90,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                                 
                     if myResponse.statusCode == 200 {
                         let course = try JSONDecoder().decode(CourseInfo.self, from: data)
-                        print(course.exams)
+                        self.courses = course.exams
+                        
+                        print(self.courses)
+                        
+                        DispatchQueue.main.async {
+                            completed()
+                        }
+                        
                     }
                 } catch {
                     print(error)
@@ -75,39 +105,35 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             }
         }.resume()
     }
-
 }
-    
-//    static func search(_ term: String, completion: @escaping ([Course]) -> Void){
-//        let session  = URLSession(configuration: .default)
-//
-//        var urlComponents = URLComponents(string: ""http://api.puroong.me/v1/exams"")!
-//        let termQuery = URLQueryItem(name: "term", value: term)
-//        urlComponents.queryItems?.append(termQuery)
-//
-//        let requestURL = urlComponents.url!
-//        print(requestURL)
-//
-//        let dataTask = session.dataTask(with: requestURL){
-//            (data, response, error) in
-//            let successRange = 200..<300
-//
-//            guard error == nil,
-//                let statusCode = (response as? HTTPURLResponse)?.statusCode, successRange.contains(statusCode) else {
-//                    completion([])
-//                    return
-//            }
-//
-//            guard let resultData = data else {
-//                completion([])
-//                return
-//            }
-//
-//            // data -> [Course]
-//            let string = String(data: resultData, encoding: .utf8)
-//            print("--> result: \(string)")
-////            completion([Course])
-//
-//        }.resume()
-//
+
+//extension SearchViewController: UITableViewDataSource{
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
 //    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return courses.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SearchCell else {
+//            return UITableViewCell()
+//        }
+//
+//
+//        return cell
+//    }
+//}
+//
+//
+//class CourseViewModel{
+//    let courseInfoList:[ExamInfo] = []
+//}
+//
+//class SearchCell: UITableViewCell{
+//    @IBOutlet var courseTitleLabel: UILabel!
+//    @IBOutlet var courseCodeLabel: UILabel!
+//    @IBOutlet var professorLabel: UILabel!
+//}
+//
