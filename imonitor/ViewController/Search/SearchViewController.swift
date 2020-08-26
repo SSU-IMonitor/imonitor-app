@@ -40,11 +40,25 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         cell.detailTextLabel?.text = courses[indexPath.row].courseCode
         return cell
     }
-//
+
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        return 80.0
    }
-//
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        alert()
+    }
+    
+    func alert(){
+         DispatchQueue.main.async {
+            let alert = UIAlertController(title: "알림", message: "해당 과목을 추가하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
     private func dismissKeyboard(){
         searchBar.resignFirstResponder()
     }
@@ -106,34 +120,3 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }.resume()
     }
 }
-
-//extension SearchViewController: UITableViewDataSource{
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return courses.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SearchCell else {
-//            return UITableViewCell()
-//        }
-//
-//
-//        return cell
-//    }
-//}
-//
-//
-//class CourseViewModel{
-//    let courseInfoList:[ExamInfo] = []
-//}
-//
-//class SearchCell: UITableViewCell{
-//    @IBOutlet var courseTitleLabel: UILabel!
-//    @IBOutlet var courseCodeLabel: UILabel!
-//    @IBOutlet var professorLabel: UILabel!
-//}
-//
