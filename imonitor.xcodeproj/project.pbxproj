@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9665CC9824E6BCF600938E49 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9665CC9724E6BCF600938E49 /* SearchViewController.swift */; };
+		9642B4AA24F154CA009BF676 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4A924F154CA009BF676 /* SearchViewController.swift */; };
+		9642B4AC24F15A17009BF676 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4AB24F15A17009BF676 /* CourseModel.swift */; };
 		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
 		9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */; };
 		96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568924E17531002F52BF /* DetailContentsViewController.swift */; };
@@ -66,7 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9665CC9724E6BCF600938E49 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9642B4A924F154CA009BF676 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9642B4AB24F15A17009BF676 /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		96A2568924E17531002F52BF /* DetailContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentsViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +179,7 @@
 		96AA35C924EBCEE4001A79FF /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				9665CC9724E6BCF600938E49 /* SearchViewController.swift */,
+				9642B4A924F154CA009BF676 /* SearchViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -188,6 +190,7 @@
 				96AA35CE24EBCFFF001A79FF /* LoginModel.swift */,
 				96AA35D224EBD131001A79FF /* SignUpModel.swift */,
 				96AA35D024EBD048001A79FF /* ErrorModel.swift */,
+				9642B4AB24F15A17009BF676 /* CourseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96AA35D124EBD048001A79FF /* ErrorModel.swift in Sources */,
+				9642B4AC24F15A17009BF676 /* CourseModel.swift in Sources */,
 				96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */,
 				96AA35CF24EBCFFF001A79FF /* LoginModel.swift in Sources */,
 				96AA35D324EBD131001A79FF /* SignUpModel.swift in Sources */,
@@ -404,7 +408,7 @@
 				96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */,
 				96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */,
 				96AA35D924EBD48E001A79FF /* Constant.swift in Sources */,
-				9665CC9824E6BCF600938E49 /* SearchViewController.swift in Sources */,
+				9642B4AA24F154CA009BF676 /* SearchViewController.swift in Sources */,
 				96AA35D524EBD1B4001A79FF /* APIManager.swift in Sources */,
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,

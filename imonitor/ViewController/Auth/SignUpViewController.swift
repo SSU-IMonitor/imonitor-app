@@ -34,11 +34,12 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "login") as! LoginViewController
         vc.modalPresentationStyle = .fullScreen
-        SignUpParsing()
+        SignUpAPI()
+        
         present(vc, animated: true)
     }
     
-    func SignUpParsing(){
+    func SignUpAPI(){
         let parameters = ["id": idTextField.text, "name": nameTextField.text, "password": passwordTextField.text, "major": majorTextField.text]
         
         guard let url = URL(string: "http://api.puroong.me/v1/auth/sign-up") else { return }

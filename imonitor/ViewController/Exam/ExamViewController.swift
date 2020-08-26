@@ -34,8 +34,16 @@ class ExamViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         answerTextField.addDoneButtonOnKeyboard()
+        cameraPermissionCheck()
         
-        // 카메라 권한 체크
+    }
+    
+    func updateUI(){
+        courseNameLabel.text = courseName
+        professorLabel.text = professorName
+    }
+    
+    func cameraPermissionCheck(){
         if AVCaptureDevice .authorizationStatus(for: .video) == .authorized{
             GazeTracker.initGazeTracker(license: "dev_zjr3b5ffioy6jiynqtv99txxoi5dswqo6nukescw", delegate: self)
         } else {
@@ -46,11 +54,6 @@ class ExamViewController: UIViewController {
                 }
             })
         }
-    }
-    
-    func updateUI(){
-        courseNameLabel.text = courseName
-        professorLabel.text = professorName
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
@@ -87,8 +90,8 @@ extension ExamViewController: StatusDelegate{
 
 
 extension ExamViewController: GazeDelegate{
-    // 시선 인식
     
+    // 시선 인식
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
         if x < 100.0 || y < 100.0 || x > Float(width) || y > Float(height) - 100.0 || x == Float(Double.nan) || y == Float(Double.nan)  {

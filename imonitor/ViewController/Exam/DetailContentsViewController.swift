@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailContentsViewController: UIViewController {
-    let viewModel = DetailContentViewModel()
+//    let viewModel = DetailContentViewModel()
     
     @IBOutlet var courseIDLabel: UILabel!
     @IBOutlet var courseNameLabel: UILabel!
@@ -18,25 +18,25 @@ class DetailContentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+//        updateUI()
     }
     
-    func updateUI(){
-        if let courseInfo = viewModel.courseInfo{
-            print(courseInfo.courseCode)
-            courseIDLabel.text = courseInfo.courseCode
-            courseNameLabel.text = courseInfo.course
-            startTimeLabel.text = courseInfo.startTime
-            endTimeLabel.text = courseInfo.endTime
-        }
-    }
+//    func updateUI(){
+//        if let courseInfo = viewModel.courseInfo{
+//            print(courseInfo.courseCode)
+//            courseIDLabel.text = courseInfo.courseCode
+//            courseNameLabel.text = courseInfo.course
+//            startTimeLabel.text = courseInfo.startTime
+//            endTimeLabel.text = courseInfo.endTime
+//        }
+//    }
 }
 
-class DetailContentViewModel{
-    var courseInfo: CourseInfo?
-    
-    func update(model: CourseInfo?){
-        courseInfo = model
-    }
-}
+//class DetailContentViewModel{
+//    var courseInfo: CourseInfo?
+//    
+//    func update(model: CourseInfo?){
+//        courseInfo = model
+//    }
+//}
 

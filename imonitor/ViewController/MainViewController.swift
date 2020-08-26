@@ -34,8 +34,9 @@ class MainViewController: UIViewController{
     var idText: String = ""
     var majorText: String = ""
     var nameText: String = ""
+    var accessToken: String = ""
     
-    let viewModel = CourseViewModel()
+    //let viewModel = CourseViewModel()
     
     let nameLabel = UILabel(frame: CGRect(x: 230, y: -30, width:150, height:150))
     let collegeNameLabel = UILabel(frame: CGRect(x: 230, y: 0, width:150, height:150))
@@ -51,7 +52,7 @@ class MainViewController: UIViewController{
         var imgStudent: UIImageView!
         
         tableView.delegate = self
-        tableView.dataSource = self
+        //tableView.dataSource = self
         
         header.backgroundColor =  UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1)
         
@@ -80,22 +81,29 @@ class MainViewController: UIViewController{
         tableView.tableHeaderView = header
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           if segue.identifier == "showDetail"{
-               let vc = segue.destination as? DetailViewController
-               if let index = sender as? Int{
-                   let courseInfo = viewModel.courseInfo(at: index)
-                   vc?.viewModel.update(model: courseInfo)
-               }
-           }
-       }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//           if segue.identifier == "showDetail"{
+//               let vc = segue.destination as? DetailViewController
+//               if let index = sender as? Int{
+//                   let courseInfo = viewModel.courseInfo(at: index)
+//                   vc?.viewModel.update(model: courseInfo)
+//               }
+//           }
+//       }
        
     @IBAction func logoutButtonPressed(){
         dismiss(animated: true, completion: nil)
     }
     
+    override func prepare(for segue:UIStoryboardSegue, sender: Any?){
+        if let view = segue.destination as? SearchViewController{
+            view.accessTokenString = accessToken
+        }
+    }
+    
     @IBAction func searchButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "search", sender: nil)
+        
     }
 }
 
@@ -106,78 +114,78 @@ extension MainViewController: UITableViewDelegate{
       }
 }
 
-extension MainViewController: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-        return 20.0
-       }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numofCourseInfo
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
-            return UITableViewCell()
-        }
-        
-        let courseInfo = viewModel.courseInfo(at: indexPath.row)
-        cell.update(info: courseInfo)
-        return cell
-    }
-}
+//extension MainViewController: UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+//        return 20.0
+//       }
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return viewModel.numofCourseInfo
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListCell else {
+//            return UITableViewCell()
+//        }
+//
+//        let courseInfo = viewModel.courseInfo(at: indexPath.row)
+//        cell.update(info: courseInfo)
+//        return cell
+//    }
+//}
 
-class ListCell: UITableViewCell{
-    @IBOutlet weak var courseTitleLabel: UILabel!
-    @IBOutlet weak var professorLabel: UILabel!
-    
-    func update(info: CourseInfo){
-        courseTitleLabel.text = info.course
-        professorLabel.text = info.professor
-    }
-}
+//class ListCell: UITableViewCell{
+//    @IBOutlet weak var courseTitleLabel: UILabel!
+//    @IBOutlet weak var professorLabel: UILabel!
+//
+//    func update(info: CourseInfo){
+//        courseTitleLabel.text = info.course
+//        professorLabel.text = info.professor
+//    }
+//}
 
-struct CourseInfo{
-    let course: String
-    let professor: String
-    let courseCode: String
-    let startTime: String
-    let endTime: String
-    let notice: String
-    
-    init(course: String, professor: String, courseCode: String, startTime: String, endTime: String, notice: String){
-        self.course = course
-        self.professor = professor
-        self.courseCode = courseCode
-        self.startTime = startTime
-        self.endTime = endTime
-        self.notice = notice
-    }
-}
+//struct CourseInfo{
+//    let course: String
+//    let professor: String
+//    let courseCode: String
+//    let startTime: String
+//    let endTime: String
+//    let notice: String
+//
+//    init(course: String, professor: String, courseCode: String, startTime: String, endTime: String, notice: String){
+//        self.course = course
+//        self.professor = professor
+//        self.courseCode = courseCode
+//        self.startTime = startTime
+//        self.endTime = endTime
+//        self.notice = notice
+//    }
+//}
 
-class CourseViewModel{
-    let courseInfoList:[CourseInfo] = [
-        CourseInfo(course:"데이터베이스응용", professor: "이상호", courseCode: "2050301", startTime:"2020.08.07 15:00:00", endTime: "2020.08.07 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다."),
-        CourseInfo(course:"운영체제", professor: "양승민", courseCode: "3020594", startTime:"2020.08.09 15:00:00", endTime: "2020.08.09 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다."),
-        CourseInfo(course:"시스템프로그래밍", professor: "최재영", courseCode: "342456", startTime:"2020.08.11 15:00:00", endTime: "2020.08.11 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다.")
-    ]
-    
-    var numofCourseInfo: Int{
-        return courseInfoList.count
-    }
-    
-    func courseInfo(at index: Int) -> CourseInfo{
-        return courseInfoList[index]
-    }
-}
-
-class UserInfoViewModel{
-    var courseInfo: CourseInfo?
-    
-    func update(model: CourseInfo?){
-        courseInfo = model
-    }
-}
+//class CourseViewModel{
+//    let courseInfoList:[CourseInfo] = [
+//        CourseInfo(course:"데이터베이스응용", professor: "이상호", courseCode: "2050301", startTime:"2020.08.07 15:00:00", endTime: "2020.08.07 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다."),
+//        CourseInfo(course:"운영체제", professor: "양승민", courseCode: "3020594", startTime:"2020.08.09 15:00:00", endTime: "2020.08.09 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다."),
+//        CourseInfo(course:"시스템프로그래밍", professor: "최재영", courseCode: "342456", startTime:"2020.08.11 15:00:00", endTime: "2020.08.11 16:00:00", notice: "본 시험은 시험 기간 이후 접속할 시 접속할 수 없습니다. 그러니 주의하시고 시험 시간 몇 분전에 미리 접속하여 시험을 볼 수 있는 환경을 만들어 놓으시길 바랍니다.")
+//    ]
+//    
+//    var numofCourseInfo: Int{
+//        return courseInfoList.count
+//    }
+//    
+//    func courseInfo(at index: Int) -> CourseInfo{
+//        return courseInfoList[index]
+//    }
+//}
+//
+//class UserInfoViewModel{
+//    var courseInfo: CourseInfo?
+//    
+//    func update(model: CourseInfo?){
+//        courseInfo = model
+//    }
+//}

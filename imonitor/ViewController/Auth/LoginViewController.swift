@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     var idText: String = ""
     var majorText: String = ""
     var nameText: String = ""
+    var accessToken: String = ""
     
     var delegate: MainViewController?
     
@@ -27,10 +28,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(){
-            userInfoParsing()
+            loginAPI()
     }
     
-    func userInfoParsing(){
+    func loginAPI(){
         let parameters = ["id": idTextField.text, "password": passwordTextField.text]
 
         //guard let url = URL(string: "https://stoplight.io/p/mocks/13917/150793/v1/auth/sign-in") else { return }
@@ -60,6 +61,7 @@ class LoginViewController: UIViewController {
                         self.idText = user.userInfo.id
                         self.nameText = user.userInfo.name
                         self.majorText = user.userInfo.major
+                        self.accessToken = user.accessToken
                         self.moveToMain()
                         
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
@@ -83,6 +85,8 @@ class LoginViewController: UIViewController {
             vc.idText = self.idText
             vc.nameText = self.nameText
             vc.majorText = self.majorText
+            vc.accessToken = self.accessToken
+            
                           
             self.present(vc, animated: true)
         }

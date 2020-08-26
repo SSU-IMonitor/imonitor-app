@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailTableViewController: UITableViewController {
-    let viewModel = DetailTableViewModel()
+//    let viewModel = DetailTableViewModel()
 
     @IBOutlet var courseIDLabel: UILabel!
     @IBOutlet var courseNameLabel: UILabel!
@@ -18,18 +18,18 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+//        updateUI()
     }
     
-    func updateUI(){
-        if let courseInfo = viewModel.courseInfo{
-            print(courseInfo.courseCode)
-            courseIDLabel.text = courseInfo.courseCode
-            courseNameLabel.text = courseInfo.course
-            startTimeLabel.text = courseInfo.startTime
-            endTimeLabel.text = courseInfo.endTime
-        }
-    }
+//    func updateUI(){
+//        if let courseInfo = viewModel.courseInfo{
+//            print(courseInfo.courseCode)
+//            courseIDLabel.text = courseInfo.courseCode
+//            courseNameLabel.text = courseInfo.course
+//            startTimeLabel.text = courseInfo.startTime
+//            endTimeLabel.text = courseInfo.endTime
+//        }
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -39,11 +39,11 @@ class DetailTableViewController: UITableViewController {
         return 4
     }
     
-    class DetailTableViewModel{
-        var courseInfo: CourseInfo?
-        
-        func update(model: CourseInfo?){
-            courseInfo = model
-        }
-    }
+//    class DetailTableViewModel{
+//        var courseInfo: CourseInfo?
+//        
+//        func update(model: CourseInfo?){
+//            courseInfo = model
+//        }
+//    }
 }

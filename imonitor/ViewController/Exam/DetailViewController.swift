@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+//        updateUI()
 
         // Do any additional setup after loading the view.
     }
@@ -65,17 +65,17 @@ class DetailViewController: UIViewController {
         
     }
     
-    func updateUI(){
-        if let courseInfo = viewModel.courseInfo{
-            courseTitleLabel.text = courseInfo.course
-            professorLabel.text = courseInfo.professor
-            noticeLabel.text = courseInfo.notice
-            courseIDLabel.text = courseInfo.courseCode
-            courseTitle2Label.text = courseInfo.course
-            startTimeLabel.text = courseInfo.startTime
-            endTimeLabel.text = courseInfo.endTime
-        }
-    }
+//    func updateUI(){
+//        if let courseInfo = viewModel.courseInfo{
+//            courseTitleLabel.text = courseInfo.course
+//            professorLabel.text = courseInfo.professor
+//            noticeLabel.text = courseInfo.notice
+//            courseIDLabel.text = courseInfo.courseCode
+//            courseTitle2Label.text = courseInfo.course
+//            startTimeLabel.text = courseInfo.startTime
+//            endTimeLabel.text = courseInfo.endTime
+//        }
+//    }
 }
 
 class DetailViewModel{
