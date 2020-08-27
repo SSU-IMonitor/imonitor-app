@@ -731,7 +731,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="제목 또는 교수명을 입력하세요." translatesAutoresizingMaskIntoConstraints="NO" id="6VF-J5-JOr">
+                            <searchBar contentMode="redraw" placeholder="시험코드 또는 과목명을 입력해주세요." translatesAutoresizingMaskIntoConstraints="NO" id="6VF-J5-JOr">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>

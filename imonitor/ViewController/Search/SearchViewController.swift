@@ -5,7 +5,6 @@
 //  Created by 허예은 on 2020/08/22.
 //  Copyright © 2020 허예은. All rights reserved.
 //
-
 import UIKit
 import Alamofire
 
@@ -20,45 +19,28 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     var accessTokenString: String = ""
     var courses = [ExamInfo]()
+    var filteredCourses = [ExamInfo]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         SearchAPI {
             self.tableView.reloadData()
         }
+        setUptableView()
+        setUpSearchBar()
+        
+        filteredCourses = courses
+    }
+    
+    private func setUptableView(){
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count
+    private func setUpSearchBar(){
+        searchBar.delegate = self
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.textLabel?.text = courses[indexPath.row].title
-        cell.detailTextLabel?.text = courses[indexPath.row].courseCode
-        return cell
-    }
-
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return 80.0
-   }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        alert()
-    }
-    
-    func alert(){
-         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "알림", message: "해당 과목을 추가하시겠습니까?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-
     private func dismissKeyboard(){
         searchBar.resignFirstResponder()
     }
@@ -78,6 +60,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         
        
         print("--> 검색어: \(searchBar.text)")
+        
     }
     
     func SearchAPI(completed: @escaping () -> ()){
@@ -118,5 +101,65 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                 }
             }
         }.resume()
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredCourses.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = filteredCourses[indexPath.row].title
+        cell.detailTextLabel?.text = filteredCourses[indexPath.row].courseCode
+        return cell
+    }
+
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       return 80.0
+   }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        alert()
+    }
+    
+    func alert(){
+         DispatchQueue.main.async {
+            let alert = UIAlertController(title: "알림", message: "해당 과목을 추가하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            filteredCourses = courses
+            
+            return
+        }
+        filteredCourses = courses.filter({course -> Bool in
+            guard let text = searchBar.text else { return false }
+                if searchBar.text == course.courseCode {
+                    return course.courseCode!.contains(text)
+                }
+                
+                if searchBar.text == course.courseName {
+                    return course.courseName!.contains(text)
+                }
+            
+                if searchBar.text == course.title {
+                    return course.title!.contains(text)
+                }
+            
+                return false
+            })
+        tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
     }
 }
