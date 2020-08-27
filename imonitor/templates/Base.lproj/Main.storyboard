@@ -16,24 +16,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="20180343" borderStyle="roundedRect" placeholder="Student ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JQG-tM-zsW">
-                                <rect key="frame" x="60" y="391" width="294" height="34"/>
+                                <rect key="frame" x="60" y="376" width="294" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="19981231" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ojk-qN-sAN">
-                                <rect key="frame" x="60" y="475" width="294" height="34"/>
+                                <rect key="frame" x="60" y="460" width="294" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0D-D2-QqR" customClass="UIRoundPrimaryButton" customModule="imonitor" customModuleProvider="target">
-                                <rect key="frame" x="150" y="559" width="114" height="30"/>
+                                <rect key="frame" x="150" y="544" width="114" height="30"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="loginButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="QC5-v0-Mgf"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="CrN-4t-XVd">
-                                <rect key="frame" x="80" y="169" width="254" height="142"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="big-logo-nobackground" translatesAutoresizingMaskIntoConstraints="NO" id="CrN-4t-XVd">
+                                <rect key="frame" x="80" y="169" width="254" height="127"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0U-dT-a8l">
                                 <rect key="frame" x="130" y="626" width="155" height="30"/>
@@ -88,7 +88,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo2" translatesAutoresizingMaskIntoConstraints="NO" id="mHa-XU-0Cz">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small-logo-nobackground" translatesAutoresizingMaskIntoConstraints="NO" id="mHa-XU-0Cz">
                                 <rect key="frame" x="153" y="44" width="108" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="qC8-um-wde"/>
@@ -696,7 +696,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Xxa-aa-6G2">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="big-logo-nobackground" translatesAutoresizingMaskIntoConstraints="NO" id="Xxa-aa-6G2">
                                 <rect key="frame" x="87" y="121" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -797,12 +797,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="big-logo-nobackground" width="218" height="127"/>
         <image name="clear" catalog="system" width="128" height="114"/>
         <image name="greaterthan" catalog="system" width="128" height="111"/>
         <image name="lessthan" catalog="system" width="128" height="111"/>
-        <image name="logo" width="243.33332824707031" height="142"/>
-        <image name="logo2" width="399.33334350585938" height="166"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="power" catalog="system" width="128" height="124"/>
+        <image name="small-logo-nobackground" width="178.33332824707031" height="155.33332824707031"/>
     </resources>
 </document>
