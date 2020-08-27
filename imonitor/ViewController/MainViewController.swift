@@ -92,9 +92,24 @@ class MainViewController: UIViewController{
 //       }
        
     @IBAction func logoutButtonPressed(){
-        dismiss(animated: true, completion: nil)
+        
+        alert()
     }
     
+    func alert(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "알림", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default){
+                (action) in self.dismiss(animated: true, completion: nil)
+            }
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
     override func prepare(for segue:UIStoryboardSegue, sender: Any?){
         if let view = segue.destination as? SearchViewController{
             view.accessTokenString = accessToken
