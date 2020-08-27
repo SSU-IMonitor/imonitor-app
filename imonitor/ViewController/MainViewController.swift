@@ -92,11 +92,10 @@ class MainViewController: UIViewController{
 //       }
        
     @IBAction func logoutButtonPressed(){
-        
-        alert()
+        alertLogout()
     }
     
-    func alert(){
+    func alertLogout(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default){

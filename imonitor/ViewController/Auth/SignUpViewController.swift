@@ -32,11 +32,11 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(identifier: "login") as! LoginViewController
-        vc.modalPresentationStyle = .fullScreen
-        SignUpAPI()
-        
-        present(vc, animated: true)
+       SignUpAPI()
+    }
+    
+    @IBAction func exitSignUpPage(_ sender: Any) {
+        moveToLogin()
     }
     
     func SignUpAPI(){
@@ -64,9 +64,12 @@ class SignUpViewController: UIViewController {
                         let log = try JSONDecoder().decode(LoginInfo.self, from: data)
                         print("id:", log.userInfo.id, "\tname: ", log.userInfo.name)
                         print("회원가입 정상 완료")
+                        self.moveToLogin()
                         
                     } else if myResponse.statusCode == 500{
+                        
                         print("회원 중복")
+                        self.alertUserDuplicated()
                         
                     } else {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
@@ -77,5 +80,23 @@ class SignUpViewController: UIViewController {
                 }
             }
         }.resume()
+    }
+    
+    func moveToLogin(){
+        let vc = storyboard?.instantiateViewController(identifier: "login") as! LoginViewController
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    func alertUserDuplicated(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "경고", message: "회원 중복. 다른 아이디를 사용해주세요", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default){
+                (action) in self.idTextField.text = ""
+            }
+                   
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

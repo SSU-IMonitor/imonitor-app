@@ -121,10 +121,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        alert()
+        alertAddCourse()
     }
     
-    func alert(){
+    func alertAddCourse(){
          DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "해당 과목을 추가하시겠습니까?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
