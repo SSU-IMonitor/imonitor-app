@@ -90,7 +90,7 @@ class SignUpViewController: UIViewController {
     
     func alertUserDuplicated(){
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "경고", message: "회원 중복. 다른 아이디를 사용해주세요", preferredStyle: .alert)
+            let alert = UIAlertController(title: "경고", message: "회원 중복. 다른 학번을 사용해주세요", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default){
                 (action) in self.idTextField.text = ""
             }

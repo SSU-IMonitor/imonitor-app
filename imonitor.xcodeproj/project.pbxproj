@@ -10,6 +10,7 @@
 		9642B4AA24F154CA009BF676 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4A924F154CA009BF676 /* SearchViewController.swift */; };
 		9642B4AC24F15A17009BF676 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4AB24F15A17009BF676 /* CourseModel.swift */; };
 		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
+		96932FCD24FA4B1800E5B468 /* MyCourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */; };
 		9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */; };
 		96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568924E17531002F52BF /* DetailContentsViewController.swift */; };
 		96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568B24E17CE6002F52BF /* DoneButton.swift */; };
@@ -70,6 +71,7 @@
 		9642B4A924F154CA009BF676 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9642B4AB24F15A17009BF676 /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseModel.swift; sourceTree = "<group>"; };
 		9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		96A2568924E17531002F52BF /* DetailContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentsViewController.swift; sourceTree = "<group>"; };
 		96A2568B24E17CE6002F52BF /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				96AA35CE24EBCFFF001A79FF /* LoginModel.swift */,
+				96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */,
 				96AA35D224EBD131001A79FF /* SignUpModel.swift */,
 				96AA35D024EBD048001A79FF /* ErrorModel.swift */,
 				9642B4AB24F15A17009BF676 /* CourseModel.swift */,
@@ -413,6 +416,7 @@
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,
 				9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */,
+				96932FCD24FA4B1800E5B468 /* MyCourseModel.swift in Sources */,
 				96FA970924D3F7B700F49D24 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

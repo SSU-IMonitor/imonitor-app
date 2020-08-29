@@ -18,6 +18,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     @IBOutlet var tableView: UITableView!
     
     var accessTokenString: String = ""
+    var userId: String = ""
     var courses = [ExamInfo]()
     var filteredCourses = [ExamInfo]()
 
@@ -59,7 +60,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         // - 결과를 받아와서 table view로 표현
         
        
-        print("--> 검색어: \(searchBar.text)")
+        //print("--> 검색어: \(searchBar.text)")
         
     }
     
@@ -103,7 +104,29 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }.resume()
     }
     
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            filteredCourses = courses
+            return
+        }
+        filteredCourses = courses.filter({course -> Bool in
+        guard let text = searchBar.text else { return false }
+            if searchBar.text == course.courseCode {
+                return course.courseCode!.contains(text)
+            }
+                   
+            if searchBar.text == course.courseName {
+                return course.courseName!.contains(text)
+            }
+               
+            if searchBar.text == course.title {
+                return course.title!.contains(text)
+            }
+               
+            return false
+        })
+        tableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCourses.count
@@ -121,45 +144,67 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        alertAddCourse()
+        alertAddCourse(indexPath: indexPath)
+        print("userId: \(userId)")
+        print("examId: \(filteredCourses[indexPath.row].id!)")
     }
     
-    func alertAddCourse(){
-         DispatchQueue.main.async {
+    func alertAddCourse(indexPath: IndexPath){
+        DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "해당 과목을 추가하시겠습니까?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+//            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            let okAction = UIAlertAction(title: "확인", style: .default){
+                (action) in
+                self.postMyExam(indexPath: indexPath)
+                //print(self.filteredCourses[indexPath.row].id)
+            }
             alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
-            
+            alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard !searchText.isEmpty else {
-            filteredCourses = courses
-            
-            return
-        }
-        filteredCourses = courses.filter({course -> Bool in
-            guard let text = searchBar.text else { return false }
-                if searchBar.text == course.courseCode {
-                    return course.courseCode!.contains(text)
-                }
+    func postMyExam(indexPath: IndexPath){
+        let parameters = ["examId": filteredCourses[indexPath.row].id!];
+        
+        guard let url = URL(string: "http://api.puroong.me/v1/users/\(userId)/exams") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        //request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer " + accessTokenString, forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+
+        request.httpBody = httpBody;
+        
+        let session = URLSession.shared
+        session.dataTask(with: request){
+            (data, response, error) in
                 
-                if searchBar.text == course.courseName {
-                    return course.courseName!.contains(text)
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                        print("Status Code:", myResponse.statusCode)
+                    
+                    if myResponse.statusCode == 200 {
+                        let course = try JSONDecoder().decode(MyCourseInfo.self, from: data)
+                        print(course.exam)
+                        
+                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+                        print(myResponse.statusCode)
+                    } else {
+                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+                        print(error.message)
+                    }
+                } catch {
+                    print("error: ", error)
                 }
-            
-                if searchBar.text == course.title {
-                    return course.title!.contains(text)
-                }
-            
-                return false
-            })
-        tableView.reloadData()
+            }
+        }.resume()
     }
     
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-    }
+   
+    
 }

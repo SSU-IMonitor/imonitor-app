@@ -14,6 +14,7 @@ struct CourseInfo: Codable{
 }
 
 struct ExamInfo: Codable{
+    let id: Int?
     let owner: OwnerInfo?
     let title: String?
     let courseName: String?
@@ -22,6 +23,7 @@ struct ExamInfo: Codable{
     let endTime: String?
     
     enum CodingKeys: String, CodingKey{
+        case id
         case owner = "owner"
         case title
         case courseName
@@ -30,7 +32,8 @@ struct ExamInfo: Codable{
         case endTime
     }
     
-    init(owner: OwnerInfo, title: String, courseName: String, courseCode: String, startTime: String, endTime: String){
+    init(id: Int, owner: OwnerInfo, title: String, courseName: String, courseCode: String, startTime: String, endTime: String){
+        self.id = id
         self.owner = owner
         self.title = title
         self.courseName = courseName

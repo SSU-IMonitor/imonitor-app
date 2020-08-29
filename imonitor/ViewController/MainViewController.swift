@@ -68,7 +68,7 @@ class MainViewController: UIViewController{
         nameLabel.textColor = UIColor.white
         header.addSubview(nameLabel)
             
-        //collegeNameLabel.text = "IT대학"
+        //collegeNameLabel.text = "20180343"
         collegeNameLabel.text = idText
         collegeNameLabel.textColor = UIColor.white
         header.addSubview(collegeNameLabel)
@@ -112,12 +112,12 @@ class MainViewController: UIViewController{
     override func prepare(for segue:UIStoryboardSegue, sender: Any?){
         if let view = segue.destination as? SearchViewController{
             view.accessTokenString = accessToken
+            view.userId = idText
         }
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "search", sender: nil)
-        
     }
 }
 
