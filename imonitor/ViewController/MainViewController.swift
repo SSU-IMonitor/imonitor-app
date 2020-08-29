@@ -27,7 +27,8 @@ import Foundation
  
  */
 
-class MainViewController: UIViewController{
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
    
     @IBOutlet var tableView: UITableView!
     
@@ -42,8 +43,19 @@ class MainViewController: UIViewController{
     let collegeNameLabel = UILabel(frame: CGRect(x: 230, y: 0, width:150, height:150))
     let deptNameLabel = UILabel(frame: CGRect(x: 230, y: 30, width:150, height:150))
     
+    var myCourses = [ExamInfo]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        postMyCourses{
+            self.tableView.reloadData()
+        }
+        
+        setUptableView()
+        
+        print("count: \(myCourses.count)")
+        
         
         let image = UIImage(named: "person.jpg")
         
@@ -51,8 +63,8 @@ class MainViewController: UIViewController{
         
         var imgStudent: UIImageView!
         
-        tableView.delegate = self
-        //tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.dataSource = self
         
         header.backgroundColor =  UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1)
         
@@ -79,6 +91,11 @@ class MainViewController: UIViewController{
         header.addSubview(deptNameLabel)
         
         tableView.tableHeaderView = header
+    }
+    
+    private func setUptableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,14 +136,61 @@ class MainViewController: UIViewController{
     @IBAction func searchButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "search", sender: nil)
     }
-}
-
-
-extension MainViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return myCourses.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = myCourses[indexPath.row].title
+        cell.detailTextLabel?.text = myCourses[indexPath.row].owner?.name
+        return cell
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        performSegue(withIdentifier: "showDetail", sender: indexPath.row)
-      }
+      performSegue(withIdentifier: "showDetail", sender: indexPath.row)
+    }
+    
+    func postMyCourses(completed: @escaping () -> ()){
+        guard let url = URL(string: "http://api.puroong.me/v1/users/\(idText)/exams") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+               
+        let session = URLSession.shared
+        session.dataTask(with: request){
+            (data, response, error) in
+                       
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                        print("Status Code:", myResponse.statusCode)
+                        
+                    if myResponse.statusCode == 200 {
+                        let courses = try JSONDecoder().decode(CourseInfo.self, from: data)
+                        self.myCourses = courses.exams
+                               
+                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+                        print(myResponse.statusCode)
+                    } else {
+                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+                        print(error.message)
+                    }
+                } catch {
+                    print("error: ", error)
+                }
+            }
+        }.resume()
+    }
 }
+
 
 //extension MainViewController: UITableViewDataSource{
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{

@@ -53,15 +53,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         // 검색어가 있는지. 없으면 아래의 작업을 수행할 수 없음.
         guard let searchTerm = searchBar.text, searchTerm.isEmpty == false else { return }
         
-        // 네트워킹을 통한 검색
-        // - 목표: 서치텀을 가지고 네트워킹을 통해서 영화 검색
-        // - 검색 API 필요
-        // - 결과를 받아오는 모델 (Course, response)
-        // - 결과를 받아와서 table view로 표현
-        
-       
         //print("--> 검색어: \(searchBar.text)")
-        
     }
     
     func SearchAPI(completed: @escaping () -> ()){
@@ -70,11 +62,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         guard let requestURL = url else { fatalError() }
         
         var request = URLRequest(url: requestURL)
-        
         request.httpMethod = "GET"
-        
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("Bearer " + accessTokenString, forHTTPHeaderField: "Authorization")
+        
         print("access: \(accessTokenString)" )
         
         let session = URLSession.shared
@@ -152,11 +143,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func alertAddCourse(indexPath: IndexPath){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "해당 과목을 추가하시겠습니까?", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
             let okAction = UIAlertAction(title: "확인", style: .default){
                 (action) in
                 self.postMyExam(indexPath: indexPath)
-                //print(self.filteredCourses[indexPath.row].id)
             }
             alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
             alert.addAction(okAction)
@@ -194,7 +183,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                         
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)
-                    } else {
+                    } else if myResponse.statusCode == 409 {
+                        self.alertDuplicatedMyCourse()
+                    }
+                    else {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
                         print(error.message)
                     }
@@ -205,6 +197,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }.resume()
     }
     
-   
+    func alertDuplicatedMyCourse(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "경고", message: "이미 추가한 과목입니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
 }

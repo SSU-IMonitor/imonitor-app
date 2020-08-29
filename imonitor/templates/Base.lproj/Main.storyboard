@@ -98,39 +98,35 @@
                                 <rect key="frame" x="0.0" y="119" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="84" id="Vaw-5D-fbg" customClass="ListCell" customModule="imonitor" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="ep6-od-VAd" detailTextLabel="j41-ax-w1z" rowHeight="84" style="IBUITableViewCellStyleSubtitle" id="Vaw-5D-fbg" customClass="ListCell" customModule="imonitor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vaw-5D-fbg" id="D1d-VE-MLR">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYd-Fd-Q9P">
-                                                    <rect key="frame" x="22" y="49" width="66" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CourseTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F48-lc-6UI">
-                                                    <rect key="frame" x="22" y="16" width="86.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ep6-od-VAd">
+                                                    <rect key="frame" x="20" y="17.5" width="40.5" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j41-ax-w1z">
+                                                    <rect key="frame" x="20" y="45" width="38.5" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="F48-lc-6UI" firstAttribute="leading" secondItem="D1d-VE-MLR" secondAttribute="leading" constant="22" id="1TM-o7-8zv"/>
-                                                <constraint firstItem="yYd-Fd-Q9P" firstAttribute="top" secondItem="F48-lc-6UI" secondAttribute="bottom" constant="12" id="42O-K1-hnA"/>
-                                                <constraint firstItem="yYd-Fd-Q9P" firstAttribute="leading" secondItem="D1d-VE-MLR" secondAttribute="leading" constant="22" id="bZV-WS-ewI"/>
-                                                <constraint firstItem="F48-lc-6UI" firstAttribute="top" secondItem="D1d-VE-MLR" secondAttribute="topMargin" constant="5" id="pqk-Za-tjk"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="courseTitleLabel" destination="F48-lc-6UI" id="5HQ-Ti-1Pa"/>
-                                            <outlet property="professorLabel" destination="yYd-Fd-Q9P" id="q8Q-VP-in6"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="HOR-Sa-u5f" id="1q2-lN-C80"/>
+                                    <outlet property="delegate" destination="HOR-Sa-u5f" id="js5-LD-4qT"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSq-lJ-eRW">
                                 <rect key="frame" x="370" y="66" width="24" height="22"/>
