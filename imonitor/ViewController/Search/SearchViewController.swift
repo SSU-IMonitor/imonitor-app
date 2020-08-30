@@ -177,7 +177,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     
                     if myResponse.statusCode == 200 {
                         let course = try JSONDecoder().decode(MyCourseInfo.self, from: data)
-//                        print(course.exam)
+                        print(course.exam as Any)
                         
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)

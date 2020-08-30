@@ -27,23 +27,23 @@ import Foundation
  
  */
 
+
+
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-   
     @IBOutlet var tableView: UITableView!
     
     var idText: String = ""
     var majorText: String = ""
     var nameText: String = ""
     var accessToken: String = ""
+    var rowSelected: Int = 0
     
-    //let viewModel = CourseViewModel()
+    var myCourses = [ExamInfo]()
     
     let nameLabel = UILabel(frame: CGRect(x: 230, y: -30, width:150, height:150))
     let collegeNameLabel = UILabel(frame: CGRect(x: 230, y: 0, width:150, height:150))
     let deptNameLabel = UILabel(frame: CGRect(x: 230, y: 30, width:150, height:150))
-    
-    var myCourses = [ExamInfo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +128,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             view.accessTokenString = accessToken
             view.userId = idText
         }
+        if let view = segue.destination as? DetailViewController{
+            view.course = myCourses[rowSelected]
+        }
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
@@ -150,7 +153,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-      performSegue(withIdentifier: "showDetail", sender: indexPath.row)
+        rowSelected = indexPath.row
+        performSegue(withIdentifier: "showDetail", sender: self)
     }
     
     func postMyCourses(completed: @escaping () -> ()){
@@ -174,7 +178,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     if myResponse.statusCode == 200 {
                         let courses = try JSONDecoder().decode(CourseInfo.self, from: data)
                         self.myCourses = courses.exams
-                        print(self.myCourses)
+//                        print(self.myCourses)
                         
                         DispatchQueue.main.async {
                             completed()
@@ -263,10 +267,3 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //    }
 //}
 //
-//class UserInfoViewModel{
-//    var courseInfo: CourseInfo?
-//    
-//    func update(model: CourseInfo?){
-//        courseInfo = model
-//    }
-//}

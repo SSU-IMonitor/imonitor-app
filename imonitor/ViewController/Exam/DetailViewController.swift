@@ -34,12 +34,13 @@ class DetailViewController: UIViewController {
     @IBOutlet var startTimeLabel: UILabel!
     @IBOutlet var endTimeLabel: UILabel!
     
-    let viewModel = DetailViewModel();
+//    var course: ExamInfo!
+    var course: ExamInfo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        updateUI()
-
+        updateUI()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -65,6 +66,16 @@ class DetailViewController: UIViewController {
         
     }
     
+    func updateUI(){
+        courseTitleLabel.text = course.title
+        professorLabel.text = course.owner?.name
+        noticeLabel.text = course.notice
+        courseIDLabel.text = "\(course.id!)"
+        courseTitle2Label.text = course.title
+        startTimeLabel.text = course.startTime
+        endTimeLabel.text = course.endTime
+    }
+    
 //    func updateUI(){
 //        if let courseInfo = viewModel.courseInfo{
 //            courseTitleLabel.text = courseInfo.course
@@ -76,12 +87,4 @@ class DetailViewController: UIViewController {
 //            endTimeLabel.text = courseInfo.endTime
 //        }
 //    }
-}
-
-class DetailViewModel{
-    var courseInfo: CourseInfo?
-    
-    func update(model: CourseInfo?){
-        courseInfo = model
-    }
 }

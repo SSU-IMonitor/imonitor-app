@@ -15,7 +15,6 @@ let width = bounds.width
 let height = bounds.height
 
 class ExamViewController: UIViewController {
-    let viewModel = DetailViewModel()
     var tracker: GazeTracker? = nil
     var count: Int = 0
     var isWarning: Bool = false
