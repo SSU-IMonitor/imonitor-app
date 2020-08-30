@@ -54,17 +54,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setUptableView()
         
-        print("count: \(myCourses.count)")
-        
-        
         let image = UIImage(named: "person.jpg")
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 150))
         
         var imgStudent: UIImageView!
-        
-//        tableView.delegate = self
-//        tableView.dataSource = self
         
         header.backgroundColor =  UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1)
         
@@ -116,7 +110,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default){
-                (action) in self.dismiss(animated: true, completion: nil)
+                (action) in
+                self.accessToken = " "
+                self.dismiss(animated: true, completion: nil)
+                // print("accessToken(main): \(self.accessToken)")
             }
             let cancelAction = UIAlertAction(title: "취소", style: .cancel)
             
@@ -157,6 +154,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func postMyCourses(completed: @escaping () -> ()){
+         print("postMyCourses active")
         guard let url = URL(string: "http://api.puroong.me/v1/users/\(idText)/exams") else { return }
         
         var request = URLRequest(url: url)
@@ -176,6 +174,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     if myResponse.statusCode == 200 {
                         let courses = try JSONDecoder().decode(CourseInfo.self, from: data)
                         self.myCourses = courses.exams
+                        print(self.myCourses)
+                        
+                        DispatchQueue.main.async {
+                            completed()
+                        }
                                
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)

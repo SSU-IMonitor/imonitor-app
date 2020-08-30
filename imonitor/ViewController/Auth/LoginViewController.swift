@@ -62,6 +62,7 @@ class LoginViewController: UIViewController {
                         self.nameText = user.userInfo.name
                         self.majorText = user.userInfo.major
                         self.accessToken = user.accessToken
+                        print("login accessToken: \(self.accessToken)")
                         self.moveToMain()
                         
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {

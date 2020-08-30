@@ -136,8 +136,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         alertAddCourse(indexPath: indexPath)
-        print("userId: \(userId)")
-        print("examId: \(filteredCourses[indexPath.row].id!)")
     }
     
     func alertAddCourse(indexPath: IndexPath){
@@ -179,7 +177,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     
                     if myResponse.statusCode == 200 {
                         let course = try JSONDecoder().decode(MyCourseInfo.self, from: data)
-                        print(course.exam)
+//                        print(course.exam)
                         
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)
