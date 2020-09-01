@@ -506,6 +506,7 @@
                                 <state key="normal" title="SUBMIT"/>
                                 <connections>
                                     <action selector="submitButtonPressed:" destination="REB-6w-WNt" eventType="touchUpInside" id="mmx-mi-JyR"/>
+                                    <segue destination="v7b-5Z-T1r" kind="show" identifier="submitExam" id="Rxl-lP-w0u"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CourseTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftd-CA-94e">
@@ -583,34 +584,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWE-68-d1T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2230.434782608696" y="137.94642857142856"/>
-        </scene>
-        <!--Submit Table View Controller-->
-        <scene sceneID="Eut-eo-8Ay">
-            <objects>
-                <tableViewController storyboardIdentifier="submit" id="frm-DY-VId" customClass="SubmitTableViewController" customModule="imonitor" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gUm-sM-HdF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Yfd-5T-0aG">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yfd-5T-0aG" id="Waa-Lt-1tG">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="frm-DY-VId" id="7r8-pQ-pdQ"/>
-                            <outlet property="delegate" destination="frm-DY-VId" id="spg-XX-xwe"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ig-Lh-nyP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2951" y="136"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="f7k-J3-3Jf">
@@ -794,6 +767,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7d-JW-L2b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="834.78260869565224" y="-521.65178571428567"/>
+        </scene>
+        <!--Submit View Controller-->
+        <scene sceneID="23J-Un-Wrq">
+            <objects>
+                <viewController storyboardIdentifier="submit" id="v7b-5Z-T1r" customClass="SubmitViewController" customModule="imonitor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="63V-zI-tXk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVg-T6-rIY" customClass="UIRoundPrimaryButton" customModule="imonitor" customModuleProvider="target">
+                                <rect key="frame" x="50" y="44" width="314" height="52"/>
+                                <state key="normal" title="제출하기"/>
+                                <connections>
+                                    <action selector="submitButtonPressed:" destination="v7b-5Z-T1r" eventType="touchUpInside" id="P8g-Xe-GMw"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QXN-ID-mFi">
+                                <rect key="frame" x="0.0" y="137" width="414" height="671"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="QXN-ID-mFi" firstAttribute="top" secondItem="dVg-T6-rIY" secondAttribute="bottom" constant="41" id="EMS-J3-N8Z"/>
+                            <constraint firstItem="Ct8-KZ-R3H" firstAttribute="bottom" secondItem="dVg-T6-rIY" secondAttribute="bottom" constant="712" id="KEF-HL-ETx"/>
+                            <constraint firstItem="QXN-ID-mFi" firstAttribute="leading" secondItem="Ct8-KZ-R3H" secondAttribute="leading" id="KrO-eW-mhW"/>
+                            <constraint firstItem="Ct8-KZ-R3H" firstAttribute="trailing" secondItem="dVg-T6-rIY" secondAttribute="trailing" constant="50" id="Ps6-8R-w28"/>
+                            <constraint firstItem="dVg-T6-rIY" firstAttribute="leading" secondItem="Ct8-KZ-R3H" secondAttribute="leading" constant="50" id="YvY-Fy-p3A"/>
+                            <constraint firstItem="QXN-ID-mFi" firstAttribute="trailing" secondItem="Ct8-KZ-R3H" secondAttribute="trailing" id="cvA-dY-fSC"/>
+                            <constraint firstItem="dVg-T6-rIY" firstAttribute="top" secondItem="Ct8-KZ-R3H" secondAttribute="top" constant="44" id="dGe-zj-fnm"/>
+                            <constraint firstItem="QXN-ID-mFi" firstAttribute="bottom" secondItem="Ct8-KZ-R3H" secondAttribute="bottom" id="imG-Py-f57"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ct8-KZ-R3H"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="j1y-dZ-nUo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TEi-a4-gLQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3031.884057971015" y="137.94642857142856"/>
         </scene>
     </scenes>
     <resources>

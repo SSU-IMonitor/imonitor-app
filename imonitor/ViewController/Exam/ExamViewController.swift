@@ -56,9 +56,10 @@ class ExamViewController: UIViewController {
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(identifier: "submit") as! SubmitTableViewController
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        performSegue(withIdentifier: "submitExam", sender: nil)
+//        let vc = storyboard?.instantiateViewController(identifier: "submit") as! SubmitViewController
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: true)
     }
 }
 
@@ -93,7 +94,7 @@ extension ExamViewController: GazeDelegate{
     // 시선 인식
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
         print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
-        if x < 100.0 || y < 100.0 || x > Float(width) || y > Float(height) - 100.0 || x == Float(Double.nan) || y == Float(Double.nan)  {
+        if x < 100.0 || y < 100.0 || x > Float(width) + 100.0 || y > Float(height) - 100.0 || x == Float(Double.nan) || y == Float(Double.nan)  {
             startCount()
         }
     }

@@ -69,7 +69,7 @@ class DetailViewController: UIViewController {
         professorLabel.text = course.owner?.name
         noticeLabel.text = course.notice
         courseIDLabel.text = "\(course.id!)"
-        courseTitle2Label.text = course.title
+        courseTitle2Label.text = course.courseName
         startTimeLabel.text = parsingTime(time: course.startTime!)
         endTimeLabel.text = parsingTime(time:course.endTime!)
     }
@@ -80,21 +80,7 @@ class DetailViewController: UIViewController {
         let strDate = arr[0] + "-" + arr[1] + "-" + arr[2] + " " + arr[3] + ":" + arr[4] + ":" + arr[5]
         return strDate
     }
-    
-//    func changeTime(){
-        
-//        var str = course.startTime
-//        var arr = str?.components(separatedBy: ["-","T",":","."])
-//        let strDate = arr![0] + "-" + arr![1] + "-" + arr![2] + " " + arr![3] + ":" + arr![4] + ":" + arr![5]
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale(identifier: "ko_KR")
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//
-//        let date = formatter.date(from:strDate)
-//        let realDate = date! + 32400
-//
-//      return realDate
-//    }
+
     func changeStringToDate(time: String) -> Date{
         let parsingDate = parsingTime(time: time)
         
@@ -104,8 +90,6 @@ class DetailViewController: UIViewController {
         
         let date = formatter.date(from: parsingDate)
         let realDate = date! + 32400
-        
-        print("realDate: \(realDate)")
         
         return realDate
     }
@@ -128,18 +112,10 @@ class DetailViewController: UIViewController {
         let minute = remainHour / 60
         
         let second = remainHour % 60
-
-        print("\(day)일")
-        print("\(hour)시간")
-        print("\(minute)분")
-        print("\(second)초")
         
         let strRemainTime = "\(day)일 \(hour)시간 \(minute)분 \(second)초 남음"
-        print(strRemainTime)
         
         remainTime.text = strRemainTime
-        
-
     }
     
     func caculateCurrentTime()-> String{
