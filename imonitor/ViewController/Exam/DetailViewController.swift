@@ -33,15 +33,16 @@ class DetailViewController: UIViewController {
     @IBOutlet var courseTitle2Label: UILabel!
     @IBOutlet var startTimeLabel: UILabel!
     @IBOutlet var endTimeLabel: UILabel!
+    @IBOutlet var remainTime: UILabel!
     
-//    var course: ExamInfo!
+    //    var course: ExamInfo!
     var course: ExamInfo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
         
-        // Do any additional setup after loading the view.
+        updateUI()
+        caculateRemainTime()
     }
     
 
@@ -61,9 +62,6 @@ class DetailViewController: UIViewController {
         vc.end = endTime!
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
-        
-        
-        
     }
     
     func updateUI(){
@@ -72,19 +70,82 @@ class DetailViewController: UIViewController {
         noticeLabel.text = course.notice
         courseIDLabel.text = "\(course.id!)"
         courseTitle2Label.text = course.title
-        startTimeLabel.text = course.startTime
-        endTimeLabel.text = course.endTime
+        startTimeLabel.text = parsingTime(time: course.startTime!)
+        endTimeLabel.text = parsingTime(time:course.endTime!)
     }
     
-//    func updateUI(){
-//        if let courseInfo = viewModel.courseInfo{
-//            courseTitleLabel.text = courseInfo.course
-//            professorLabel.text = courseInfo.professor
-//            noticeLabel.text = courseInfo.notice
-//            courseIDLabel.text = courseInfo.courseCode
-//            courseTitle2Label.text = courseInfo.course
-//            startTimeLabel.text = courseInfo.startTime
-//            endTimeLabel.text = courseInfo.endTime
-//        }
+    func parsingTime(time: String) -> String{
+        let str = time
+        let arr = str.components(separatedBy: ["-","T",":","."])
+        let strDate = arr[0] + "-" + arr[1] + "-" + arr[2] + " " + arr[3] + ":" + arr[4] + ":" + arr[5]
+        return strDate
+    }
+    
+//    func changeTime(){
+        
+//        var str = course.startTime
+//        var arr = str?.components(separatedBy: ["-","T",":","."])
+//        let strDate = arr![0] + "-" + arr![1] + "-" + arr![2] + " " + arr![3] + ":" + arr![4] + ":" + arr![5]
+//        let formatter = DateFormatter()
+//        formatter.locale = Locale(identifier: "ko_KR")
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//
+//        let date = formatter.date(from:strDate)
+//        let realDate = date! + 32400
+//
+//      return realDate
 //    }
+    func changeStringToDate(time: String) -> Date{
+        let parsingDate = parsingTime(time: time)
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let date = formatter.date(from: parsingDate)
+        let realDate = date! + 32400
+        
+        print("realDate: \(realDate)")
+        
+        return realDate
+    }
+    
+    func caculateRemainTime(){
+        let now = NSDate()
+        print("now: \(now)")
+        let startTime = changeStringToDate(time: course.startTime!)
+        print(startTime)
+        
+        let timeInterval = Int(startTime.timeIntervalSince(now as Date))
+        print("Time Interval: \(timeInterval)")
+        
+        let day = timeInterval / 86400
+        let remainDay = timeInterval % 86400
+        
+        let hour = remainDay / 3600
+        let remainHour = remainDay % 3600
+        
+        let minute = remainHour / 60
+        
+        let second = remainHour % 60
+
+        print("\(day)일")
+        print("\(hour)시간")
+        print("\(minute)분")
+        print("\(second)초")
+        
+        let strRemainTime = "\(day)일 \(hour)시간 \(minute)분 \(second)초 남음"
+        print(strRemainTime)
+        
+        remainTime.text = strRemainTime
+        
+
+    }
+    
+    func caculateCurrentTime()-> String{
+        let now = NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.string(from: now as Date)
+    }
 }

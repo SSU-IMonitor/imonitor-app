@@ -81,13 +81,11 @@ class LoginViewController: UIViewController {
     func moveToMain(){
         DispatchQueue.main.async {
             let vc = self.storyboard?.instantiateViewController(identifier: "main") as! MainViewController
-                          
             vc.modalPresentationStyle = .fullScreen
             vc.idText = self.idText
             vc.nameText = self.nameText
             vc.majorText = self.majorText
             vc.accessToken = self.accessToken
-            
                           
             self.present(vc, animated: true)
         }

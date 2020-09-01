@@ -356,6 +356,7 @@
                         <outlet property="endTimeLabel" destination="ygC-dF-BwM" id="cZG-Np-7ST"/>
                         <outlet property="noticeLabel" destination="Bh5-AU-i0s" id="pot-VQ-onI"/>
                         <outlet property="professorLabel" destination="XgF-eN-M2v" id="tq0-Ix-s3c"/>
+                        <outlet property="remainTime" destination="QRG-4w-o4D" id="QzT-Ee-iri"/>
                         <outlet property="startTimeLabel" destination="v6Y-f5-2zO" id="BHA-ev-ONM"/>
                     </connections>
                 </viewController>

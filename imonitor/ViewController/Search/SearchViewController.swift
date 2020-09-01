@@ -10,7 +10,6 @@ import Alamofire
 
 var count: Int = 0
 
-
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     
