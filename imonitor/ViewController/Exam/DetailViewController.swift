@@ -35,6 +35,8 @@ class DetailViewController: UIViewController {
     @IBOutlet var endTimeLabel: UILabel!
     @IBOutlet var remainTime: UILabel!
     
+    var accessToken: String = ""
+    
     //    var course: ExamInfo!
     var course: ExamInfo!
     
@@ -45,7 +47,6 @@ class DetailViewController: UIViewController {
         caculateRemainTime()
     }
     
-
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -54,12 +55,15 @@ class DetailViewController: UIViewController {
         let course = courseTitleLabel.text
         let professor = professorLabel.text
         let endTime = endTimeLabel.text
+        let id = courseIDLabel.text
         
         let vc = storyboard?.instantiateViewController(identifier: "exam") as! ExamViewController
         
         vc.courseName = course!
         vc.professorName = professor!
         vc.end = endTime!
+        vc.id = id!
+        vc.accessToken = accessToken
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }

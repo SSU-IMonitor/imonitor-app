@@ -80,7 +80,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 (action) in
                 self.accessToken = " "
                 self.dismiss(animated: true, completion: nil)
-                // print("accessToken(main): \(self.accessToken)")
             }
             let cancelAction = UIAlertAction(title: "취소", style: .cancel)
             
@@ -97,6 +96,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         if let view = segue.destination as? DetailViewController{
             view.course = myCourses[rowSelected]
+            view.accessToken = accessToken
         }
     }
     

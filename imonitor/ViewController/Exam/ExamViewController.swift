@@ -22,6 +22,8 @@ class ExamViewController: UIViewController {
     var courseName = ""
     var professorName = ""
     var end = ""
+    var id = ""
+    var accessToken: String = ""
     
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
@@ -32,14 +34,48 @@ class ExamViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        getQuestions()
         answerTextField.addDoneButtonOnKeyboard()
         cameraPermissionCheck()
-        
     }
     
     func updateUI(){
         courseNameLabel.text = courseName
         professorLabel.text = professorName
+    }
+    
+    func getQuestions(){
+        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(id)") else { return }
+                    
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+                       
+        let session = URLSession.shared
+        session.dataTask(with: request){
+            (data, response, error) in
+                               
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                        print("Status Code:", myResponse.statusCode)
+                                
+                    if myResponse.statusCode == 200 {
+                        let courses = try JSONDecoder().decode(CourseExamInfo.self, from: data)
+                        print(courses)
+                    
+                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+                        print(myResponse.statusCode)
+                    } else {
+                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+                        print(error.message)
+                    }
+                } catch {
+                    print("error: ", error)
+                }
+            }
+        }.resume()
     }
     
     func cameraPermissionCheck(){
@@ -125,33 +161,4 @@ extension ExamViewController: GazeDelegate{
         }
     }
 }
-
-struct QnAInfo{
-    let id: Int
-    let question: String
-    let answer: String
-    
-    
-    init(id: Int, question:String, answer: String){
-        self.id = id
-        self.question = question
-        self.answer = answer
-    }
-}
-
-class qnaViewModel{    
-    let qnaInfoList: [QnAInfo] = [
-        QnAInfo(id:1, question:"1+1 은?", answer: "2"),
-        QnAInfo(id:2, question:"2+2는? ", answer: "4")
-    ]
-    
-    var numofCourseInfo: Int{
-        return qnaInfoList.count
-    }
-    
-    func qnaInfo(at index: Int) -> QnAInfo{
-        return qnaInfoList[index]
-    }
-}
-
 
