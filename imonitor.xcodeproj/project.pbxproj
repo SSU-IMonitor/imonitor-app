@@ -12,7 +12,6 @@
 		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
 		96932FCD24FA4B1800E5B468 /* MyCourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */; };
 		9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */; };
-		96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568924E17531002F52BF /* DetailContentsViewController.swift */; };
 		96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2568B24E17CE6002F52BF /* DoneButton.swift */; };
 		96AA35C124EBCDD7001A79FF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 96AA35C024EBCDD7001A79FF /* Alamofire */; };
 		96AA35CF24EBCFFF001A79FF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA35CE24EBCFFF001A79FF /* LoginModel.swift */; };
@@ -28,7 +27,6 @@
 		96AE574D24D3005E002C7114 /* imonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE574C24D3005E002C7114 /* imonitorUITests.swift */; };
 		96AE575B24D300B2002C7114 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE575A24D300B2002C7114 /* LoginViewController.swift */; };
 		96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */; };
-		96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B334CC24E041BD00227852 /* DetailTableViewController.swift */; };
 		96B3FD7724FE857A0026AE70 /* QnAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3FD7624FE857A0026AE70 /* QnAModel.swift */; };
 		96B3FD7924FE87140026AE70 /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3FD7824FE87140026AE70 /* SubmitViewController.swift */; };
 		96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF6FB524DD3A2800833233 /* ExamViewController.swift */; };
@@ -74,7 +72,6 @@
 		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseModel.swift; sourceTree = "<group>"; };
 		9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		96A2568924E17531002F52BF /* DetailContentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentsViewController.swift; sourceTree = "<group>"; };
 		96A2568B24E17CE6002F52BF /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
 		96AA35CE24EBCFFF001A79FF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		96AA35D024EBD048001A79FF /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
@@ -95,7 +92,6 @@
 		96AE574E24D3005E002C7114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96AE575A24D300B2002C7114 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
-		96B334CC24E041BD00227852 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		96B3FD7624FE857A0026AE70 /* QnAModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnAModel.swift; sourceTree = "<group>"; };
 		96B3FD7824FE87140026AE70 /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		96CF6FB524DD3A2800833233 /* ExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
@@ -171,8 +167,6 @@
 		96AA35C824EBCEC7001A79FF /* Exam */ = {
 			isa = PBXGroup;
 			children = (
-				96A2568924E17531002F52BF /* DetailContentsViewController.swift */,
-				96B334CC24E041BD00227852 /* DetailTableViewController.swift */,
 				9686686F24DA92F8004BB017 /* DetailViewController.swift */,
 				96B3FD7824FE87140026AE70 /* SubmitViewController.swift */,
 				96CF6FB524DD3A2800833233 /* ExamViewController.swift */,
@@ -409,10 +403,8 @@
 				96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */,
 				96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */,
 				96B3FD7924FE87140026AE70 /* SubmitViewController.swift in Sources */,
-				96A2568A24E17531002F52BF /* DetailContentsViewController.swift in Sources */,
 				96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */,
 				96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */,
-				96B334CD24E041BD00227852 /* DetailTableViewController.swift in Sources */,
 				96AA35D924EBD48E001A79FF /* Constant.swift in Sources */,
 				9642B4AA24F154CA009BF676 /* SearchViewController.swift in Sources */,
 				96AA35D524EBD1B4001A79FF /* APIManager.swift in Sources */,

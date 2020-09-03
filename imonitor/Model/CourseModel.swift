@@ -22,7 +22,6 @@ struct ExamInfo: Codable{
     let courseCode: String?
     let startTime: String?
     let endTime: String?
-    let questions: [QuestionInfo]?
     
     enum CodingKeys: String, CodingKey{
         case id
@@ -33,10 +32,9 @@ struct ExamInfo: Codable{
         case courseCode
         case startTime
         case endTime
-        case questions
     }
     
-    init(id: Int, notice: String, owner: OwnerInfo, title: String, courseName: String, courseCode: String, startTime: String, endTime: String, questions: [QuestionInfo]){
+    init(id: Int, notice: String, owner: OwnerInfo, title: String, courseName: String, courseCode: String, startTime: String, endTime: String){
         self.id = id
         self.notice = notice
         self.owner = owner
@@ -45,7 +43,6 @@ struct ExamInfo: Codable{
         self.courseCode = courseCode
         self.startTime = startTime
         self.endTime = endTime
-        self.questions = questions
     }
 }
 

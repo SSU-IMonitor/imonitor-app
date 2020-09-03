@@ -9,22 +9,34 @@
 import Foundation
 
 struct CourseExamInfo: Codable{
-    let exam: ExamInfo?
+    let exam: OneExamInfo?
     
     enum CodingKeys: String, CodingKey{
-        case exam = "exams"
+        case exam = "exam"
     }
 }
 
+struct OneExamInfo: Codable{
+    var id: Int
+    var notice: String
+    var owner: OwnerInfo
+    var title: String
+    var courseName: String
+    var courseCode: String
+    var startTime: String
+    var endTime: String
+    var questions: [QuestionInfo]
+}
+
 struct QuestionInfo: Codable{
-    let id: String?
+    let id: Int?
     let question: String?
     let type: String?
     let choices: [ChoiceInfo]?
 }
 
 struct ChoiceInfo: Codable{
-    let id: String?
+    let id: Int?
     let content: String?
     let order: Int?
 }
