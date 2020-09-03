@@ -15,7 +15,7 @@ let width = bounds.width
 let height = bounds.height
 
 var questionList = [QuestionInfo]()
-var answerList = [String]()
+var answerList = [String](repeating: "0", count: questionList.count)
 
 class ExamViewController: UIViewController {
     var tracker: GazeTracker? = nil
@@ -102,7 +102,12 @@ class ExamViewController: UIViewController {
     }
     
     @IBAction func prevButtonPressed(_ sender: Any) {
-
+        if answerTextField.text != "" {
+            answerList[numQuestion] = answerTextField.text!
+            answerTextField.text = ""
+        }
+           
+        print(answerList)
         numQuestion = numQuestion - 1
 
         if(numQuestion < 0){
@@ -110,9 +115,16 @@ class ExamViewController: UIViewController {
         }
         problemNumberLabel.text = "Problem \(numQuestion + 1)"
         questionLabel.text = questionList[numQuestion].question
+        print(answerList)
     }
     
     @IBAction func nextButtonPressed(_ sender: Any) {
+        if answerTextField.text != "" {
+            answerList[numQuestion] = answerTextField.text!
+            answerTextField.text = ""
+        }
+        
+        print(answerList)
         numQuestion = numQuestion + 1
 
         if(numQuestion > questionList.endIndex - 1){
@@ -120,6 +132,13 @@ class ExamViewController: UIViewController {
         }
         problemNumberLabel.text = "Problem \(numQuestion + 1)"
         questionLabel.text = questionList[numQuestion].question
+        print(answerList)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if let view = segue.destination as? SubmitViewController{
+            view.answerList = answerList
+        }
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {

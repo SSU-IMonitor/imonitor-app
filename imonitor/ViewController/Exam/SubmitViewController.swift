@@ -9,7 +9,9 @@
 import UIKit
 
 class SubmitViewController: UIViewController {
-
+    
+    var answerList = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
