@@ -8,7 +8,18 @@
 
 import UIKit
 
-class SubmitViewController: UIViewController {
+class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return answerList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.textLabel?.text = "Problem \(indexPath.row + 1)"
+            cell.detailTextLabel?.text = answerList[indexPath.row]
+            return cell
+    }
     
     var answerList = [String]()
     

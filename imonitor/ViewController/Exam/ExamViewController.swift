@@ -15,7 +15,7 @@ let width = bounds.width
 let height = bounds.height
 
 var questionList = [QuestionInfo]()
-var answerList = [String](repeating: "0", count: questionList.count)
+var answerList = [String](repeating: " ", count: questionList.count)
 
 class ExamViewController: UIViewController {
     var tracker: GazeTracker? = nil
@@ -137,11 +137,13 @@ class ExamViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if let view = segue.destination as? SubmitViewController{
+            answerList[numQuestion] = answerTextField.text!
             view.answerList = answerList
         }
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
+
         performSegue(withIdentifier: "submitExam", sender: nil)
 //        let vc = storyboard?.instantiateViewController(identifier: "submit") as! SubmitViewController
 //        vc.modalPresentationStyle = .fullScreen
