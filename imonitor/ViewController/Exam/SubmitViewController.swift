@@ -10,6 +10,13 @@ import UIKit
 
 class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    var answerList = [String]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answerList.count
     }
@@ -21,12 +28,6 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
     }
     
-    var answerList = [String]()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     @IBAction func submitButtonPressed(_ sender: Any) {
         alertSubmit()
     }
@@ -34,7 +35,13 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func alertSubmit(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "시험지를 제출하시겠습니까?", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .cancel)
+            let okAction = UIAlertAction(title: "확인", style: .cancel){
+                (action) in
+                let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
+                    vc.modalPresentationStyle = .fullScreen
+                vc.answerList = self.answerList
+                self.present(vc, animated: true)
+            }
             let cancelAction = UIAlertAction(title: "취소", style: .destructive)
             alert.addAction(cancelAction)
             alert.addAction(okAction)

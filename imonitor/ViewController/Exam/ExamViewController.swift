@@ -205,9 +205,7 @@ extension ExamViewController: GazeDelegate{
     func alert(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "경고", message: "경고 횟수 초과 시험 권한 박탈", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default){
-                (action) in exit(0)
-            }
+            let okAction = UIAlertAction(title: "확인", style: .default)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }

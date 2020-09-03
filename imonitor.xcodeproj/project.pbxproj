@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9642B4AA24F154CA009BF676 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4A924F154CA009BF676 /* SearchViewController.swift */; };
 		9642B4AC24F15A17009BF676 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4AB24F15A17009BF676 /* CourseModel.swift */; };
+		96737485250134850012F1A7 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96737484250134850012F1A7 /* ScoreViewController.swift */; };
 		9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686686F24DA92F8004BB017 /* DetailViewController.swift */; };
 		96932FCD24FA4B1800E5B468 /* MyCourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */; };
 		9698CC9424E42F2D00F9B0B6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */; };
@@ -69,6 +70,7 @@
 /* Begin PBXFileReference section */
 		9642B4A924F154CA009BF676 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9642B4AB24F15A17009BF676 /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
+		96737484250134850012F1A7 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		9686686F24DA92F8004BB017 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseModel.swift; sourceTree = "<group>"; };
 		9698CC9324E42F2D00F9B0B6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				9686686F24DA92F8004BB017 /* DetailViewController.swift */,
 				96B3FD7824FE87140026AE70 /* SubmitViewController.swift */,
 				96CF6FB524DD3A2800833233 /* ExamViewController.swift */,
+				96737484250134850012F1A7 /* ScoreViewController.swift */,
 			);
 			path = Exam;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				96AA35D324EBD131001A79FF /* SignUpModel.swift in Sources */,
 				96AE572B24D3005C002C7114 /* AppDelegate.swift in Sources */,
 				96AE572D24D3005C002C7114 /* SceneDelegate.swift in Sources */,
+				96737485250134850012F1A7 /* ScoreViewController.swift in Sources */,
 				96B3FD7924FE87140026AE70 /* SubmitViewController.swift in Sources */,
 				96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */,
 				96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */,
