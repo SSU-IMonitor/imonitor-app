@@ -14,6 +14,9 @@ let bounds: CGRect = UIScreen.main.bounds
 let width = bounds.width
 let height = bounds.height
 
+var questionList = [QuestionInfo]()
+var answerList = [String]()
+
 class ExamViewController: UIViewController {
     var tracker: GazeTracker? = nil
     var count: Int = 0
@@ -24,6 +27,8 @@ class ExamViewController: UIViewController {
     var end = ""
     var id = ""
     var accessToken: String = ""
+    var cnt: Int = 1
+    var numQuestion: Int = questionList.startIndex
     
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
@@ -31,17 +36,22 @@ class ExamViewController: UIViewController {
     @IBOutlet var countLabel: UILabel!
     @IBOutlet var answerTextField: UITextField!
     
+    @IBOutlet var problemNumberLabel: UILabel!
+    @IBOutlet var questionLabel: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
         getQuestions()
         answerTextField.addDoneButtonOnKeyboard()
         cameraPermissionCheck()
+        updateUI()
     }
     
     func updateUI(){
         courseNameLabel.text = courseName
         professorLabel.text = professorName
+        problemNumberLabel.text = "Problem \(cnt)"
+        questionLabel.text = questionList[questionList.startIndex].question
     }
     
     func getQuestions(){
@@ -62,8 +72,8 @@ class ExamViewController: UIViewController {
                         print("Status Code:", myResponse.statusCode)
                                 
                     if myResponse.statusCode == 200 {
-                        let courses = try JSONDecoder().decode(CourseExamInfo.self, from: data)
-                        print(courses)
+                        let course = try JSONDecoder().decode(CourseExamInfo.self, from: data)
+                        questionList = course.exam!.questions
                     
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)
@@ -89,6 +99,27 @@ class ExamViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    @IBAction func prevButtonPressed(_ sender: Any) {
+
+        numQuestion = numQuestion - 1
+
+        if(numQuestion < 0){
+            numQuestion = questionList.endIndex - 1
+        }
+        problemNumberLabel.text = "Problem \(numQuestion + 1)"
+        questionLabel.text = questionList[numQuestion].question
+    }
+    
+    @IBAction func nextButtonPressed(_ sender: Any) {
+        numQuestion = numQuestion + 1
+
+        if(numQuestion > questionList.endIndex - 1){
+            numQuestion = 0
+        }
+        problemNumberLabel.text = "Problem \(numQuestion + 1)"
+        questionLabel.text = questionList[numQuestion].question
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
