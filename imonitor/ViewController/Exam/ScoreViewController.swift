@@ -11,6 +11,11 @@ import UIKit
 class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var answerList = [String]()
+    var courseTitle: String = " "
+    var professor: String = " "
+    
+    @IBOutlet var courseTitleLabel: UILabel!
+    @IBOutlet var professorLabel: UILabel!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answerList.count
@@ -26,6 +31,12 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateUI()
+    }
+    
+    func updateUI(){
+        courseTitleLabel.text = courseTitle
+        professorLabel.text = professor
     }
     
     @IBAction func ExitButtonPressed(_ sender: Any) {

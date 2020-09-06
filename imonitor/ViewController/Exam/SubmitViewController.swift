@@ -10,8 +10,12 @@ import UIKit
 
 class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
+    var accessToken: String = " "
+    var courseTitle: String = " "
+    var professor: String = " "
+    var examId: String = " "
     var answerList = [String]()
+    var qnaIdList = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +44,9 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
                     vc.modalPresentationStyle = .fullScreen
                 vc.answerList = self.answerList
+                vc.courseTitle = self.courseTitle
+                vc.professor = self.professor
+                
                 self.present(vc, animated: true)
             }
             let cancelAction = UIAlertAction(title: "취소", style: .destructive)

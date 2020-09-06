@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96063C512504F648004A434F /* SubmitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96063C502504F648004A434F /* SubmitModel.swift */; };
 		9642B4AA24F154CA009BF676 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4A924F154CA009BF676 /* SearchViewController.swift */; };
 		9642B4AC24F15A17009BF676 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642B4AB24F15A17009BF676 /* CourseModel.swift */; };
 		96737485250134850012F1A7 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96737484250134850012F1A7 /* ScoreViewController.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		96063C502504F648004A434F /* SubmitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitModel.swift; sourceTree = "<group>"; };
 		9642B4A924F154CA009BF676 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9642B4AB24F15A17009BF676 /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		96737484250134850012F1A7 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				96AA35CE24EBCFFF001A79FF /* LoginModel.swift */,
+				96063C502504F648004A434F /* SubmitModel.swift */,
 				96B3FD7624FE857A0026AE70 /* QnAModel.swift */,
 				96932FCC24FA4B1800E5B468 /* MyCourseModel.swift */,
 				96AA35D224EBD131001A79FF /* SignUpModel.swift */,
@@ -411,6 +414,7 @@
 				96A2568C24E17CE6002F52BF /* DoneButton.swift in Sources */,
 				96AA35D924EBD48E001A79FF /* Constant.swift in Sources */,
 				9642B4AA24F154CA009BF676 /* SearchViewController.swift in Sources */,
+				96063C512504F648004A434F /* SubmitModel.swift in Sources */,
 				96AA35D524EBD1B4001A79FF /* APIManager.swift in Sources */,
 				9686687024DA92F8004BB017 /* DetailViewController.swift in Sources */,
 				96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */,
