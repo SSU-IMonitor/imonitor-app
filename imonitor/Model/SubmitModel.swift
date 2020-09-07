@@ -17,3 +17,12 @@ struct ResultInfo: Codable{
     let submittedAnswer: String
     let isCorrecet: Bool
 }
+
+struct Submit: Codable{
+    let submits: SubmitParameter
+}
+
+struct SubmitParameter: Codable{
+    var qnaId: Int
+    var answer: String
+}

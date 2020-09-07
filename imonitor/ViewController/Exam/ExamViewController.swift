@@ -16,7 +16,8 @@ let height = bounds.height
 
 var questionList = [QuestionInfo]()
 var answerList = [String](repeating: " ", count: questionList.count)
-var qnaID = [Int]()
+var qnaIDList = [Int]()
+var qnaAndAnswer = [SubmitParameter](repeating: SubmitParameter.init(qnaId: 0, answer: " "), count: questionList.count)
 
 class ExamViewController: UIViewController {
     var tracker: GazeTracker? = nil
@@ -77,7 +78,7 @@ class ExamViewController: UIViewController {
                         questionList = course.exam!.questions
                         
                         for question in questionList {
-                            qnaID.append(question.id!)
+                            qnaIDList.append(question.id!)
                         }
                     } else if myResponse.statusCode == 403 {
                         print(myResponse.statusCode)
@@ -159,13 +160,19 @@ class ExamViewController: UIViewController {
             view.answerList = answerList
             view.courseTitle = courseName
             view.professor = professorName
-            view.qnaIdList = qnaID
+            view.qnaIdList = qnaIDList
             view.accessToken = accessToken
             view.examId = id
         }
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
+        for i in 0..<qnaIDList.count{
+            qnaAndAnswer[i].qnaId = qnaIDList[i]
+            qnaAndAnswer[i].answer = answerList[i]
+            print("qnaID(\(i)): \(qnaAndAnswer[i].qnaId)")
+            print("answer(\(i)): \(qnaAndAnswer[i].answer)")
+        }
         postSubmit()
         performSegue(withIdentifier: "submitExam", sender: nil)
 //        let vc = storyboard?.instantiateViewController(identifier: "submit") as! SubmitViewController
@@ -174,18 +181,17 @@ class ExamViewController: UIViewController {
     }
     
     func postSubmit(){
-        let parameters = ["qnaId": qnaID, "answer": answerList] as [String : Any]
-
+        let parameter = ["submits": qnaAndAnswer]
+        
         guard let url = URL(string: "http://api.puroong.me/v1/exams/\(id)/submit") else { return }
         var request = URLRequest(url: url)
 
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+
+        let httpBody = try! JSONEncoder().encode(parameter)
         
-
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-
         request.httpBody = httpBody;
                
         let session = URLSession.shared
