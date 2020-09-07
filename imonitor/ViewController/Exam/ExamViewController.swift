@@ -53,7 +53,12 @@ class ExamViewController: UIViewController {
         courseNameLabel.text = courseName
         professorLabel.text = professorName
         problemNumberLabel.text = "Problem \(cnt)"
-            questionLabel.text = questionList[questionList.startIndex].question
+        questionLabel.text = questionList[questionList.startIndex].question
+        
+         for i in 0..<qnaIDList.count{
+            qnaAndAnswer[i].qnaId = qnaIDList[i]
+        //            qnaAndAnswer[i].answer = answerList[i]
+        }
     }
     
     func getQuestions(){
@@ -123,7 +128,7 @@ class ExamViewController: UIViewController {
     @IBAction func prevButtonPressed(_ sender: Any) {
         if answerTextField.text != "" {
             answerList[numQuestion] = answerTextField.text!
-            answerTextField.text = ""
+            qnaAndAnswer[numQuestion].answer = answerTextField.text!
         }
            
         print(answerList)
@@ -134,16 +139,14 @@ class ExamViewController: UIViewController {
         }
         problemNumberLabel.text = "Problem \(numQuestion + 1)"
         questionLabel.text = questionList[numQuestion].question
-        print(answerList)
+        answerTextField.text = answerList[numQuestion]
     }
     
     @IBAction func nextButtonPressed(_ sender: Any) {
         if answerTextField.text != "" {
             answerList[numQuestion] = answerTextField.text!
-            answerTextField.text = ""
+            qnaAndAnswer[numQuestion].answer = answerTextField.text!
         }
-        
-        print(answerList)
         numQuestion = numQuestion + 1
 
         if(numQuestion > questionList.endIndex - 1){
@@ -151,7 +154,7 @@ class ExamViewController: UIViewController {
         }
         problemNumberLabel.text = "Problem \(numQuestion + 1)"
         questionLabel.text = questionList[numQuestion].question
-        print(answerList)
+        answerTextField.text = answerList[numQuestion]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -163,63 +166,53 @@ class ExamViewController: UIViewController {
             view.qnaIdList = qnaIDList
             view.accessToken = accessToken
             view.examId = id
+            print("prepare: \(qnaAndAnswer)")
+            view.qnaAndAnswer = qnaAndAnswer
         }
     }
     
     @IBAction func submitButtonPressed(_ sender: Any) {
-        for i in 0..<qnaIDList.count{
-            qnaAndAnswer[i].qnaId = qnaIDList[i]
-            qnaAndAnswer[i].answer = answerList[i]
-            print("qnaID(\(i)): \(qnaAndAnswer[i].qnaId)")
-            print("answer(\(i)): \(qnaAndAnswer[i].answer)")
-        }
-        postSubmit()
         performSegue(withIdentifier: "submitExam", sender: nil)
-//        let vc = storyboard?.instantiateViewController(identifier: "submit") as! SubmitViewController
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: true)
     }
     
-    func postSubmit(){
-        let parameter = ["submits": qnaAndAnswer]
-        
-        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(id)/submit") else { return }
-        var request = URLRequest(url: url)
-
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-
-        let httpBody = try! JSONEncoder().encode(parameter)
-        
-        request.httpBody = httpBody;
-               
-        let session = URLSession.shared
-        session.dataTask(with: request){
-            (data, response, error) in
-                       
-            if let data = data {
-                do {
-                    let myResponse = response as! HTTPURLResponse
-                        print("Status Code:", myResponse.statusCode)
-                           
-                    if myResponse.statusCode == 200 {
-                        let submit = try JSONDecoder().decode(SubmitInfo.self, from: data)
-                        print(submit.result)
-                         
-                            
-                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
-                        print(myResponse.statusCode)
-                    } else {
-                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
-                        print(error.message)
-                    }
-                } catch {
-                    print("error: ", error)
-                }
-            }
-        }.resume()
-    }
+//    func postSubmit(qnaAndAnswer: [SubmitParameter]){
+//        let parameter = ["submits": qnaAndAnswer]
+//
+//        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(id)/submit") else { return }
+//        var request = URLRequest(url: url)
+//
+//        request.httpMethod = "POST"
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+//
+//        let httpBody = try! JSONEncoder().encode(parameter)
+//
+//        request.httpBody = httpBody;
+//
+//        let session = URLSession.shared
+//        session.dataTask(with: request){
+//            (data, response, error) in
+//
+//            if let data = data {
+//                do {
+//                    let myResponse = response as! HTTPURLResponse
+//                        print("Status Code:", myResponse.statusCode)
+//
+//                    if myResponse.statusCode == 200 {
+//                        let submit = try JSONDecoder().decode(SubmitInfo.self, from: data)
+//                        print("result: \(submit.result)")
+//                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+//                        print(myResponse.statusCode)
+//                    } else {
+//                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+//                        print(error.message)
+//                    }
+//                } catch {
+//                    print("error: ", error)
+//                }
+//            }
+//        }.resume()
+//    }
 }
 
 // tracker 초기화

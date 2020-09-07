@@ -14,11 +14,14 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var courseTitle: String = " "
     var professor: String = " "
     var examId: String = " "
-    var answerList = [String]()
+    var answerList = [String](repeating: " ", count: questionList.count)
     var qnaIdList = [Int]()
+    var qnaAndAnswer = [SubmitParameter]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("qnaAnswer: \(qnaAndAnswer)")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +44,7 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let alert = UIAlertController(title: "알림", message: "시험지를 제출하시겠습니까?", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .cancel){
                 (action) in
+                self.postSubmit(qnaAndAnswer: self.qnaAndAnswer)
                 let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
                     vc.modalPresentationStyle = .fullScreen
                 vc.answerList = self.answerList
@@ -55,5 +59,44 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func postSubmit(qnaAndAnswer: [SubmitParameter]){
+        let parameter = ["submits": qnaAndAnswer]
+        
+        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(examId)/submit") else { return }
+        var request = URLRequest(url: url)
+
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+
+        let httpBody = try! JSONEncoder().encode(parameter)
+        
+        request.httpBody = httpBody;
+               
+        let session = URLSession.shared
+        session.dataTask(with: request){
+            (data, response, error) in
+                       
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                        print("Status Code:", myResponse.statusCode)
+                           
+                    if myResponse.statusCode == 200 {
+                        let submit = try JSONDecoder().decode(SubmitInfo.self, from: data)
+                        print("result: \(submit.result)")
+                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+                        print(myResponse.statusCode)
+                    } else {
+                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+                        print(error.message)
+                    }
+                } catch {
+                    print("error: ", error)
+                }
+            }
+        }.resume()
     }
 }

@@ -17,27 +17,32 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet var courseTitleLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return answerList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-                   cell.textLabel?.text = "Problem \(indexPath.row + 1)"
-                   cell.detailTextLabel?.text = answerList[indexPath.row]
-                   return cell
-    }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        getScore()
     }
     
     func updateUI(){
         courseTitleLabel.text = courseTitle
         professorLabel.text = professor
     }
+    
+    func getScore(){
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+           return answerList.count
+       }
+       
+       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+                      cell.textLabel?.text = "Problem \(indexPath.row + 1)"
+                      cell.detailTextLabel?.text = answerList[indexPath.row]
+                      return cell
+       }
     
     @IBAction func ExitButtonPressed(_ sender: Any) {
         alertExitExam()
