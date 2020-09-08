@@ -36,13 +36,13 @@ class DetailViewController: UIViewController {
     @IBOutlet var remainTime: UILabel!
     
     var accessToken: String = ""
+    var userId: String = ""
     
     //    var course: ExamInfo!
     var course: ExamInfo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateUI()
         caculateRemainTime()
     }
@@ -62,10 +62,14 @@ class DetailViewController: UIViewController {
         vc.courseName = course!
         vc.professorName = professor!
         vc.end = endTime!
-        vc.id = id!
+        vc.examId = String(id!)
+        vc.userId = userId
         vc.accessToken = accessToken
+        
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+        
+        print("Detail View examId: \(vc.examId)")
     }
     
     func updateUI(){

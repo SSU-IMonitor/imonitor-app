@@ -9,10 +9,14 @@
 import UIKit
 
 class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    var answerList = [String]()
+
     var courseTitle: String = " "
     var professor: String = " "
+    var accessToken: String = " "
+    var userId: String = " "
+    var examId: String = " "
+    var answerList = [String]()
+    var scoreList = [AnswerInfo]()
     
     @IBOutlet var courseTitleLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
@@ -20,6 +24,9 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("examId: \(examId)")
+        print("userId: \(userId)")
+        
         updateUI()
         getScore()
     }
@@ -30,7 +37,36 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func getScore(){
+        let url = URL(string: "http://api.puroong.me/v1/users/\(userId)/exams/\(examId)/submit")
         
+        guard let requestURL = url else { fatalError() }
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        
+        print("access: \(accessToken)" )
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) {
+            (data, response, error) in
+            
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                    print("Status Code:", myResponse.statusCode)
+                                
+                    if myResponse.statusCode == 200 {
+                        let answer = try JSONDecoder().decode(ScoreInfo.self, from: data)
+                        self.scoreList = answer.result!
+                        print(self.scoreList)
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

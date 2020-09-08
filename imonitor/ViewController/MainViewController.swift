@@ -97,6 +97,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let view = segue.destination as? DetailViewController{
             view.course = myCourses[rowSelected]
             view.accessToken = accessToken
+            view.userId = idText
         }
     }
     

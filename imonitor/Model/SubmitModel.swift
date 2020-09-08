@@ -13,9 +13,9 @@ struct SubmitInfo: Codable{
 }
 
 struct ResultInfo: Codable{
-    let qna: QuestionInfo
-    let submittedAnswer: String
-    let isCorrecet: Bool
+    let qna: QuestionInfo?
+    let submittedAnswer: String?
+    let isCorrect: Bool?
 }
 
 struct Submit: Codable{

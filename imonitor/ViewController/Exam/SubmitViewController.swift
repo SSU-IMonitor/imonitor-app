@@ -13,7 +13,8 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var accessToken: String = " "
     var courseTitle: String = " "
     var professor: String = " "
-    var examId: String = " "
+    var examId: String = ""
+    var userId: String = ""
     var answerList = [String](repeating: " ", count: questionList.count)
     var qnaIdList = [Int]()
     var qnaAndAnswer = [SubmitParameter]()
@@ -21,7 +22,8 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("qnaAnswer: \(qnaAndAnswer)")
+        //print("qnaAnswer: \(qnaAndAnswer)")
+        print("Submit examId: \(examId)")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,6 +52,9 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 vc.answerList = self.answerList
                 vc.courseTitle = self.courseTitle
                 vc.professor = self.professor
+                vc.accessToken = self.accessToken
+                vc.userId = self.userId
+                vc.examId = self.examId
                 
                 self.present(vc, animated: true)
             }
@@ -86,7 +91,7 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
                            
                     if myResponse.statusCode == 200 {
                         let submit = try JSONDecoder().decode(SubmitInfo.self, from: data)
-                        print("result: \(submit.result)")
+                        //print("result: \(submit.result)")
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)
                     } else {

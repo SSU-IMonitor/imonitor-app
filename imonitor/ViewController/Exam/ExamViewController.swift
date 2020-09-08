@@ -27,7 +27,8 @@ class ExamViewController: UIViewController {
     var courseName = ""
     var professorName = ""
     var end = ""
-    var id = ""
+    var examId = ""
+    var userId: String = ""
     var accessToken: String = ""
     var cnt: Int = 1
     var numQuestion: Int = questionList.startIndex
@@ -47,6 +48,7 @@ class ExamViewController: UIViewController {
         answerTextField.addDoneButtonOnKeyboard()
         cameraPermissionCheck()
         updateUI()
+        print("Exam examId: \(examId)")
     }
     
     func updateUI(){
@@ -62,7 +64,7 @@ class ExamViewController: UIViewController {
     }
     
     func getQuestions(){
-        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(id)") else { return }
+        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(examId)") else { return }
                     
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -155,18 +157,21 @@ class ExamViewController: UIViewController {
         problemNumberLabel.text = "Problem \(numQuestion + 1)"
         questionLabel.text = questionList[numQuestion].question
         answerTextField.text = answerList[numQuestion]
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        answerList[numQuestion] = answerTextField.text!
+        qnaAndAnswer[numQuestion].answer = answerList[numQuestion]
+        
          if let view = segue.destination as? SubmitViewController{
-            answerList[numQuestion] = answerTextField.text!
             view.answerList = answerList
             view.courseTitle = courseName
             view.professor = professorName
             view.qnaIdList = qnaIDList
             view.accessToken = accessToken
-            view.examId = id
-            print("prepare: \(qnaAndAnswer)")
+            view.examId = examId
+            view.userId = userId
             view.qnaAndAnswer = qnaAndAnswer
         }
     }
@@ -174,45 +179,6 @@ class ExamViewController: UIViewController {
     @IBAction func submitButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "submitExam", sender: nil)
     }
-    
-//    func postSubmit(qnaAndAnswer: [SubmitParameter]){
-//        let parameter = ["submits": qnaAndAnswer]
-//
-//        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(id)/submit") else { return }
-//        var request = URLRequest(url: url)
-//
-//        request.httpMethod = "POST"
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-//
-//        let httpBody = try! JSONEncoder().encode(parameter)
-//
-//        request.httpBody = httpBody;
-//
-//        let session = URLSession.shared
-//        session.dataTask(with: request){
-//            (data, response, error) in
-//
-//            if let data = data {
-//                do {
-//                    let myResponse = response as! HTTPURLResponse
-//                        print("Status Code:", myResponse.statusCode)
-//
-//                    if myResponse.statusCode == 200 {
-//                        let submit = try JSONDecoder().decode(SubmitInfo.self, from: data)
-//                        print("result: \(submit.result)")
-//                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
-//                        print(myResponse.statusCode)
-//                    } else {
-//                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
-//                        print(error.message)
-//                    }
-//                } catch {
-//                    print("error: ", error)
-//                }
-//            }
-//        }.resume()
-//    }
 }
 
 // tracker 초기화
