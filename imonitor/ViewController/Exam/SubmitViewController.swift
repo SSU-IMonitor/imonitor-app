@@ -15,14 +15,13 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var professor: String = " "
     var examId: String = ""
     var userId: String = ""
-    var answerList = [String](repeating: " ", count: questionList.count)
+    var answerList = [String](repeating: "", count: questionList.count)
     var qnaIdList = [Int]()
     var qnaAndAnswer = [SubmitParameter]()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("qnaAnswer: \(qnaAndAnswer)")
         print("Submit examId: \(examId)")
     }
     
@@ -44,19 +43,9 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func alertSubmit(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "시험지를 제출하시겠습니까?", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .cancel){
+            let okAction = UIAlertAction(title: "확인", style: .default){
                 (action) in
                 self.postSubmit(qnaAndAnswer: self.qnaAndAnswer)
-                let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
-                    vc.modalPresentationStyle = .fullScreen
-                vc.answerList = self.answerList
-                vc.courseTitle = self.courseTitle
-                vc.professor = self.professor
-                vc.accessToken = self.accessToken
-                vc.userId = self.userId
-                vc.examId = self.examId
-                
-                self.present(vc, animated: true)
             }
             let cancelAction = UIAlertAction(title: "취소", style: .destructive)
             alert.addAction(cancelAction)
@@ -67,6 +56,7 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func postSubmit(qnaAndAnswer: [SubmitParameter]){
+        print(qnaAndAnswer)
         let parameter = ["submits": qnaAndAnswer]
         
         guard let url = URL(string: "http://api.puroong.me/v1/exams/\(examId)/submit") else { return }
@@ -90,8 +80,18 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         print("Status Code:", myResponse.statusCode)
                            
                     if myResponse.statusCode == 200 {
-                        let submit = try JSONDecoder().decode(SubmitInfo.self, from: data)
-                        //print("result: \(submit.result)")
+                        DispatchQueue.main.async{
+                            let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
+                                vc.modalPresentationStyle = .fullScreen
+                            vc.answerList = self.answerList
+                            vc.courseTitle = self.courseTitle
+                            vc.professor = self.professor
+                            vc.accessToken = self.accessToken
+                            vc.userId = self.userId
+                            vc.examId = self.examId
+                            
+                            self.present(vc, animated: true)
+                        }
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)
                     } else {

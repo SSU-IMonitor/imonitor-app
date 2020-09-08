@@ -15,9 +15,9 @@ let width = bounds.width
 let height = bounds.height
 
 var questionList = [QuestionInfo]()
-var answerList = [String](repeating: " ", count: questionList.count)
+var answerList = [String](repeating: "", count: questionList.count)
 var qnaIDList = [Int]()
-var qnaAndAnswer = [SubmitParameter](repeating: SubmitParameter.init(qnaId: 0, answer: " "), count: questionList.count)
+var qnaAndAnswer = [SubmitParameter](repeating: SubmitParameter.init(qnaId: 0, answer: ""), count: questionList.count)
 
 class ExamViewController: UIViewController {
     var tracker: GazeTracker? = nil
@@ -163,7 +163,7 @@ class ExamViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         answerList[numQuestion] = answerTextField.text!
         qnaAndAnswer[numQuestion].answer = answerList[numQuestion]
-        
+        print("prepare: \(answerList)")
          if let view = segue.destination as? SubmitViewController{
             view.answerList = answerList
             view.courseTitle = courseName

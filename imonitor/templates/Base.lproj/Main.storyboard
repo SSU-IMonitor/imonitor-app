@@ -943,8 +943,10 @@
                         <viewLayoutGuide key="safeArea" id="YYw-H1-Uno"/>
                     </view>
                     <connections>
+                        <outlet property="correctLabel" destination="ij7-fW-q94" id="gbc-VQ-Ffz"/>
                         <outlet property="courseTitleLabel" destination="R2e-rT-DFt" id="1Yo-FV-NV2"/>
                         <outlet property="professorLabel" destination="QWg-vy-lsp" id="fUg-S9-YfF"/>
+                        <outlet property="totalLabel" destination="orL-US-hUz" id="NND-FF-1KG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2E-6N-rLI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

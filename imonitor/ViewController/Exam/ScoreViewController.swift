@@ -10,6 +10,7 @@ import UIKit
 
 class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var correct: Int = 0
     var courseTitle: String = " "
     var professor: String = " "
     var accessToken: String = " "
@@ -21,19 +22,12 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet var courseTitleLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
     
-
+    @IBOutlet var correctLabel: UILabel!
+    @IBOutlet var totalLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("examId: \(examId)")
-        print("userId: \(userId)")
-        
-        updateUI()
         getScore()
-    }
-    
-    func updateUI(){
-        courseTitleLabel.text = courseTitle
-        professorLabel.text = professor
     }
     
     func getScore(){
@@ -45,8 +39,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        
-        print("access: \(accessToken)" )
         
         let session = URLSession.shared
         session.dataTask(with: request) {
@@ -61,12 +53,39 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                         let answer = try JSONDecoder().decode(ScoreInfo.self, from: data)
                         self.scoreList = answer.result!
                         print(self.scoreList)
+                        self.countCorrect()
+                        self.updateUI()
+                        self.printAnswer(answer: self.scoreList)
                     }
                 } catch {
                     print(error)
                 }
             }
         }.resume()
+    }
+    
+    func countCorrect(){
+        for i in 0..<scoreList.count{
+            if scoreList[i].isCorrect == true {
+                correct+=1
+            }
+        }
+    }
+    
+    func updateUI(){
+        DispatchQueue.main.async {
+            self.courseTitleLabel.text = self.courseTitle
+            self.professorLabel.text = self.professor
+            self.correctLabel.text = String(self.correct)
+            self.totalLabel.text = String(self.answerList.count)
+        }
+    }
+    
+    func printAnswer(answer: [AnswerInfo]){
+        for i in 0..<scoreList.count{
+            print(answer[i].qna!.id)
+            print(answer[i].qna!.answer)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,12 +102,12 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func ExitButtonPressed(_ sender: Any) {
         alertExitExam()
     }
-    
+
     func alertExitExam(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "현재 창을 닫겠습니까?", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .cancel){
-                       (action) in
+            let okAction = UIAlertAction(title: "확인", style: .default){
+                    (action) in
                 self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 }
             let cancelAction = UIAlertAction(title: "취소", style: .destructive)
