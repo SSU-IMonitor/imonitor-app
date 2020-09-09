@@ -32,10 +32,9 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         getScore()
         DispatchQueue.main.async {
-                   self.tableView.reloadData()
-               }
+            self.tableView.reloadData()
+        }
         setTableView()
-        print("isSubmitted (Score): \(isSubmitted)")
        
     }
     
@@ -56,7 +55,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             if let data = data {
                 do {
                     let myResponse = response as! HTTPURLResponse
-                    print("Status Code:", myResponse.statusCode)
                                 
                     if myResponse.statusCode == 200 {
                         let answer = try JSONDecoder().decode(ScoreInfo.self, from: data)

@@ -68,8 +68,6 @@ class DetailViewController: UIViewController {
         
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
-        
-        print("Detail View examId: \(vc.examId)")
     }
     
     func updateUI(){

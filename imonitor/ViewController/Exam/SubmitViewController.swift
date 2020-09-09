@@ -22,7 +22,6 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Submit examId: \(examId)")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,7 +76,6 @@ class SubmitViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if let data = data {
                 do {
                     let myResponse = response as! HTTPURLResponse
-                        print("Status Code:", myResponse.statusCode)
                            
                     if myResponse.statusCode == 200 {
                         DispatchQueue.main.async{

@@ -64,11 +64,49 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.tableHeaderView = header
     }
     
+    func postMyCourses(completed: @escaping () -> ()){
+        guard let url = URL(string: "http://api.puroong.me/v1/users/\(idText)/exams") else { return }
+                
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+                   
+        let session = URLSession.shared
+        session.dataTask(with: request){
+            (data, response, error) in
+                           
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                        print("Status Code:", myResponse.statusCode)
+                            
+                    if myResponse.statusCode == 200 {
+                        let courses = try JSONDecoder().decode(CourseInfo.self, from: data)
+                        self.myCourses = courses.exams
+                        
+                        DispatchQueue.main.async {
+                            completed()
+                        }
+                
+                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+                        print(myResponse.statusCode)
+                    } else {
+                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+                        print(error.message)
+                    }
+                } catch {
+                    print("error: ", error)
+                }
+            }
+        }.resume()
+    }
+    
     private func setUptableView(){
         tableView.delegate = self
         tableView.dataSource = self
     }
-       
+    
     @IBAction func logoutButtonPressed(){
         alertLogout()
     }
@@ -103,46 +141,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func searchButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "search", sender: nil)
-    }
-    
-    func postMyCourses(completed: @escaping () -> ()){
-        print("postMyCourses active")
-        guard let url = URL(string: "http://api.puroong.me/v1/users/\(idText)/exams") else { return }
-                
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-                   
-        let session = URLSession.shared
-        session.dataTask(with: request){
-            (data, response, error) in
-                           
-            if let data = data {
-                do {
-                    let myResponse = response as! HTTPURLResponse
-                        print("Status Code:", myResponse.statusCode)
-                            
-                    if myResponse.statusCode == 200 {
-                        let courses = try JSONDecoder().decode(CourseInfo.self, from: data)
-                        self.myCourses = courses.exams
-    //                  print(self.myCourses)
-                        
-                        DispatchQueue.main.async {
-                            completed()
-                        }
-                
-                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
-                        print(myResponse.statusCode)
-                    } else {
-                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
-                        print(error.message)
-                    }
-                } catch {
-                    print("error: ", error)
-                }
-            }
-        }.resume()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

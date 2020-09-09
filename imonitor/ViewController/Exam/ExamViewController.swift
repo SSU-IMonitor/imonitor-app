@@ -183,7 +183,7 @@ class ExamViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         answerList[numQuestion] = answerTextField.text!
         qnaAndAnswer[numQuestion].answer = answerList[numQuestion]
-        print("prepare: \(answerList)")
+        
          if let view = segue.destination as? SubmitViewController{
             view.answerList = answerList
             view.courseTitle = courseName

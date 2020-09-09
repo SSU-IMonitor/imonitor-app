@@ -19,8 +19,6 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createDoneButton()
-
-        // Do any additional setup after loading the view.
     }
     
     func createDoneButton(){
@@ -32,45 +30,36 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
-       SignUpAPI()
+       postRegister()
     }
     
-    @IBAction func exitSignUpPage(_ sender: Any) {
-        moveToLogin()
-    }
-    
-    func SignUpAPI(){
+    func postRegister(){
         let parameters = ["id": idTextField.text, "name": nameTextField.text, "password": passwordTextField.text, "major": majorTextField.text]
-        
+           
         guard let url = URL(string: "http://api.puroong.me/v1/auth/sign-up") else { return }
-        
+           
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+           
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody;
-        
+           
         let session = URLSession.shared
         session.dataTask(with: request){
             (data, response, error) in
-            
+               
             if let data = data {
                 do {
                     let myResponse = response as! HTTPURLResponse
-                    print("Status Code: ", myResponse.statusCode)
-                    
+                       
                     if myResponse.statusCode == 200{
-                        let log = try JSONDecoder().decode(LoginInfo.self, from: data)
-                        print("id:", log.userInfo.id, "\tname: ", log.userInfo.name)
-                        print("회원가입 정상 완료")
+                        // let log = try JSONDecoder().decode(LoginInfo.self, from: data)
                         self.moveToLogin()
-                        
+                           
                     } else if myResponse.statusCode == 500{
-                        
-                        print("회원 중복")
                         self.alertUserDuplicated()
-                        
+                           
                     } else {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
                         print(error.message)
@@ -99,4 +88,10 @@ class SignUpViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func exitSignUpPage(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
