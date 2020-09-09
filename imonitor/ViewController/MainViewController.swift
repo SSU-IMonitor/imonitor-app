@@ -119,7 +119,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.accessToken = " "
                 self.dismiss(animated: true, completion: nil)
             }
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            let cancelAction = UIAlertAction(title: "취소", style: .destructive)
             
             alert.addAction(okAction)
             alert.addAction(cancelAction)

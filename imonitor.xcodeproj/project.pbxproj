@@ -34,6 +34,7 @@
 		96AE575D24D3059D002C7114 /* UIRoundPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */; };
 		96B3FD7724FE857A0026AE70 /* QnAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3FD7624FE857A0026AE70 /* QnAModel.swift */; };
 		96B3FD7924FE87140026AE70 /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B3FD7824FE87140026AE70 /* SubmitViewController.swift */; };
+		96C6341B2509292100D7FC9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96C6341A2509292100D7FC9F /* Launch Screen.storyboard */; };
 		96CF6FB624DD3A2800833233 /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF6FB524DD3A2800833233 /* ExamViewController.swift */; };
 		96F9852A24DD76A100229FE4 /* SeeSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F9852824DD769B00229FE4 /* SeeSo.framework */; };
 		96F9852B24DD76A100229FE4 /* SeeSo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96F9852824DD769B00229FE4 /* SeeSo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -110,6 +111,7 @@
 		96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundPrimaryButton.swift; sourceTree = "<group>"; };
 		96B3FD7624FE857A0026AE70 /* QnAModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnAModel.swift; sourceTree = "<group>"; };
 		96B3FD7824FE87140026AE70 /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
+		96C6341A2509292100D7FC9F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		96CF6FB524DD3A2800833233 /* ExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
 		96F9852824DD769B00229FE4 /* SeeSo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SeeSo.framework; sourceTree = "<group>"; };
 		96FA970824D3F7B700F49D24 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				96AE573024D3005C002C7114 /* Main.storyboard */,
 				96AE575C24D3059D002C7114 /* UIRoundPrimaryButton.swift */,
 				96A2568B24E17CE6002F52BF /* DoneButton.swift */,
+				96C6341A2509292100D7FC9F /* Launch Screen.storyboard */,
 			);
 			path = templates;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C6341B2509292100D7FC9F /* Launch Screen.storyboard in Resources */,
 				96AE573424D3005E002C7114 /* Assets.xcassets in Resources */,
 				96AE573224D3005C002C7114 /* Main.storyboard in Resources */,
 			);
