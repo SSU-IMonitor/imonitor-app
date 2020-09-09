@@ -32,6 +32,7 @@ class ExamViewController: UIViewController {
     var accessToken: String = ""
     var cnt: Int = 1
     var numQuestion: Int = questionList.startIndex
+    var isSubmitted: Bool = true
     
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
@@ -47,19 +48,18 @@ class ExamViewController: UIViewController {
         getQuestions()
         answerTextField.addDoneButtonOnKeyboard()
         cameraPermissionCheck()
-        updateUI()
-        print("Exam examId: \(examId)")
     }
     
     func updateUI(){
-        courseNameLabel.text = courseName
-        professorLabel.text = professorName
-        problemNumberLabel.text = "Problem \(cnt)"
-        questionLabel.text = questionList[questionList.startIndex].question
-        
-         for i in 0..<qnaIDList.count{
-            qnaAndAnswer[i].qnaId = qnaIDList[i]
-        //            qnaAndAnswer[i].answer = answerList[i]
+        DispatchQueue.main.async{
+            self.courseNameLabel.text = self.courseName
+            self.professorLabel.text = self.professorName
+            self.problemNumberLabel.text = "Problem \(self.cnt)"
+            self.questionLabel.text = questionList[questionList.startIndex].question
+                   
+            for i in 0..<qnaIDList.count{
+                qnaAndAnswer[i].qnaId = qnaIDList[i]
+            }
         }
     }
     
@@ -79,21 +79,41 @@ class ExamViewController: UIViewController {
                 do {
                     let myResponse = response as! HTTPURLResponse
                         print("Status Code:", myResponse.statusCode)
+                    
                                 
                     if myResponse.statusCode == 200 {
                         let course = try JSONDecoder().decode(CourseExamInfo.self, from: data)
+                        
+                        if course.exam?.hasSubmitted == false {
+                            self.isSubmitted = false
+                            DispatchQueue.main.async{
+                                let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
+                                vc.userId = self.userId
+                                vc.examId = self.examId
+                                vc.courseTitle = self.courseName
+                                vc.professor = self.professorName
+                                vc.accessToken = self.accessToken
+                                vc.isSubmitted = self.isSubmitted
+                                vc.modalPresentationStyle = .fullScreen
+                                self.present(vc, animated: true)
+                            }
+                        }
+                        
                         questionList = course.exam!.questions
                         
                         for question in questionList {
                             qnaIDList.append(question.id!)
                         }
+                        
+                        self.updateUI()
                     } else if myResponse.statusCode == 403 {
                         print(myResponse.statusCode)
                         self.presentingViewController?.dismiss(animated: true, completion: nil)
                         self.alertNotAccepted()
                         
-                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500{
                         print(myResponse.statusCode)
+                        
                     } else {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
                         print(error.message)

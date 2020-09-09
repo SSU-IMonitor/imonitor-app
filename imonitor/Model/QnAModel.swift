@@ -26,6 +26,7 @@ struct OneExamInfo: Codable{
     var startTime: String
     var endTime: String
     var questions: [QuestionInfo]
+    var hasSubmitted: Bool
 }
 
 struct QuestionInfo: Codable{

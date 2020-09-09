@@ -18,6 +18,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     var examId: String = " "
     var answerList = [String]()
     var scoreList = [AnswerInfo]()
+    var isSubmitted: Bool = true
     
     @IBOutlet var courseTitleLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
@@ -25,9 +26,17 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet var correctLabel: UILabel!
     @IBOutlet var totalLabel: UILabel!
     
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getScore()
+        DispatchQueue.main.async {
+                   self.tableView.reloadData()
+               }
+        setTableView()
+        print("isSubmitted (Score): \(isSubmitted)")
+       
     }
     
     func getScore(){
@@ -77,25 +86,30 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.courseTitleLabel.text = self.courseTitle
             self.professorLabel.text = self.professor
             self.correctLabel.text = String(self.correct)
-            self.totalLabel.text = String(self.answerList.count)
+            self.totalLabel.text = String(self.scoreList.count)
         }
     }
     
     func printAnswer(answer: [AnswerInfo]){
         for i in 0..<scoreList.count{
-            print(answer[i].qna!.id)
-            print(answer[i].qna!.answer)
+            print(answer[i].qna!.id as Any)
+            print(answer[i].qna!.answer as Any)
         }
     }
     
+    func setTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return answerList.count
+           return scoreList.count
        }
        
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
                       cell.textLabel?.text = "Problem \(indexPath.row + 1)"
-                      cell.detailTextLabel?.text = answerList[indexPath.row]
+        cell.detailTextLabel?.text = scoreList[indexPath.row].submittedAnswer
                       return cell
        }
     
@@ -108,8 +122,12 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             let alert = UIAlertController(title: "알림", message: "현재 창을 닫겠습니까?", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default){
                     (action) in
-                self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                if(self.isSubmitted == false){
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+                } else {
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 }
+            }
             let cancelAction = UIAlertAction(title: "취소", style: .destructive)
             alert.addAction(cancelAction)
             alert.addAction(okAction)
