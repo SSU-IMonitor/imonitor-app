@@ -55,6 +55,7 @@ class SignUpViewController: UIViewController {
                        
                     if myResponse.statusCode == 200{
                         // let log = try JSONDecoder().decode(LoginInfo.self, from: data)
+                        
                         self.moveToLogin()
                            
                     } else if myResponse.statusCode == 500{

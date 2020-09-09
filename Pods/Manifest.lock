@@ -1,0 +1,16 @@
+PODS:
+  - NVActivityIndicatorView/AppExtension (4.8.0)
+
+DEPENDENCIES:
+  - NVActivityIndicatorView/AppExtension
+
+SPEC REPOS:
+  trunk:
+    - NVActivityIndicatorView
+
+SPEC CHECKSUMS:
+  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
+
+PODFILE CHECKSUM: 73c9c56f0b8f5b504485ab007e402319ed95c8ca
+
+COCOAPODS: 1.9.3

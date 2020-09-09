@@ -7,23 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class DetailViewController: UIViewController {
-    // MVVM
-    
-    // Model
-    // - courseInfo
-    // > courseInfo 만들기
-    
-    // View
-    // - courseTitleLabel, professorLabel
-    // > view들은 viewModel을 통해서 구현
-    
-    // View Model
-    // - Detail View Model
-    // > 뷰 레이어에 피료한 메소드 만들기
-    // > 모델 가지고 있기 (courseInfo)
-    
+class DetailViewController: UIViewController{
 
     @IBOutlet var courseTitleLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
@@ -38,36 +24,12 @@ class DetailViewController: UIViewController {
     var accessToken: String = ""
     var userId: String = ""
     
-    //    var course: ExamInfo!
     var course: ExamInfo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
         caculateRemainTime()
-    }
-    
-    @IBAction func close(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func startPressed(_ sender: Any) {
-        let course = courseTitleLabel.text
-        let professor = professorLabel.text
-        let endTime = endTimeLabel.text
-        let id = courseIDLabel.text
-        
-        let vc = storyboard?.instantiateViewController(identifier: "exam") as! ExamViewController
-        
-        vc.courseName = course!
-        vc.professorName = professor!
-        vc.end = endTime!
-        vc.examId = String(id!)
-        vc.userId = userId
-        vc.accessToken = accessToken
-        
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
     }
     
     func updateUI(){
@@ -78,26 +40,6 @@ class DetailViewController: UIViewController {
         courseTitle2Label.text = course.courseName
         startTimeLabel.text = parsingTime(time: course.startTime!)
         endTimeLabel.text = parsingTime(time:course.endTime!)
-    }
-    
-    func parsingTime(time: String) -> String{
-        let str = time
-        let arr = str.components(separatedBy: ["-","T",":","."])
-        let strDate = arr[0] + "-" + arr[1] + "-" + arr[2] + " " + arr[3] + ":" + arr[4] + ":" + arr[5]
-        return strDate
-    }
-
-    func changeStringToDate(time: String) -> Date{
-        let parsingDate = parsingTime(time: time)
-        
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        let date = formatter.date(from: parsingDate)
-        let realDate = date! + 32400
-        
-        return realDate
     }
     
     func caculateRemainTime(){
@@ -124,10 +66,76 @@ class DetailViewController: UIViewController {
         remainTime.text = strRemainTime
     }
     
+    func changeStringToDate(time: String) -> Date{
+        let parsingDate = parsingTime(time: time)
+           
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+           
+        let date = formatter.date(from: parsingDate)
+        let realDate = date! + 32400
+           
+        return realDate
+    }
+    
+    func parsingTime(time: String) -> String{
+        let str = time
+        let arr = str.components(separatedBy: ["-","T",":","."])
+        let strDate = arr[0] + "-" + arr[1] + "-" + arr[2] + " " + arr[3] + ":" + arr[4] + ":" + arr[5]
+        return strDate
+    }
+    
     func caculateCurrentTime()-> String{
         let now = NSDate()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter.string(from: now as Date)
+    }
+    
+    @IBAction func close(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func startPressed(_ sender: Any) {
+        setLoading()
+    }
+    
+    
+    func setLoading(){
+        let loading = NVActivityIndicatorView(frame: .zero, type: .ballScaleMultiple, color: UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1), padding: 0)
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loading)
+        NSLayoutConstraint.activate([
+            loading.widthAnchor.constraint(equalToConstant: 60),
+            loading.heightAnchor.constraint(equalToConstant: 60),
+            loading.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        loading.startAnimating()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5){
+            loading.stopAnimating()
+            self.moveToExam()
+        }
+    }
+    func moveToExam(){
+        let course = courseTitleLabel.text
+        let professor = professorLabel.text
+        let endTime = endTimeLabel.text
+        let id = courseIDLabel.text
+        
+        let vc = storyboard?.instantiateViewController(identifier: "exam") as! ExamViewController
+        
+        vc.courseName = course!
+        vc.professorName = professor!
+        vc.end = endTime!
+        vc.examId = String(id!)
+        vc.userId = userId
+        vc.accessToken = accessToken
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }

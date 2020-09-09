@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class LoginViewController: UIViewController {
 
@@ -26,7 +27,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(){
-            postLogin()
+        postLogin()
     }
     
     func postLogin(){
@@ -55,12 +56,13 @@ class LoginViewController: UIViewController {
                         let user = try JSONDecoder().decode(LoginInfo.self, from: data)
                         print(user.userInfo.id)
                         
-                        self.idText = user.userInfo.id
-                        self.nameText = user.userInfo.name
-                        self.majorText = user.userInfo.major
-                        self.accessToken = user.accessToken
-                        self.moveToMain()
-                        
+                        DispatchQueue.main.async {
+                            self.idText = user.userInfo.id
+                            self.nameText = user.userInfo.name
+                            self.majorText = user.userInfo.major
+                            self.accessToken = user.accessToken
+                            self.setLoading()
+                        }
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         self.alert()
                     } else {
@@ -72,6 +74,25 @@ class LoginViewController: UIViewController {
                 }
             }
         }.resume()
+    }
+    
+    func setLoading(){
+        let loading = NVActivityIndicatorView(frame: .zero, type: .ballScaleMultiple, color: UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1), padding: 0)
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loading)
+        NSLayoutConstraint.activate([
+            loading.widthAnchor.constraint(equalToConstant: 60),
+            loading.heightAnchor.constraint(equalToConstant: 60),
+            loading.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        loading.startAnimating()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5){
+            loading.stopAnimating()
+            self.moveToMain()
+        }
     }
     
     func moveToMain(){
