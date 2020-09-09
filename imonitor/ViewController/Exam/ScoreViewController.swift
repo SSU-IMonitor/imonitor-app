@@ -31,11 +31,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         getScore()
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        setTableView()
-       
+        
     }
     
     func getScore(){
@@ -59,10 +55,9 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                     if myResponse.statusCode == 200 {
                         let answer = try JSONDecoder().decode(ScoreInfo.self, from: data)
                         self.scoreList = answer.result!
-                        print(self.scoreList)
                         self.countCorrect()
                         self.updateUI()
-                        self.printAnswer(answer: self.scoreList)
+                        // self.printAnswer(answer: self.scoreList)
                     }
                 } catch {
                     print(error)
@@ -85,15 +80,17 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.professorLabel.text = self.professor
             self.correctLabel.text = String(self.correct)
             self.totalLabel.text = String(self.scoreList.count)
+            self.setTableView()
+            self.tableView.reloadData()
         }
     }
     
-    func printAnswer(answer: [AnswerInfo]){
-        for i in 0..<scoreList.count{
-            print(answer[i].qna!.id as Any)
-            print(answer[i].qna!.answer as Any)
-        }
-    }
+//    func printAnswer(answer: [AnswerInfo]){
+//        for i in 0..<scoreList.count{
+//            print(answer[i].qna!.id as Any)
+//            print(answer[i].qna!.answer as Any)
+//        }
+//    }
     
     func setTableView(){
         tableView.delegate = self
@@ -101,11 +98,12 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return scoreList.count
-       }
+        print("tableViewCellNum: \(scoreList.count)")
+        return scoreList.count
+    }
        
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "answer")
                       cell.textLabel?.text = "Problem \(indexPath.row + 1)"
         cell.detailTextLabel?.text = scoreList[indexPath.row].submittedAnswer
                       return cell

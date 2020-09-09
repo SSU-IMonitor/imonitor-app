@@ -231,7 +231,7 @@ extension ExamViewController: GazeDelegate{
     
     // 시선 인식
     func onGaze(timestamp: Double, x: Float, y: Float, state: TrackingState) {
-//        print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
+        //print("timestamp: \(timestamp), (x, y): (\(x), \(y), state: \(state.description)")
         if x < 100.0 || y < 100.0 || x > Float(width) + 100.0 || y > Float(height) - 100.0 || x == Float(Double.nan) || y == Float(Double.nan)  {
             startCount()
         }
