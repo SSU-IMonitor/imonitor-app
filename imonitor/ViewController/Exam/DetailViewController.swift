@@ -47,7 +47,9 @@ class DetailViewController: UIViewController{
         let now = NSDate()
         print("now: \(now)")
         let startTime = changeStringToDate(time: course.startTime!)
-        print(startTime)
+        let endTime = changeStringToDate(time: course.endTime!)
+        let endTimeInterval = Int(endTime.timeIntervalSince(startTime as Date))
+        print("endTimeInterval: \(endTimeInterval)")
         
         let timeInterval = Int(startTime.timeIntervalSince(now as Date))
         print("Time Interval: \(timeInterval)")
@@ -67,7 +69,7 @@ class DetailViewController: UIViewController{
         strRemainTime = setRemainZero(day: day, hour: hour, minute: minute, second: second)
         remainTime.text = strRemainTime
         
-        setAccepted(day: day, hour: hour, minute: minute, second: second)
+        setAccepted(day: day, hour: hour, minute: minute, second: second, endTimeInterval: endTimeInterval)
     }
     
     func changeStringToDate(time: String) -> Date{
@@ -123,9 +125,15 @@ class DetailViewController: UIViewController{
     }
     
     
-    func setAccepted(day: Int, hour: Int, minute: Int, second: Int) {
+    func setAccepted(day: Int, hour: Int, minute: Int, second: Int, endTimeInterval: Int) {
         if day <= 0 && hour <= 0 && minute <= 0 && second <= 0{
-            isTime = true
+            if -(endTimeInterval % 3600) >= hour {
+                remainTime.text = "시험이 종료 되었습니다."
+            } else {
+                isTime = true
+                remainTime.text = "시험 시간 입니다"
+            }
+            remainTime.textColor = UIColor.red
         }
     }
     
@@ -137,7 +145,7 @@ class DetailViewController: UIViewController{
         if(isTime == true){
             setLoading()
         } else {
-            alertNotStartTime()
+            alertNotTime()
         }
     }
   
@@ -178,9 +186,9 @@ class DetailViewController: UIViewController{
         present(vc, animated: true)
     }
     
-    func alertNotStartTime(){
+    func alertNotTime(){
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "알림", message: "시험 시작 시간이 아닙니다.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "알림", message: "시험 시간이 아닙니다.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
