@@ -22,6 +22,9 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet var signUpButton: UIRoundPrimaryButton!
     
+    @IBOutlet var wrongPasswordImageView: UIImageView!
+    @IBOutlet var wrongPasswordVerifiedImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createDoneButton()
@@ -54,7 +57,20 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
-       postRegister()
+        comparePassword()
+    }
+    
+    func comparePassword(){
+        if String(passwordTextField.text!) == String(passwordVerifiedTextField.text!){
+            wrongPasswordImageView.image = nil
+            wrongPasswordVerifiedImageView.image = nil
+            postRegister()
+        } else {
+            wrongPasswordImageView.image = UIImage(named: "wrong.png")
+            wrongPasswordVerifiedImageView.image = UIImage(named: "wrong.png")
+            
+            alertPasswordNotCorrect()
+        }
     }
     
     func postRegister(){
@@ -104,11 +120,25 @@ class SignUpViewController: UIViewController {
     
     func alertUserDuplicated(){
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "경고", message: "회원 중복. 다른 학번을 사용해주세요", preferredStyle: .alert)
+            let alert = UIAlertController(title: "경고", message: "회원 중복. 다른 학번을 사용해주세요.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default){
                 (action) in self.idTextField.text = ""
             }
                    
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func alertPasswordNotCorrect(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "경고", message: "비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default){
+                (action) in
+                self.passwordTextField.text = ""
+                self.passwordVerifiedTextField.text = ""
+            }
+                          
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
