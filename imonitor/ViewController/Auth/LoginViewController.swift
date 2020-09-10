@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import NVActivityIndicatorView
 
 class LoginViewController: UIViewController {
+    private let loginViewModel = LoginViewModel()
+    private let disposeBag = DisposeBag()
 
     @IBOutlet var idTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
@@ -24,6 +28,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        idTextField.becomeFirstResponder()
+        
+        idTextField.rx.text.map {$0 ?? ""}.bind(to: loginViewModel.idTextPublishSubject).disposed(by: disposeBag)
+        passwordTextField.rx.text.map {$0 ?? ""}.bind(to: loginViewModel.passwordTextPublishSubject).disposed(by: disposeBag)
+        
+        loginViewModel.isValid().bind(to: signinButton.rx.isEnabled).disposed(by: disposeBag)
+        loginViewModel.isValid().map{ $0 ? 1 : 0.1}.bind(to: signinButton.rx.alpha).disposed(by: disposeBag)
     }
     
     @IBAction func loginButtonPressed(){
@@ -120,5 +132,17 @@ class LoginViewController: UIViewController {
         let vc = storyboard?.instantiateViewController(identifier: "signUp") as! SignUpViewController
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+}
+
+class LoginViewModel{
+    let idTextPublishSubject = PublishSubject<String>()
+    let passwordTextPublishSubject = PublishSubject<String>()
+    
+    func isValid() -> Observable<Bool> {
+        Observable.combineLatest(idTextPublishSubject.asObservable().startWith(""), passwordTextPublishSubject.asObservable().startWith("")).map{
+            id, password in
+            return id.count >= 8 && password.count >= 8
+        }.startWith(false)
     }
 }
