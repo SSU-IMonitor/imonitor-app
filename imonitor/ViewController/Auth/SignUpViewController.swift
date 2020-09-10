@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class SignUpViewController: UIViewController {
+    private let registerViewModel = RegisterViewModel()
+    private let disposeBag = DisposeBag()
 
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var majorTextField: UITextField!
@@ -16,9 +20,12 @@ class SignUpViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var passwordVerifiedTextField: UITextField!
     
+    @IBOutlet var signUpButton: UIRoundPrimaryButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createDoneButton()
+        rxRegister()
     }
     
     func createDoneButton(){
@@ -27,6 +34,23 @@ class SignUpViewController: UIViewController {
         idTextField.addDoneButtonOnKeyboard()
         passwordTextField.addDoneButtonOnKeyboard()
         passwordVerifiedTextField.addDoneButtonOnKeyboard()
+    }
+    
+    func rxRegister(){
+        nameTextField.becomeFirstResponder()
+           
+        nameTextField.rx.text.map {$0 ?? ""}.bind(to: registerViewModel.nameTextPublishSubject).disposed(by: disposeBag)
+        
+        majorTextField.rx.text.map {$0 ?? ""}.bind(to: registerViewModel.majorTextPublishSubject).disposed(by: disposeBag)
+        
+        idTextField.rx.text.map {$0 ?? ""}.bind(to: registerViewModel.idTextPublishSubject).disposed(by: disposeBag)
+        
+        passwordTextField.rx.text.map {$0 ?? ""}.bind(to: registerViewModel.passwordTextPublishSubject).disposed(by: disposeBag)
+        
+        passwordVerifiedTextField.rx.text.map {$0 ?? ""}.bind(to: registerViewModel.passwordCheckTextPublishSubject).disposed(by: disposeBag)
+        
+        registerViewModel.isValid().bind(to: signUpButton.rx.isEnabled).disposed(by: disposeBag)
+        registerViewModel.isValid().map{ $0 ? 1 : 0.1}.bind(to: signUpButton.rx.alpha).disposed(by: disposeBag)
     }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
@@ -93,6 +117,19 @@ class SignUpViewController: UIViewController {
     @IBAction func exitSignUpPage(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+class RegisterViewModel{
+    let nameTextPublishSubject = PublishSubject<String>()
+    let majorTextPublishSubject = PublishSubject<String>()
+    let idTextPublishSubject = PublishSubject<String>()
+    let passwordTextPublishSubject = PublishSubject<String>()
+    let passwordCheckTextPublishSubject = PublishSubject<String>()
     
-    
+    func isValid() -> Observable<Bool> {
+        Observable.combineLatest(nameTextPublishSubject.asObservable().startWith(""), majorTextPublishSubject.asObservable().startWith(""), idTextPublishSubject.asObservable().startWith(""), passwordCheckTextPublishSubject.asObservable().startWith(""),nameTextPublishSubject.asObservable().startWith("")).map{
+            name, major, id, password, passwordCheck in
+            return name.count >= 2 && major.count >= 1 && id.count >= 8 && password.count >= 1 && passwordCheck.count >= 1
+        }.startWith(false)
+    }
 }

@@ -29,6 +29,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setKeyboard()
+        rxLogin()
+    }
+    
+    func setKeyboard(){
+        idTextField.addDoneButtonOnKeyboard()
+        passwordTextField.addDoneButtonOnKeyboard()
+    }
+    
+    func rxLogin(){
         idTextField.becomeFirstResponder()
         
         idTextField.rx.text.map {$0 ?? ""}.bind(to: loginViewModel.idTextPublishSubject).disposed(by: disposeBag)
@@ -142,7 +152,7 @@ class LoginViewModel{
     func isValid() -> Observable<Bool> {
         Observable.combineLatest(idTextPublishSubject.asObservable().startWith(""), passwordTextPublishSubject.asObservable().startWith("")).map{
             id, password in
-            return id.count >= 8 && password.count >= 8
+            return id.count >= 8 && password.count >= 1
         }.startWith(false)
     }
 }
