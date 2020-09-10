@@ -1,16 +1,32 @@
 PODS:
-  - NVActivityIndicatorView/AppExtension (4.8.0)
+  - NVActivityIndicatorView (5.0.1):
+    - NVActivityIndicatorView/Base (= 5.0.1)
+  - NVActivityIndicatorView/Base (5.0.1)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
 
 DEPENDENCIES:
-  - NVActivityIndicatorView/AppExtension
+  - NVActivityIndicatorView
+  - RxCocoa
+  - RxSwift
 
 SPEC REPOS:
   trunk:
     - NVActivityIndicatorView
+    - RxCocoa
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
-  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
+  NVActivityIndicatorView: 738e843cb8924e9e4fc3e559d0728031624bf860
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 73c9c56f0b8f5b504485ab007e402319ed95c8ca
+PODFILE CHECKSUM: bd3335352f1aa208d660ad624ac26dbc6da365d0
 
 COCOAPODS: 1.9.3

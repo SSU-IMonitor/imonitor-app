@@ -104,9 +104,15 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
        
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = UITableViewCell(style: .value1, reuseIdentifier: "answer")
-                      cell.textLabel?.text = "Problem \(indexPath.row + 1)"
-        cell.detailTextLabel?.text = scoreList[indexPath.row].submittedAnswer
-                      return cell
+            cell.textLabel?.text = "Problem \(indexPath.row + 1)"
+            cell.detailTextLabel?.text = scoreList[indexPath.row].submittedAnswer
+        
+            if scoreList[indexPath.row].isCorrect == false{
+                cell.detailTextLabel?.textColor = UIColor.red
+            } else {
+                cell.detailTextLabel?.textColor = UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1)
+            }
+            return cell
        }
     
     @IBAction func ExitButtonPressed(_ sender: Any) {

@@ -8,6 +8,8 @@ target 'imonitor' do
   # Pods for imonitor
 
   pod 'NVActivityIndicatorView'
+  pod 'RxSwift'
+  pod 'RxCocoa'
  
 
   target 'imonitorTests' do
