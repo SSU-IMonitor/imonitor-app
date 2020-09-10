@@ -10,6 +10,7 @@ target 'imonitor' do
   pod 'NVActivityIndicatorView'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'IQKeyboardManagerSwift'
  
 
   target 'imonitorTests' do

@@ -1,4 +1,5 @@
 PODS:
+  - IQKeyboardManagerSwift (6.5.6)
   - NVActivityIndicatorView (5.0.1):
     - NVActivityIndicatorView/Base (= 5.0.1)
   - NVActivityIndicatorView/Base (5.0.1)
@@ -10,23 +11,26 @@ PODS:
   - RxSwift (5.1.1)
 
 DEPENDENCIES:
+  - IQKeyboardManagerSwift
   - NVActivityIndicatorView
   - RxCocoa
   - RxSwift
 
 SPEC REPOS:
   trunk:
+    - IQKeyboardManagerSwift
     - NVActivityIndicatorView
     - RxCocoa
     - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   NVActivityIndicatorView: 738e843cb8924e9e4fc3e559d0728031624bf860
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: bd3335352f1aa208d660ad624ac26dbc6da365d0
+PODFILE CHECKSUM: 23fe8edd90f4bde88de14a2a82ae79ba286ee6bf
 
 COCOAPODS: 1.9.3

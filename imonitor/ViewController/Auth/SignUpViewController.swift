@@ -25,6 +25,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet var wrongPasswordImageView: UIImageView!
     @IBOutlet var wrongPasswordVerifiedImageView: UIImageView!
     
+    var isExpand: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createDoneButton()
@@ -38,6 +40,7 @@ class SignUpViewController: UIViewController {
         passwordTextField.addDoneButtonOnKeyboard()
         passwordVerifiedTextField.addDoneButtonOnKeyboard()
     }
+
     
     func rxRegister(){
         nameTextField.becomeFirstResponder()
