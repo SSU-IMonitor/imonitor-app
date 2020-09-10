@@ -21,6 +21,7 @@ class DetailViewController: UIViewController{
     @IBOutlet var endTimeLabel: UILabel!
     @IBOutlet var remainTime: UILabel!
     
+    var isTime: Bool = false
     var accessToken: String = ""
     var userId: String = ""
     
@@ -65,6 +66,8 @@ class DetailViewController: UIViewController{
         
         strRemainTime = setRemainZero(day: day, hour: hour, minute: minute, second: second)
         remainTime.text = strRemainTime
+        
+        setAccepted(day: day, hour: hour, minute: minute, second: second)
     }
     
     func changeStringToDate(time: String) -> Date{
@@ -119,15 +122,25 @@ class DetailViewController: UIViewController{
         return strRemainTime
     }
     
+    
+    func setAccepted(day: Int, hour: Int, minute: Int, second: Int) {
+        if day <= 0 && hour <= 0 && minute <= 0 && second <= 0{
+            isTime = true
+        }
+    }
+    
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func startPressed(_ sender: Any) {
-        setLoading()
+        if(isTime == true){
+            setLoading()
+        } else {
+            alertNotStartTime()
+        }
     }
-    
-    
+  
     func setLoading(){
         let loading = NVActivityIndicatorView(frame: .zero, type: .ballScaleMultiple, color: UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1), padding: 0)
         loading.translatesAutoresizingMaskIntoConstraints = false
@@ -163,5 +176,14 @@ class DetailViewController: UIViewController{
         
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    
+    func alertNotStartTime(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "알림", message: "시험 시작 시간이 아닙니다.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
