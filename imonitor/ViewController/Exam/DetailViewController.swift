@@ -61,8 +61,9 @@ class DetailViewController: UIViewController{
         
         let second = remainHour % 60
         
-        let strRemainTime = "\(day)일 \(hour)시간 \(minute)분 \(second)초 남음"
+        var strRemainTime: String = ""
         
+        strRemainTime = setRemainZero(day: day, hour: hour, minute: minute, second: second)
         remainTime.text = strRemainTime
     }
     
@@ -86,11 +87,36 @@ class DetailViewController: UIViewController{
         return strDate
     }
     
-    func caculateCurrentTime()-> String{
-        let now = NSDate()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return dateFormatter.string(from: now as Date)
+    func setRemainZero(day: Int, hour: Int, minute: Int, second: Int) -> String{
+        var strRemainTime = "\(day)일 \(hour)시간 \(minute)분 \(second)초 남음"
+        
+        if day == 0 {
+            strRemainTime = "\(hour)시간 \(minute)분 \(second)초 남음"
+            if hour == 0 {
+                strRemainTime = "\(minute)분 \(second)초 남음"
+            }
+            if minute == 0 {
+                strRemainTime = "\(second)초 남음"
+            }
+        }
+        
+        if day != 0 && hour == 0 {
+            strRemainTime = "\(day)일 \(minute)분 \(second)초 남음"
+            
+            if minute == 0 {
+                strRemainTime = "\(day)일 \(second)초 남음"
+            }
+        }
+        
+        if day != 0 && hour != 0 && minute == 0 {
+            strRemainTime = "\(day)일 \(hour)시간 \(second)초 남음"
+        }
+        
+        if day != 0 && hour != 0 && minute != 0 && second == 0 {
+            strRemainTime = "\(day)일 \(hour)시간 \(minute)분 남음"
+        }
+        
+        return strRemainTime
     }
     
     @IBAction func close(_ sender: Any) {
