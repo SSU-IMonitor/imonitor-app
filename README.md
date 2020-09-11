@@ -75,6 +75,8 @@ func cameraPermissionCheck(){
 ## 🗣 세부 설명
 <img width="1192" alt="스크린샷 2020-09-10 오후 6 34 11" src="https://user-images.githubusercontent.com/39258902/92712134-3948c080-f394-11ea-8e5f-0630aeac09ae.png">
 
+<img width="1235" alt="스크린샷 2020-09-11 오후 4 51 02" src="https://user-images.githubusercontent.com/39258902/92886832-fac40c00-f44e-11ea-8756-a57957ec3331.png">
+
 <img width="1198" alt="스크린샷 2020-09-10 오후 6 34 37" src="https://user-images.githubusercontent.com/39258902/92712191-48c80980-f394-11ea-86a5-c165626f715f.png">
 
 <img width="1195" alt="스크린샷 2020-09-10 오후 6 34 47" src="https://user-images.githubusercontent.com/39258902/92712215-4f568100-f394-11ea-8f11-bd9ed0721f46.png">
