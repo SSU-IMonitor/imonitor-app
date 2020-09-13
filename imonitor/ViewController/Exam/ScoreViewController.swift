@@ -80,17 +80,11 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.professorLabel.text = self.professor
             self.correctLabel.text = String(self.correct)
             self.totalLabel.text = String(self.scoreList.count)
+            
             self.setTableView()
             self.tableView.reloadData()
         }
     }
-    
-//    func printAnswer(answer: [AnswerInfo]){
-//        for i in 0..<scoreList.count{
-//            print(answer[i].qna!.id as Any)
-//            print(answer[i].qna!.answer as Any)
-//        }
-//    }
     
     func setTableView(){
         tableView.delegate = self
@@ -122,19 +116,20 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
     func alertExitExam(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "현재 창을 닫겠습니까?", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default){
-                    (action) in
-                if(self.isSubmitted == false){
-                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                } else {
-                    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-                }
-            }
-            let cancelAction = UIAlertAction(title: "취소", style: .destructive)
-            alert.addAction(cancelAction)
-            alert.addAction(okAction)
+            alert.addAction(UIAlertAction(title: "취소", style: .destructive))
+            alert.addAction(UIAlertAction(title: "확인", style: .default){
+                    (action) in self.moveExamOrScore()
+            })
                    
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func moveExamOrScore(){
+        if(self.isSubmitted == false){
+            self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        } else {
+            self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
 }

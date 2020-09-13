@@ -29,6 +29,7 @@ class DetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateUI()
         caculateRemainTime()
     }
@@ -45,17 +46,13 @@ class DetailViewController: UIViewController{
     
     func caculateRemainTime(){
         let now = NSDate()
-        print("now: \(now)")
         let startTime = changeStringToDate(time: course.startTime!)
         let endTime = changeStringToDate(time: course.endTime!)
+        let startTimeInterval = Int(startTime.timeIntervalSince(now as Date))
         let endTimeInterval = Int(endTime.timeIntervalSince(startTime as Date))
-        print("endTimeInterval: \(endTimeInterval)")
         
-        let timeInterval = Int(startTime.timeIntervalSince(now as Date))
-        print("Time Interval: \(timeInterval)")
-        
-        let day = timeInterval / 86400
-        let remainDay = timeInterval % 86400
+        let day = startTimeInterval / 86400
+        let remainDay = startTimeInterval % 86400
         
         let hour = remainDay / 3600
         let remainHour = remainDay % 3600
@@ -131,7 +128,7 @@ class DetailViewController: UIViewController{
                 remainTime.text = "시험이 종료 되었습니다."
             } else {
                 isTime = true
-                remainTime.text = "시험 시간 입니다"
+                remainTime.text = "시험시간 입니다."
             }
             remainTime.textColor = UIColor.red
         }
@@ -152,7 +149,9 @@ class DetailViewController: UIViewController{
     func setLoading(){
         let loading = NVActivityIndicatorView(frame: .zero, type: .ballScaleMultiple, color: UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1), padding: 0)
         loading.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(loading)
+        
         NSLayoutConstraint.activate([
             loading.widthAnchor.constraint(equalToConstant: 60),
             loading.heightAnchor.constraint(equalToConstant: 60),
@@ -167,6 +166,7 @@ class DetailViewController: UIViewController{
             self.moveToExam()
         }
     }
+    
     func moveToExam(){
         let course = courseTitleLabel.text
         let professor = professorLabel.text

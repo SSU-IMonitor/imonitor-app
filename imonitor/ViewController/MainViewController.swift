@@ -79,7 +79,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let data = data {
                 do {
                     let myResponse = response as! HTTPURLResponse
-                        print("Status Code:", myResponse.statusCode)
                             
                     if myResponse.statusCode == 200 {
                         let courses = try JSONDecoder().decode(CourseInfo.self, from: data)
@@ -90,7 +89,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                 
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
-                        print(myResponse.statusCode)
+                        print("Status Code:", myResponse.statusCode)
                     } else {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
                         print(error.message)
@@ -114,15 +113,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func alertLogout(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default){
+            alert.addAction(UIAlertAction(title: "확인", style: .default){
                 (action) in
                 self.accessToken = " "
                 self.dismiss(animated: true, completion: nil)
-            }
-            let cancelAction = UIAlertAction(title: "취소", style: .destructive)
+            })
+            alert.addAction(UIAlertAction(title: "취소", style: .destructive))
             
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -132,6 +129,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             view.accessTokenString = accessToken
             view.userId = idText
         }
+        
         if let view = segue.destination as? DetailViewController{
             view.course = myCourses[rowSelected]
             view.accessToken = accessToken

@@ -136,13 +136,13 @@ class SignUpViewController: UIViewController {
     func alertPasswordNotCorrect(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "경고", message: "비밀번호가 일치하지 않습니다.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default){
+                          
+            alert.addAction(UIAlertAction(title: "확인", style: .default){
                 (action) in
                 self.passwordTextField.text = ""
                 self.passwordVerifiedTextField.text = ""
-            }
-                          
-            alert.addAction(okAction)
+            })
+            
             self.present(alert, animated: true, completion: nil)
         }
     }

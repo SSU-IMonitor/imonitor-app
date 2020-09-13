@@ -11,12 +11,13 @@ import SeeSo
 import AVFoundation
 
 let bounds: CGRect = UIScreen.main.bounds
+
 let width = bounds.width
 let height = bounds.height
 
-var questionList = [QuestionInfo]()
-var answerList = [String](repeating: "", count: questionList.count)
 var qnaIDList = [Int]()
+var answerList = [String](repeating: "", count: questionList.count)
+var questionList = [QuestionInfo]()
 var qnaAndAnswer = [SubmitParameter](repeating: SubmitParameter.init(qnaId: 0, answer: ""), count: questionList.count)
 
 class ExamViewController: UIViewController {
@@ -36,15 +37,16 @@ class ExamViewController: UIViewController {
     
     @IBOutlet var courseNameLabel: UILabel!
     @IBOutlet var professorLabel: UILabel!
-    
     @IBOutlet var countLabel: UILabel!
+    @IBOutlet var problemNumberLabel: UILabel!
+    
     @IBOutlet var answerTextField: UITextField!
     
-    @IBOutlet var problemNumberLabel: UILabel!
     @IBOutlet var questionLabel: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getQuestions()
         answerTextField.addDoneButtonOnKeyboard()
         cameraPermissionCheck()
@@ -80,12 +82,12 @@ class ExamViewController: UIViewController {
                     let myResponse = response as! HTTPURLResponse
                         print("Status Code:", myResponse.statusCode)
                     
-                                
                     if myResponse.statusCode == 200 {
                         let course = try JSONDecoder().decode(CourseExamInfo.self, from: data)
                         
                         if course.exam?.hasSubmitted == false {
                             self.isSubmitted = false
+                            
                             DispatchQueue.main.async{
                                 let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
                                 vc.userId = self.userId
@@ -95,6 +97,7 @@ class ExamViewController: UIViewController {
                                 vc.accessToken = self.accessToken
                                 vc.isSubmitted = self.isSubmitted
                                 vc.modalPresentationStyle = .fullScreen
+                                
                                 self.present(vc, animated: true)
                             }
                         }
@@ -106,6 +109,7 @@ class ExamViewController: UIViewController {
                         }
                         
                         self.updateUI()
+                        
                     } else if myResponse.statusCode == 403 {
                         print(myResponse.statusCode)
                         self.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -128,8 +132,8 @@ class ExamViewController: UIViewController {
     func alertNotAccepted(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "경고", message: "승인이 되지 않은 시험입니다.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default)
-            alert.addAction(okAction)
+            alert.addAction(UIAlertAction(title: "확인", style: .default))
+            
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -147,37 +151,41 @@ class ExamViewController: UIViewController {
         }
     }
     
+    
     @IBAction func prevButtonPressed(_ sender: Any) {
-        if answerTextField.text != "" {
-            answerList[numQuestion] = answerTextField.text!
-            qnaAndAnswer[numQuestion].answer = answerTextField.text!
-        }
-           
-        print(answerList)
+       
+        checkAnswerTextFieldEmpty()
+        
         numQuestion = numQuestion - 1
 
         if(numQuestion < 0){
             numQuestion = questionList.endIndex - 1
         }
+    }
+    
+    func checkAnswerTextFieldEmpty(){
+        if answerTextField.text != "" {
+            answerList[numQuestion] = answerTextField.text!
+            qnaAndAnswer[numQuestion].answer = answerTextField.text!
+        }
+    }
+    
+    func updateProblemUI(){
         problemNumberLabel.text = "Problem \(numQuestion + 1)"
         questionLabel.text = questionList[numQuestion].question
         answerTextField.text = answerList[numQuestion]
     }
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        if answerTextField.text != "" {
-            answerList[numQuestion] = answerTextField.text!
-            qnaAndAnswer[numQuestion].answer = answerTextField.text!
-        }
+        checkAnswerTextFieldEmpty()
+        
         numQuestion = numQuestion + 1
 
         if(numQuestion > questionList.endIndex - 1){
             numQuestion = 0
         }
-        problemNumberLabel.text = "Problem \(numQuestion + 1)"
-        questionLabel.text = questionList[numQuestion].question
-        answerTextField.text = answerList[numQuestion]
-
+        
+        updateProblemUI()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

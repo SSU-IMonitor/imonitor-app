@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
                             self.setLoading()
                         }
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
-                        self.alert()
+                        self.alertLogin()
                     } else {
                         let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
                         print(error.message)
@@ -101,7 +101,9 @@ class LoginViewController: UIViewController {
     func setLoading(){
         let loading = NVActivityIndicatorView(frame: .zero, type: .ballScaleMultiple, color: UIColor(red: 93/255, green: 155/255, blue: 197/255, alpha: 1), padding: 0)
         loading.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(loading)
+        
         NSLayoutConstraint.activate([
             loading.widthAnchor.constraint(equalToConstant: 60),
             loading.heightAnchor.constraint(equalToConstant: 60),
@@ -130,10 +132,11 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func alert(){
+    func alertLogin(){
          DispatchQueue.main.async {
             let alert = UIAlertController(title: "경고", message: "아이디 또는 비밀번호를 잘못 입력하셨습니다.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+            
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -141,6 +144,7 @@ class LoginViewController: UIViewController {
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "signUp") as! SignUpViewController
         vc.modalPresentationStyle = .fullScreen
+        
         present(vc, animated: true)
     }
 }
