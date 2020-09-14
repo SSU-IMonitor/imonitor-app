@@ -66,7 +66,9 @@ class DetailViewController: UIViewController{
         strRemainTime = setRemainZero(day: day, hour: hour, minute: minute, second: second)
         remainTime.text = strRemainTime
         
-        setAccepted(day: day, hour: hour, minute: minute, second: second, endTimeInterval: endTimeInterval)
+        if(startTimeInterval <= 0){
+             setAccepted(day: day, hour: hour, minute: minute, second: second, endTimeInterval: endTimeInterval)
+        }
     }
     
     func changeStringToDate(time: String) -> Date{
@@ -77,7 +79,7 @@ class DetailViewController: UIViewController{
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
            
         let date = formatter.date(from: parsingDate)
-        let realDate = date! + 32400
+        let realDate = date!
            
         return realDate
     }
@@ -123,7 +125,7 @@ class DetailViewController: UIViewController{
     
     
     func setAccepted(day: Int, hour: Int, minute: Int, second: Int, endTimeInterval: Int) {
-        if day <= 0 && hour <= 0 && minute <= 0 && second <= 0{
+        if(day <= 0 && hour <= 0 && minute <= 0 && second <= 0){
             if -(endTimeInterval % 3600) >= hour {
                 remainTime.text = "시험이 종료 되었습니다."
             } else {

@@ -46,10 +46,13 @@ class ExamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getQuestions()
+         getQuestions()
         answerTextField.addDoneButtonOnKeyboard()
         cameraPermissionCheck()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("detected")
     }
     
     func updateUI(){
@@ -270,5 +273,35 @@ extension ExamViewController: GazeDelegate{
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    func putAccessControl(){
+        let url = URL(string: "http://api.puroong.me/v1/exams/\(examId)/access-control")
+        
+        guard let requestURL = url else { fatalError() }
+        
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) {
+            (data, response, error) in
+            
+            if let data = data {
+                do {
+                    let myResponse = response as! HTTPURLResponse
+                                
+                    if myResponse.statusCode == 200 {
+                        let access = try JSONDecoder().decode(accessInfo.self, from: data)
+                        print(access)
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
+    }
+    
 }
 

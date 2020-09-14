@@ -57,7 +57,6 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                         self.scoreList = answer.result!
                         self.countCorrect()
                         self.updateUI()
-                        // self.printAnswer(answer: self.scoreList)
                     }
                 } catch {
                     print(error)

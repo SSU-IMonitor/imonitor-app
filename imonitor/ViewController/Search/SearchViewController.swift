@@ -99,8 +99,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             filteredCourses = courses
             return
         }
+        
         filteredCourses = courses.filter({course -> Bool in
         guard let text = searchBar.text else { return false }
+            
             if searchBar.text == course.courseCode {
                 return course.courseCode!.contains(text)
             }

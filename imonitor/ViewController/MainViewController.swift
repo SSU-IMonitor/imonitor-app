@@ -113,12 +113,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func alertLogout(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "알림", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "취소", style: .destructive))
             alert.addAction(UIAlertAction(title: "확인", style: .default){
                 (action) in
                 self.accessToken = " "
                 self.dismiss(animated: true, completion: nil)
             })
-            alert.addAction(UIAlertAction(title: "취소", style: .destructive))
             
             self.present(alert, animated: true, completion: nil)
         }
