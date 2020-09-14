@@ -46,7 +46,7 @@ class ExamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         getQuestions()
+        getQuestions()
         answerTextField.addDoneButtonOnKeyboard()
         cameraPermissionCheck()
     }
@@ -90,7 +90,7 @@ class ExamViewController: UIViewController {
                         
                         if course.exam?.hasSubmitted == false {
                             self.isSubmitted = false
-                            
+
                             DispatchQueue.main.async{
                                 let vc = self.storyboard?.instantiateViewController(identifier: "score") as! ScoreViewController
                                 vc.userId = self.userId
@@ -100,7 +100,7 @@ class ExamViewController: UIViewController {
                                 vc.accessToken = self.accessToken
                                 vc.isSubmitted = self.isSubmitted
                                 vc.modalPresentationStyle = .fullScreen
-                                
+
                                 self.present(vc, animated: true)
                             }
                         }
@@ -115,9 +115,10 @@ class ExamViewController: UIViewController {
                         
                     } else if myResponse.statusCode == 403 {
                         print(myResponse.statusCode)
-                        self.presentingViewController?.dismiss(animated: true, completion: nil)
-                        self.alertNotAccepted()
-                        
+                        DispatchQueue.main.async {
+                            self.presentingViewController?.dismiss(animated: true, completion: nil)
+                            self.alertNotAccepted()
+                        }
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500{
                         print(myResponse.statusCode)
                         
@@ -177,6 +178,9 @@ class ExamViewController: UIViewController {
         problemNumberLabel.text = "Problem \(numQuestion + 1)"
         questionLabel.text = questionList[numQuestion].question
         answerTextField.text = answerList[numQuestion]
+        
+        print(questionList)
+        print(answerList)
     }
     
     @IBAction func nextButtonPressed(_ sender: Any) {
@@ -258,6 +262,7 @@ extension ExamViewController: GazeDelegate{
             self.count = self.count + 1
         }
         if self.count == 10 {
+            self.putAccessControl()
             alert()
         }
     }
@@ -267,7 +272,8 @@ extension ExamViewController: GazeDelegate{
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "경고", message: "경고 횟수 초과 시험 권한 박탈", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "확인", style: .default){
-                (action) in exit(0)
+                (action) in
+                exit(0)
             }
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
@@ -275,33 +281,46 @@ extension ExamViewController: GazeDelegate{
     }
     
     func putAccessControl(){
-        let url = URL(string: "http://api.puroong.me/v1/exams/\(examId)/access-control")
         
-        guard let requestURL = url else { fatalError() }
-        
-        var request = URLRequest(url: requestURL)
+        let parameters = ["studentId": userId, "accessControl": "UNACCEPTED"]
+
+        guard let url = URL(string: "http://api.puroong.me/v1/exams/\(examId)/access-control") else { return }
+        var request = URLRequest(url: url)
+
         request.httpMethod = "PUT"
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+
+        request.httpBody = httpBody;
         
         let session = URLSession.shared
-        session.dataTask(with: request) {
+        session.dataTask(with: request){
             (data, response, error) in
-            
+                
             if let data = data {
                 do {
                     let myResponse = response as! HTTPURLResponse
-                                
+                        print("Status Code:", myResponse.statusCode)
+                    
                     if myResponse.statusCode == 200 {
-                        let access = try JSONDecoder().decode(accessInfo.self, from: data)
-                        print(access)
+                        let user = try JSONDecoder().decode(AccessInfo.self, from: data)
+                        print(user.accessControl!)
+                        
+                        DispatchQueue.main.async {
+                            
+                        }
+                    } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
+                     
+                    } else {
+                        let error = try JSONDecoder().decode(ErrorInfo.self, from: data)
+                        print(error.message)
                     }
                 } catch {
-                    print(error)
+                    print("error: ", error)
                 }
             }
         }.resume()
     }
-    
 }
-

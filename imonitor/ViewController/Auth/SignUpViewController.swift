@@ -95,11 +95,10 @@ class SignUpViewController: UIViewController {
             if let data = data {
                 do {
                     let myResponse = response as! HTTPURLResponse
-                       
-                    if myResponse.statusCode == 200{
-                        // let log = try JSONDecoder().decode(LoginInfo.self, from: data)
-                        
-                        self.moveToLogin()
+                    print("status code: \(myResponse.statusCode)")
+                    if myResponse.statusCode == 200 || myResponse.statusCode == 201{
+                        let log = try JSONDecoder().decode(LoginInfo.self, from: data)
+                        self.alertCompleteLogin()
                            
                     } else if myResponse.statusCode == 500{
                         self.alertUserDuplicated()
@@ -113,6 +112,17 @@ class SignUpViewController: UIViewController {
                 }
             }
         }.resume()
+    }
+    
+    func alertCompleteLogin(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "알림", message: "회원가입이 완료되었습니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default){
+                (action) in
+                self.moveToLogin()
+            })
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func moveToLogin(){

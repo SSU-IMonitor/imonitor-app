@@ -22,6 +22,7 @@ class DetailViewController: UIViewController{
     @IBOutlet var remainTime: UILabel!
     
     var isTime: Bool = false
+    var isEnd: Bool = true
     var accessToken: String = ""
     var userId: String = ""
     
@@ -126,10 +127,11 @@ class DetailViewController: UIViewController{
     
     func setAccepted(day: Int, hour: Int, minute: Int, second: Int, endTimeInterval: Int) {
         if(day <= 0 && hour <= 0 && minute <= 0 && second <= 0){
+            isTime = true
             if -(endTimeInterval % 3600) >= hour {
+                isEnd = true
                 remainTime.text = "시험이 종료 되었습니다."
             } else {
-                isTime = true
                 remainTime.text = "시험시간 입니다."
             }
             remainTime.textColor = UIColor.red
@@ -141,7 +143,7 @@ class DetailViewController: UIViewController{
     }
     
     @IBAction func startPressed(_ sender: Any) {
-        if(isTime == true){
+        if(isTime == true && isEnd == false){
             setLoading()
         } else {
             alertNotTime()

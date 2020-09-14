@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct accessInfo: Codable{
+struct AccessInfo: Codable{
     let studentId: Int?
     let accessControl: String?
 }

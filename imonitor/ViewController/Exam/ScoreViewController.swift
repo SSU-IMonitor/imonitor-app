@@ -56,6 +56,7 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
                         let answer = try JSONDecoder().decode(ScoreInfo.self, from: data)
                         self.scoreList = answer.result!
                         self.countCorrect()
+                        self.printScore()
                         self.updateUI()
                     }
                 } catch {
@@ -70,6 +71,14 @@ class ScoreViewController: UIViewController, UITableViewDataSource, UITableViewD
             if scoreList[i].isCorrect == true {
                 correct+=1
             }
+        }
+    }
+    
+    func printScore(){
+        for i in 0..<scoreList.count{
+            print(scoreList[i].qna?.id)
+            print(scoreList[i].submittedAnswer)
+            print(scoreList[i].qna?.answer)
         }
     }
     

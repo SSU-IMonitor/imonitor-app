@@ -179,6 +179,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
                     if myResponse.statusCode == 200 {
                         let course = try JSONDecoder().decode(MyCourseInfo.self, from: data)
                         print(course.exam as Any)
+                        self.alertLogin()
                         
                     } else if myResponse.statusCode == 404 || myResponse.statusCode == 500 {
                         print(myResponse.statusCode)
@@ -196,6 +197,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }.resume()
     }
     
+    func alertLogin(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "알림", message: "과목이 추가되었습니다. 재로그인 후 과목 업로드 됩니다.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     func alertDuplicatedMyCourse(){
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "경고", message: "이미 추가한 과목입니다.", preferredStyle: .alert)
