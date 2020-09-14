@@ -52,7 +52,7 @@ class ExamViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("detected")
+        putAccessControl()
     }
     
     func updateUI(){

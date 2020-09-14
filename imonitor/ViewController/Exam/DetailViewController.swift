@@ -143,7 +143,9 @@ class DetailViewController: UIViewController{
     }
     
     @IBAction func startPressed(_ sender: Any) {
-        if(isTime == true && isEnd == false){
+        if(isTime == true
+//            && isEnd == false
+            ){
             setLoading()
         } else {
             alertNotTime()
