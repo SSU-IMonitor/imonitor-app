@@ -199,7 +199,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func alertLogin(){
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "알림", message: "과목이 추가되었습니다. 재로그인 후 과목 업로드 됩니다.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "알림", message: "과목이 추가되었습니다. \n재로그인 후 과목 업로드 됩니다.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

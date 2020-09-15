@@ -22,7 +22,7 @@ class DetailViewController: UIViewController{
     @IBOutlet var remainTime: UILabel!
     
     var isTime: Bool = false
-    var isEnd: Bool = true
+    var isEnd: Bool = false
     var accessToken: String = ""
     var userId: String = ""
     
@@ -143,9 +143,7 @@ class DetailViewController: UIViewController{
     }
     
     @IBAction func startPressed(_ sender: Any) {
-        if(isTime == true
-//            && isEnd == false
-            ){
+        if(isTime == true && isEnd == false){
             setLoading()
         } else {
             alertNotTime()

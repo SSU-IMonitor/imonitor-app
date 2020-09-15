@@ -51,8 +51,29 @@ class ExamViewController: UIViewController {
         cameraPermissionCheck()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        putAccessControl()
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//        DispatchQueue.main.async {
+//            if animated == false {
+//                print("detected")
+//
+//            }
+//        }
+//    }
+    
+    func alertExit(){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "경고", message: "앱을 종료하시면 시험을 볼 수 없습니다. 그래도 종료하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "취소", style: .destructive, handler: nil))
+            alert.addAction(UIAlertAction(title: "확인", style: .default){
+                (action) in
+                self.putAccessControl()
+            })
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
     func updateUI(){
@@ -238,6 +259,7 @@ extension ExamViewController: StatusDelegate{
     }
     func onStopped(error: StatusError) {
         print("stop error: \(error.description)");
+//        viewWillDisappear(false)
     }
 }
 
