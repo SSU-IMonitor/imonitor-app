@@ -144,7 +144,14 @@ class DetailViewController: UIViewController{
     
     @IBAction func startPressed(_ sender: Any) {
         if(isTime == true && isEnd == false){
-            setLoading()
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "공지", message: "앱을 종료하면 재시험을 볼 수 없습니다. \n그래도 시험을 시작하시겠습니까?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "취소", style: .destructive))
+                alert.addAction(UIAlertAction(title: "확인", style: .default){
+                    (action) in self.setLoading()
+                })
+                self.present(alert, animated: true, completion: nil)
+            }
         } else {
             alertNotTime()
         }
