@@ -23,8 +23,58 @@
 </br>
 
 ## ⏰   프로젝트 일정
-> 추후 업데이트 예정
-
+- #### 7월 31일
+  - LoginViewController 레이아웃 작업 완료
+  - MainViewController 레이아웃 작업 완료
+- #### 8월 5일
+  - DetailViewController로 데이터 로드 완료
+- #### 8월 7일
+  - Eyetracking 기술 연동 완료
+- #### 8월 8일
+  - Eyetracking count 기능 추가
+  - Eyetracking 이탈 시 경고창 기능 추가 
+- #### 8월 9일 
+  - ExamViewController 레이아웃 작업 완료
+- #### 8월 10일
+  - DetailViewController 레이아웃 작업 / 데이터 로드 완료
+- #### 8월 11일
+  - ExamViewController 데이터 로드 완료
+- #### 8월 12일
+  - JSON 연동 시작
+- #### 8월 14일
+  - 검색 기능 레이아웃 작업 완료
+- #### 8월 15일 
+  - UserInfo 파싱 완료
+- #### 8월 18일
+  - LoginAPI 연동 완료
+- #### 8월 19일
+  - SignUpAPI 연동 완료
+- #### 8월 20일
+  - LoginViewController 경고창 작업, 페이지 이동 작업 완료
+- #### 8월 26일 
+  - 검색 기능 경고창 기능 작업 완료
+  - CourseInfo 파싱 완료
+  - JSON 파싱 후 MainViewController Table View 정보 삽입 완료
+- #### 8월 27일 
+  - Logout 경고창 기능 작업 완료
+- #### 8월 30일
+  - DetailViewController에 데이터 파싱 작업 완료
+- #### 9월 1일
+  - SubmitViewController 디자인 완료
+- #### 9월 3일
+  - Exam 데이터 로드 완료
+  - AnswerList SubmitViewController에 전송
+- #### 9월 4일
+  - ScoreViewController -> MainViewController 이동 작업 완료 
+- #### 9월 6일 ~ 9월 7일
+  - Submit 정보 Post 작업 완료
+- #### 9월 8일
+   - Score 계산 기능 작업 완료
+- #### 9월 9일
+  - ScoreViewController 데이터 로드 작업 완료
+- #### 9월 10일 
+  - 전체적인 레이아웃 검토 및 보완
+  - RxSwift - Login 작업 완료
 </br>
 
 ## 💁  개발 환경
